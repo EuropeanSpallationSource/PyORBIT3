@@ -37,7 +37,7 @@ extern "C" {
 	  ((Function*) self->cpp_obj)->setPyWrapper((PyObject*) self);
     return 0;
   }
-  
+
 	/** It will return Python Lists with x_arr, y_arr, err_arr */
   static PyObject* Function_getLists(PyObject *self, PyObject *args){
 	  Function* cpp_Function = (Function*)((pyORBIT_Object*) self)->cpp_obj;
@@ -48,13 +48,13 @@ extern "C" {
 	  for(int ind = 0; ind < size; ind++){
 			if(PyList_SetItem(xPyList,ind,Py_BuildValue("d",cpp_Function->x(ind))) != 0){
 				error("pyFunction: getLists(...)  cannot create a resulting list for x_arr.");
-			}	
+			}
 			if(PyList_SetItem(yPyList,ind,Py_BuildValue("d",cpp_Function->y(ind))) != 0){
 				error("pyFunction: getLists(...)  cannot create a resulting list for y_arr.");
 			}
 			if(PyList_SetItem(errPyList,ind,Py_BuildValue("d",cpp_Function->err(ind))) != 0){
 				error("pyFunction: getLists(...)  cannot create a resulting list for err_arr.");
-			}			
+			}
 	  }
 	  PyObject* pyRes = PyTuple_New(3);
 	  if(PyTuple_SetItem(pyRes,0,xPyList) != 0){
@@ -68,7 +68,7 @@ extern "C" {
 	  }
 		return pyRes;
   }
-  
+
 	/** It will init Function with Lists of x_arr, y_arr, err_arr */
   static PyObject* Function_addLists(PyObject *self, PyObject *args){
 	  Function* cpp_Function = (Function*)((pyORBIT_Object*) self)->cpp_obj;
@@ -86,7 +86,7 @@ extern "C" {
 			size = PyList_Size(xPyList);
 			if(size != PyList_Size(yPyList)){
 				error("pyFunction addLists(x_arr,y_arr) or addLists(x_arr,y_arr,err_arr) - len(x_arr) != len(y_arr).");
-			}			
+			}
 			if(errPyList == NULL){
 				errPyList_was_null = 1;
 				errPyList = PyList_New(size);
@@ -96,14 +96,14 @@ extern "C" {
 				}
 			} else {
 				if(PyList_Check(errPyList) == 0 || size != PyList_Size(errPyList))
-					error("pyFunction addLists(x_arr,y_arr,err_arr) - err_arr parameters is not correct pyLists.");				
+					error("pyFunction addLists(x_arr,y_arr,err_arr) - err_arr parameters is not correct pyLists.");
 			}
 			for(int ind = 0; ind < size; ind++){
 				double x = PyFloat_AsDouble(PyList_GetItem(xPyList,ind));
 				double y = PyFloat_AsDouble(PyList_GetItem(yPyList,ind));
 				double err = PyFloat_AsDouble(PyList_GetItem(errPyList,ind));
 				cpp_Function->add(x,y,err);
-			}		
+			}
 		}
 		if(errPyList_was_null == 1) Py_DECREF(errPyList);
 	 	Py_INCREF(Py_None);
@@ -193,7 +193,7 @@ extern "C" {
 	 	Py_INCREF(Py_None);
 		return Py_None;
   }
-  
+
 	/** It will update (y) or (y,err) values for the point with index = index */
   static PyObject* Function_updatePoint(PyObject *self, PyObject *args){
 	  Function* cpp_Function = (Function*)((pyORBIT_Object*) self)->cpp_obj;
@@ -207,8 +207,8 @@ extern "C" {
 		}
 		Py_INCREF(Py_None);
 		return Py_None;
-  }  
-  
+  }
+
  	/** It will return minimal x value in the Function */
   static PyObject* Function_getMinX(PyObject *self, PyObject *args){
 	  Function* cpp_Function = (Function*)((pyORBIT_Object*) self)->cpp_obj;

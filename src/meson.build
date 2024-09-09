@@ -208,7 +208,7 @@ sources = files([
 	'teapot/wrap_matrix_generator.cc',
 	'teapot/teapotbase.cc',
 	'teapot/MatrixGenerator.cc'
-]) 
+])
 inc = include_directories([
   python.get_variable('INCLUDEPY', ''),
     'main',
@@ -239,7 +239,7 @@ inc = include_directories([
 	'utils/integration',
 	'libmain',
 	'orbit/Apertures'
-    
+
 ])
 
 
@@ -393,9 +393,3 @@ python.extension_module('error_base',
     install: true,
    subdir: 'orbit/core',
 )
-
-
-
-
-    
-

@@ -628,7 +628,7 @@ void Function::findMinMaxXY(){
   xMin = 1.0e+300;
   xMax = -1.0e+300;
   yMin = 1.0e+300;
-  yMax = -1.0e+300;	
+  yMax = -1.0e+300;
   if(size == 0){
   	return;
   }
@@ -636,7 +636,7 @@ void Function::findMinMaxXY(){
 		if(x_arr[ind] < xMin) {xMin = x_arr[ind];}
 		if(x_arr[ind] > xMax) {xMax = x_arr[ind];}
 		if(y_arr[ind] < yMin) {yMin = y_arr[ind];}
-		if(y_arr[ind] > yMax) {yMax = y_arr[ind];}		
+		if(y_arr[ind] > yMax) {yMax = y_arr[ind];}
 	}
 }
 
@@ -651,9 +651,9 @@ void Function::print(ostream& Out)
     <<"% minY = "<< getMinY() <<std::endl
     <<"% maxY = "<< getMaxY() <<std::endl
     <<"% x-step const = "<< isStepConst() <<std::endl;
-    
+
     Out<<"% #i      x     y      y_err "<<std::endl;
-    
+
     for(int i = 0; i < size; i++){
     	Out<<" "<< i
     	<<"   \t"<< x_arr[i]

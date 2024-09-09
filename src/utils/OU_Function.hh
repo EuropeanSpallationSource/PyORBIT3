@@ -44,10 +44,10 @@ namespace OrbitUtils{
 
 		void add(double x, double y);
 		void add(double x, double y, double err);
-		
+
 		void updatePoint(int index, double y);
 		void updatePoint(int index, double y, double err);
-		
+
 		void removePoint(int index);
 
 		int getSize();

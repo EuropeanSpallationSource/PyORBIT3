@@ -12,11 +12,11 @@ The C++ setup is combined in one file **src/meson.build**.
 ### Main modifications in C++ code
 1. **src/libmain/** is not used, still there for reference but will be gone soon.
 2. **src/core/** contains one C++ file per module inside _orbit.core_
-3. The files **wrap_XXXX.cc** were modified to correctly reference modules 
+3. The files **wrap_XXXX.cc** were modified to correctly reference modules
 ```cpp
 // line
 PyObject* mod = PyImport_ImportModule("_bunch");
-// replaced with 
+// replaced with
 PyObject* mod = PyImport_ImportModule("orbit.core.bunch");
 ```
 
@@ -27,8 +27,8 @@ PyObject* mod = PyImport_ImportModule("orbit.core.bunch");
 ## 0. Required software
 
 One needs compilers, python and libfftw (and potentially mpi).
-See [PyORBIT3](https://github.com/PyORBIT-Collaboration/PyORBIT3) for external 
-requirements. 
+See [PyORBIT3](https://github.com/PyORBIT-Collaboration/PyORBIT3) for external
+requirements.
 
 
 ## 1. Preparing environment
@@ -44,7 +44,7 @@ Initialize new virtual environment and install packages
 ```
 python -m venv .mes
 source .mes/bin/activate
-pip install -U pip 
+pip install -U pip
 pip install -r requirements
 ```
 Edit **meson.build** and set correct paths/flags for python/fftw3 headers and libraries
