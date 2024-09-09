@@ -118,7 +118,7 @@ extern "C" {
 		Matrix* cpp_Matrix = (Matrix*) pyMatrix->cpp_obj;
 		int n = cpp_Matrix->rows();
 		int m = cpp_Matrix->columns();
-		PyObject* mod = PyImport_ImportModule("_orbit_utils");
+		PyObject* mod = PyImport_ImportModule("orbit.core.orbit_utils");
 		PyObject* pyMatr = PyObject_CallMethod(mod,const_cast<char*>("Matrix"),const_cast<char*>("ii"),n,m);
 		pyORBIT_Object* pyMatrix_child = (pyORBIT_Object*) pyMatr;
 		Matrix* cpp_Matrix_child = (Matrix*) pyMatrix_child->cpp_obj;
@@ -143,11 +143,14 @@ extern "C" {
     return Py_BuildValue("i",res);
   }
 
-	//  transpose() - transpose the matrix on the place
+	//  transpose() - transpose the matrix. Returns a new matrix.
   static PyObject* Matrix_transpose(PyObject *self, PyObject *args){
-		((Matrix*) ((pyORBIT_Object*) self)->cpp_obj)->transpose();
-		Py_INCREF(Py_None);
-    return Py_None;
+		PyObject* mod = PyImport_ImportModule("orbit.core.orbit_utils");
+		PyObject* pyMtrx = PyObject_CallMethod(mod,const_cast<char*>("Matrix"),const_cast<char*>("O"),self);
+  	Matrix* cpp_mtrx = (Matrix*) ((pyORBIT_Object*) pyMtrx)->cpp_obj;
+		Py_DECREF(mod);
+		cpp_mtrx->transpose();
+		return pyMtrx;
   }
 
 	//  zero() - sets all elements of the matrix to 0
@@ -163,9 +166,9 @@ extern "C" {
     return Py_BuildValue("i",res);;
   }
 
-	//  invert() - returns the inverted matrix, or None
+	//  invert() - returns the inverted matrix, or None. Returns a new matrix.
   static PyObject* Matrix_invert(PyObject *self, PyObject *args){
-		PyObject* mod = PyImport_ImportModule("_orbit_utils");
+		PyObject* mod = PyImport_ImportModule("orbit.core.orbit_utils");
 		PyObject* pyMtrx = PyObject_CallMethod(mod,const_cast<char*>("Matrix"),const_cast<char*>("O"),self);
 		Matrix* cpp_mtrx = (Matrix*) ((pyORBIT_Object*) pyMtrx)->cpp_obj;
 		Py_DECREF(mod);
@@ -178,7 +181,7 @@ extern "C" {
 		return pyMtrx;
   }
 
-	//  add() - adds a number or matrix to the this matrix. Returns a new matrix
+	//  add() - adds a number or matrix to the this matrix. Returns a new matrix.
   static PyObject* Matrix_add(PyObject *self, PyObject *args){
 		PyObject *pyIn;
 		if(!PyArg_ParseTuple(args,"O:add",&pyIn)){
@@ -189,7 +192,7 @@ extern "C" {
 			if(!PyArg_ParseTuple(args,"d:add",&val)){
 				error("PyMatrix - add(number) - input parameter is needed.");
 			}
-			PyObject* mod = PyImport_ImportModule("_orbit_utils");
+			PyObject* mod = PyImport_ImportModule("orbit.core.orbit_utils");
 			PyObject* pyMtrx = PyObject_CallMethod(mod,const_cast<char*>("Matrix"),const_cast<char*>("O"),self);
 			Matrix* cpp_mtrx = (Matrix*) ((pyORBIT_Object*) pyMtrx)->cpp_obj;
 			cpp_mtrx->add(val);
@@ -198,14 +201,14 @@ extern "C" {
 		}
 		PyObject* pyORBIT_Matrix_Type = getOrbitUtilsType("Matrix");
 		if(PyObject_IsInstance(pyIn,pyORBIT_Matrix_Type)){
-			PyObject* mod = PyImport_ImportModule("_orbit_utils");
+			PyObject* mod = PyImport_ImportModule("orbit.core.orbit_utils");
 			PyObject* pyMtrx = PyObject_CallMethod(mod,const_cast<char*>("Matrix"),const_cast<char*>("O"),self);
 			Matrix* cpp_mtrx = (Matrix*) ((pyORBIT_Object*) pyMtrx)->cpp_obj;
 			Py_DECREF(mod);
 			cpp_mtrx->add((Matrix*)(((pyORBIT_Object*) pyIn)->cpp_obj));
 			return pyMtrx;
 		}
-		error("PyPhaseMaatrix - add(number or matrix) - input parameter is wrong.");
+		error("PyPhaseMatrix - add(number or matrix) - input parameter is wrong.");
 		Py_INCREF(Py_None);
     return Py_None;
   }
@@ -223,7 +226,7 @@ extern "C" {
 			if(!PyArg_ParseTuple(args,"d:mult",&val)){
 				error("PyMatrix - mult(number) - input parameter is needed.");
 			}
-			PyObject* mod = PyImport_ImportModule("_orbit_utils");
+			PyObject* mod = PyImport_ImportModule("orbit.core.orbit_utils");
 			PyObject* pyMtrx = PyObject_CallMethod(mod,const_cast<char*>("Matrix"),const_cast<char*>("O"),self);
 			Matrix* cpp_mtrx = (Matrix*) ((pyORBIT_Object*) pyMtrx)->cpp_obj;
 			cpp_mtrx->mult(val);
@@ -232,7 +235,7 @@ extern "C" {
 		}
 		PyObject* pyORBIT_Matrix_Type = getOrbitUtilsType("Matrix");
 		if(PyObject_IsInstance(pyIn,pyORBIT_Matrix_Type)){
-			PyObject* mod = PyImport_ImportModule("_orbit_utils");
+			PyObject* mod = PyImport_ImportModule("orbit.core.orbit_utils");
 			PyObject* pyMtrx = PyObject_CallMethod(mod,const_cast<char*>("Matrix"),const_cast<char*>("O"),self);
 			Matrix* cpp_mtrx = (Matrix*) ((pyORBIT_Object*) pyMtrx)->cpp_obj;
 			Py_DECREF(mod);
@@ -245,7 +248,7 @@ extern "C" {
 			if(cpp_Matrix->columns() != cpp_PhaseVector->size()){
 				error("PyMatrix - mult(vector) - unequal sizes of columns and vectors.");
 			}
-			PyObject* mod = PyImport_ImportModule("_orbit_utils");
+			PyObject* mod = PyImport_ImportModule("orbit.core.orbit_utils");
 			PyObject* pyVctr = PyObject_CallMethod(mod,const_cast<char*>("PhaseVector"),const_cast<char*>("i"),cpp_Matrix->rows());
 			MatrixOperations::mult(cpp_Matrix,cpp_PhaseVector,(PhaseVector*) ((pyORBIT_Object*)pyVctr)->cpp_obj);
 			Py_DECREF(mod);
@@ -289,16 +292,16 @@ extern "C" {
     { "size",       Matrix_size      ,METH_VARARGS,"Returns tuple with (n,m)"},
     { "get",        Matrix_get_set   ,METH_VARARGS,"Returns valuie(i,j)"},
     { "set",        Matrix_get_set   ,METH_VARARGS,"Sets the new value to (i,j) element - set (i,j,val)"},
-		{ "copy",       Matrix_copy      ,METH_VARARGS,"Returns the copy of the matrix"},
-		{ "copyTo",     Matrix_copyTo    ,METH_VARARGS,"Copy the matrix to the target matrix"},
-		{ "transpose",  Matrix_transpose ,METH_VARARGS,"Transposes the matrix on the place."},
-		{ "invert",     Matrix_invert    ,METH_VARARGS,"Returns the inverted the matrix, or None."},
-		{ "zero",       Matrix_zero      ,METH_VARARGS,"Sets all elements to 0."},
-		{ "unit",       Matrix_unit      ,METH_VARARGS,"Sets the matrix to a unit matrix"},
-		{ "add",        Matrix_add       ,METH_VARARGS,"Adds a matrix or number to the matrix"},
-		{ "mult",       Matrix_mult      ,METH_VARARGS,"Multiples a matrix by number, vector or matrix. Returns a new matrix"},
-		{ "det",        Matrix_det       ,METH_VARARGS,"Returns determinant of the square matrix"},
-		{ "track",      Matrix_track     ,METH_VARARGS,"Tracks Bunch through the matrix"},
+    { "copy",       Matrix_copy      ,METH_VARARGS,"Returns the copy of the matrix"},
+    { "copyTo",     Matrix_copyTo    ,METH_VARARGS,"Copy the matrix to the target matrix"},
+    { "transpose",  Matrix_transpose ,METH_VARARGS,"Returns a new transposed matrix."},
+    { "invert",     Matrix_invert    ,METH_VARARGS,"Returns the new inverted matrix, or None."},
+    { "zero",       Matrix_zero      ,METH_VARARGS,"Sets all elements to 0."},
+    { "unit",       Matrix_unit      ,METH_VARARGS,"Sets the matrix to a unit matrix"},
+    { "add",        Matrix_add       ,METH_VARARGS,"Adds a matrix or number to the matrix. Returns a new matrix."},
+    { "mult",       Matrix_mult      ,METH_VARARGS,"Multiples a matrix by number, vector or matrix. Returns a new matrix."},
+    { "det",        Matrix_det       ,METH_VARARGS,"Returns determinant of the square matrix"},
+    { "track",      Matrix_track     ,METH_VARARGS,"Tracks Bunch through the matrix"},
     {NULL}
   };
 
