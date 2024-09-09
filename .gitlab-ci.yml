@@ -12,7 +12,7 @@ run-tests:
   tags:
     - docker
   stage: test
-  image: continuumio/miniconda3:23.5.2-0
+  image: continuumio/miniconda3:24.7.1-0
   before_script:
     - conda install -c conda-forge gcc gxx fftw mpich pytest pytest-cov coverage numpy scipy matplotlib
     - python setup.py clean
@@ -32,23 +32,21 @@ run-tests:
 
 build-pypi-package-py310:
   extends: build-pypi-package
-  image: conda/miniconda3-centos7:latest
+  image: continuumio/miniconda3:24.7.1-0
   before_script:
-    - yum install -y gcc gcc-c++
     - conda update -y -n base -c defaults conda
     - conda create -y -n python310 python=3.10
     - conda init bash
     - source ~/.bashrc
     - conda activate python310
-    - conda install -y -c conda-forge git fftw mpich mpich-mpicc mpich-mpicxx
+    - conda install -y -c conda-forge gcc gxx git fftw mpich mpich-mpicc mpich-mpicxx
 
 build-pypi-package:
-  image: conda/miniconda3-centos7:latest
+  image: continuumio/miniconda3:24.7.1-0
   before_script:
-    - yum install -y gcc gcc-c++
     - conda update -y -n base -c defaults conda
     - conda create -y -n python311 python=3.11
     - conda init bash
     - source ~/.bashrc
     - conda activate python311
-    - conda install -y -c conda-forge git fftw mpich mpich-mpicc mpich-mpicxx
+    - conda install -y -c conda-forge gcc gxx git fftw mpich mpich-mpicc mpich-mpicxx
