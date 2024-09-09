@@ -67,7 +67,13 @@ def funcExit(paramsDict):
 def funcTrack(paramsDict):
     node = paramsDict["node"]
     if "print" in paramsDict and paramsDict["print"] == True:
-        print(Blanks(nLevel[0]), "BODY TRACK through node =", node.getName(), " level=", nLevel[0])
+        print(
+            Blanks(nLevel[0]),
+            "BODY TRACK through node =",
+            node.getName(),
+            " level=",
+            nLevel[0],
+        )
 
 
 acts.addAction(funcEntrance, AccActionsContainer.ENTRANCE)
@@ -80,7 +86,11 @@ print("Total length=", lattice.getLength())
 
 nodes = lattice.getNodes()
 for node in nodes:
-    print("node=", node.getName(), " s start,stop = %4.3f %4.3f " % lattice.getNodePositionsDict()[node])
+    print(
+        "node=",
+        node.getName(),
+        " s start,stop = %4.3f %4.3f " % lattice.getNodePositionsDict()[node],
+    )
 
 
 d = {"print": True}

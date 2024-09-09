@@ -225,7 +225,14 @@ class EnvelopeSolver:
     def func_fsolve(self, x, emitx, emity, sigma_p, Ksc):
         envx, envxs, envy, envys, Dx, Dxs, s = self.envelope_odeint(emitx, emity, sigma_p, Ksc, x[0], x[1], x[2], x[3], x[4], x[5])
         Nb = len(envx)
-        return [envx[Nb - 1] - x[0], envxs[Nb - 1] - x[1], envy[Nb - 1] - x[2], envys[Nb - 1] - x[3], Dx[Nb - 1] - x[4], Dxs[Nb - 1] - x[5]]
+        return [
+            envx[Nb - 1] - x[0],
+            envxs[Nb - 1] - x[1],
+            envy[Nb - 1] - x[2],
+            envys[Nb - 1] - x[3],
+            Dx[Nb - 1] - x[4],
+            Dxs[Nb - 1] - x[5],
+        ]
 
     # root searching using fsolve and initial values from MADX
     # returns matched envelopes
@@ -242,7 +249,12 @@ class EnvelopeSolver:
         Dx0 = self.beamline[Nb - 1].data["Dx"]
         Dxs0 = self.beamline[Nb - 1].data["Dpx"]
         # solver
-        sol = root(self.func_fsolve, [x0, xs0, y0, ys0, Dx0, Dxs0], args=(emitx, emity, sigma_p, Ksc), method="hybr")
+        sol = root(
+            self.func_fsolve,
+            [x0, xs0, y0, ys0, Dx0, Dxs0],
+            args=(emitx, emity, sigma_p, Ksc),
+            method="hybr",
+        )
         x0 = sol.x[0]
         xs0 = sol.x[1]
         y0 = sol.x[2]
@@ -266,7 +278,12 @@ class EnvelopeSolver:
         Dx0 = self.beamline[Nb - 1].data["Dx"]
         Dxs0 = self.beamline[Nb - 1].data["Dpx"]
         # solver
-        sol = root(self.func_fsolve, [x0, xs0, y0, ys0, Dx0, Dxs0], args=(self.beamline, emitx, emity, sigma_p, Ksc), method="hybr")
+        sol = root(
+            self.func_fsolve,
+            [x0, xs0, y0, ys0, Dx0, Dxs0],
+            args=(self.beamline, emitx, emity, sigma_p, Ksc),
+            method="hybr",
+        )
         x0 = sol.x[0]
         xs0 = sol.x[1]
         y0 = sol.x[2]
@@ -301,7 +318,12 @@ class EnvelopeSolver:
         x0 = (emitx**2 / kx) ** (1.0 / 4.0)
         y0 = (emity**2 / ky) ** (1.0 / 4.0)
 
-        sol = root(self.func_smooth, [x0, y0], args=(phase0x, phase0y, length, emitx, emity, Ksc), method="hybr")
+        sol = root(
+            self.func_smooth,
+            [x0, y0],
+            args=(phase0x, phase0y, length, emitx, emity, Ksc),
+            method="hybr",
+        )
 
         return sol.x[0] ** 2 / emitx, sol.x[1] ** 2 / emity  # beta functions
 

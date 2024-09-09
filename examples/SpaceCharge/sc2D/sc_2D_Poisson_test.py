@@ -24,7 +24,14 @@ yMin = -5.0
 yMax = +5.0
 
 scale_coeff = 3.0
-solver = PoissonSolverFFT2D(sizeX, sizeY, xMin / scale_coeff, xMax / scale_coeff, yMin / scale_coeff, yMax / scale_coeff)
+solver = PoissonSolverFFT2D(
+    sizeX,
+    sizeY,
+    xMin / scale_coeff,
+    xMax / scale_coeff,
+    yMin / scale_coeff,
+    yMax / scale_coeff,
+)
 
 gridRho = Grid2D(sizeX, sizeY, xMin, xMax, yMin, yMax)
 gridPhi = Grid2D(sizeX, sizeY, xMin, xMax, yMin, yMax)
@@ -48,6 +55,10 @@ for i in range(n_angle_steps):
     dist = (chrage_pos_x - x) * (chrage_pos_x - x) + (chrage_pos_y - y) * (chrage_pos_y - y)
     dist = math.sqrt(dist)
     phi_th = -math.log(dist)
-    print("", i, " %7.4f  %7.4f  %12.5g  %12.5g  %12.7g  " % (x, y, phi, phi_th, (phi / phi_th)))
+    print(
+        "",
+        i,
+        " %7.4f  %7.4f  %12.5g  %12.5g  %12.7g  " % (x, y, phi, phi_th, (phi / phi_th)),
+    )
 
 print("Stop.")

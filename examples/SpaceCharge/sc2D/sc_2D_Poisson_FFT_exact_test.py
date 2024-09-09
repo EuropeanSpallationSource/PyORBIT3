@@ -30,7 +30,14 @@ yMax = +5.0
 
 # let's make the solver
 scale_coeff = 3.0
-solver = PoissonSolverFFT2D(sizeX, sizeY, xMin / scale_coeff, xMax / scale_coeff, yMin / scale_coeff, yMax / scale_coeff)
+solver = PoissonSolverFFT2D(
+    sizeX,
+    sizeY,
+    xMin / scale_coeff,
+    xMax / scale_coeff,
+    yMin / scale_coeff,
+    yMax / scale_coeff,
+)
 
 # let's make the grids for the charge density and the potential
 gridRho = Grid2D(sizeX, sizeY, xMin, xMax, yMin, yMax)

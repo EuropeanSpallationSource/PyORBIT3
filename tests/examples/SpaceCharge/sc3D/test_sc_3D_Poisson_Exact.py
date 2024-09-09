@@ -109,7 +109,10 @@ for ix in range(sizeX):
 print("charge position ix =", chrage_ind_x)
 print("charge position iy =", chrage_ind_y)
 print("charge position iz =", chrage_ind_z)
-print("potential at the cahrge position phi =", gridPhi.getValueOnGrid(chrage_ind_x, chrage_ind_y, chrage_ind_z))
+print(
+    "potential at the cahrge position phi =",
+    gridPhi.getValueOnGrid(chrage_ind_x, chrage_ind_y, chrage_ind_z),
+)
 print("================================")
 print("phi theory at max deviation =", max_diff_phi)
 print("phi Solver at max deviation =", max_diff_solv_phi)

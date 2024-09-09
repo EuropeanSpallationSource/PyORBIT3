@@ -11,7 +11,12 @@ import os
 import math
 
 # import the utilities
-from orbit.utils import orbitFinalize, NamedObject, ParamsDictObject, phaseNearTargetPhase
+from orbit.utils import (
+    orbitFinalize,
+    NamedObject,
+    ParamsDictObject,
+    phaseNearTargetPhase,
+)
 
 # import general accelerator elements and lattice
 from orbit.lattice import AccLattice, AccNode, AccActionsContainer
@@ -162,7 +167,14 @@ class LinacAccLattice(AccLattice):
             paramsDict["parentNode"] = self
             node.trackActions(actionsContainer, paramsDict)
 
-    def trackBunch(self, bunch, paramsDict=None, actionContainer=None, index_start=-1, index_stop=-1):
+    def trackBunch(
+        self,
+        bunch,
+        paramsDict=None,
+        actionContainer=None,
+        index_start=-1,
+        index_stop=-1,
+    ):
         """
         It tracks the bunch through the lattice.
         """
@@ -180,7 +192,14 @@ class LinacAccLattice(AccLattice):
         self.trackActions(actionContainer, paramsDict, index_start, index_stop)
         actionContainer.removeAction(track, AccActionsContainer.BODY)
 
-    def trackDesignBunch(self, bunch_in, paramsDict=None, actionContainer=None, index_start=-1, index_stop=-1):
+    def trackDesignBunch(
+        self,
+        bunch_in,
+        paramsDict=None,
+        actionContainer=None,
+        index_start=-1,
+        index_stop=-1,
+    ):
         """
         This will track the design bunch through the linac and set up RF Cavities times of
         arrivals.

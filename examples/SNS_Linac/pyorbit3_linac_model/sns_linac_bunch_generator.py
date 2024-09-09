@@ -11,7 +11,14 @@ import sys
 import os
 import random
 
-from orbit.core.orbit_mpi import mpi_comm, mpi_datatype, mpi_op, MPI_Comm_rank, MPI_Comm_size, MPI_Bcast
+from orbit.core.orbit_mpi import (
+    mpi_comm,
+    mpi_datatype,
+    mpi_op,
+    MPI_Comm_rank,
+    MPI_Comm_size,
+    MPI_Bcast,
+)
 
 from orbit.bunch_generators import TwissContainer
 from orbit.bunch_generators import KVDist2D, KVDist3D

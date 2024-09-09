@@ -18,7 +18,23 @@ from orbit.utils.xml import XmlDataAdaptor
 print("==============START=======================")
 
 # ---- define the sequences in the linac accelerator lattice
-names = ["MEBT", "DTL1", "DTL2", "DTL3", "DTL4", "DTL5", "DTL6", "CCL1", "CCL2", "CCL3", "CCL4", "SCLMed", "SCLHigh", "HEBT1", "HEBT2"]
+names = [
+    "MEBT",
+    "DTL1",
+    "DTL2",
+    "DTL3",
+    "DTL4",
+    "DTL5",
+    "DTL6",
+    "CCL1",
+    "CCL2",
+    "CCL3",
+    "CCL4",
+    "SCLMed",
+    "SCLHigh",
+    "HEBT1",
+    "HEBT2",
+]
 
 # ---- the XML file name with the structure
 xml_file_name = "../sns_linac_xml/sns_linac.xml"

@@ -29,10 +29,29 @@ def getFirstInd(nodes, name):
 print("==============START SCRIPT=======================")
 
 # ---- define the sequences in the linac accelerator lattice
-names = ["MEBT", "DTL1", "DTL2", "DTL3", "DTL4", "DTL5", "DTL6", "CCL1", "CCL2", "CCL3", "CCL4", "SCLMed", "SCLHigh", "HEBT1", "HEBT2"]
+names = [
+    "MEBT",
+    "DTL1",
+    "DTL2",
+    "DTL3",
+    "DTL4",
+    "DTL5",
+    "DTL6",
+    "CCL1",
+    "CCL2",
+    "CCL3",
+    "CCL4",
+    "SCLMed",
+    "SCLHigh",
+    "HEBT1",
+    "HEBT2",
+]
 
 # ---- the XML file name with the structure
-xml_file_names = ["../sns_linac_xml/sns_linac.xml", "../sns_linac_xml/sns_sts_linac.xml"]
+xml_file_names = [
+    "../sns_linac_xml/sns_linac.xml",
+    "../sns_linac_xml/sns_sts_linac.xml",
+]
 for xml_file_name in xml_file_names:
     print("file =", xml_file_name)
     acc_da = XmlDataAdaptor.adaptorForFile(xml_file_name)

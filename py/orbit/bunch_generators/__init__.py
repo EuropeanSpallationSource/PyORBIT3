@@ -16,9 +16,17 @@
 ## -  WaterBagDist3D - Class. Generates the Water Bag 3D distribution.
 
 from orbit.bunch_generators.distribution_generators import TwissContainer, TwissAnalysis
-from orbit.bunch_generators.distribution_generators import GaussDist1D, GaussDist2D, GaussDist3D
+from orbit.bunch_generators.distribution_generators import (
+    GaussDist1D,
+    GaussDist2D,
+    GaussDist3D,
+)
 from orbit.bunch_generators.distribution_generators import KVDist1D, KVDist2D, KVDist3D
-from orbit.bunch_generators.distribution_generators import WaterBagDist1D, WaterBagDist2D, WaterBagDist3D
+from orbit.bunch_generators.distribution_generators import (
+    WaterBagDist1D,
+    WaterBagDist2D,
+    WaterBagDist3D,
+)
 
 
 __all__ = []

@@ -107,7 +107,10 @@ print("==========================================")
 print("lattice length=", lattice.getLength())
 print("beta=", b.getSyncParticle().beta())
 print("TEAPOT time[sec]=", b.getSyncParticle().time())
-print("SIMPLE time[sec]=", lattice.getLength() / (b.getSyncParticle().beta() * 2.99792458e8))
+print(
+    "SIMPLE time[sec]=",
+    lattice.getLength() / (b.getSyncParticle().beta() * 2.99792458e8),
+)
 print("Stop.")
 
 

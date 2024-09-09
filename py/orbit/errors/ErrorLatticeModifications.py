@@ -42,7 +42,14 @@ def addErrorNode(lattice, position, Error_Node):
 		" L = ", node.getLength()
 		"""
         if not isinstance(node, DriftTEAPOT):
-            print("Non-drift node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+            print(
+                "Non-drift node = ",
+                node.getName(),
+                " type = ",
+                node.getType(),
+                " L = ",
+                node.getLength(),
+            )
             orbitFinalize(
                 "We have non-drift element at the place of \
 				the error node! Stop!"

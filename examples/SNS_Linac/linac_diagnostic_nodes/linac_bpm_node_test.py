@@ -19,7 +19,14 @@ import sys
 import os
 
 
-from orbit.core.orbit_mpi import mpi_comm, mpi_datatype, mpi_op, MPI_Comm_rank, MPI_Comm_size, MPI_Bcast
+from orbit.core.orbit_mpi import (
+    mpi_comm,
+    mpi_datatype,
+    mpi_op,
+    MPI_Comm_rank,
+    MPI_Comm_size,
+    MPI_Bcast,
+)
 
 from orbit.py_linac.lattice import BaseLinacNode
 
@@ -264,7 +271,13 @@ for phase_ind in range(int(360 / phase_step)):
     phase_rms_old = phase_rms
     st = " %6.2f " % phase
     st += "  %6.5f  " % amp
-    st += "   %6.1f    %6.1f  %6.1f  %6.1f  %6.1f  " % (phase_rms, phase_synch, phase_avg, phase_peak, phase_fourier)
+    st += "   %6.1f    %6.1f  %6.1f  %6.1f  %6.1f  " % (
+        phase_rms,
+        phase_synch,
+        phase_avg,
+        phase_peak,
+        phase_fourier,
+    )
     print(st)
 
 

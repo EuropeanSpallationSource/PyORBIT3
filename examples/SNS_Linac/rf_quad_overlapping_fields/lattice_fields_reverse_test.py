@@ -21,7 +21,9 @@ import time
 from orbit.py_linac.linac_parsers import SNS_LinacLatticeFactory
 
 from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_to_AxisField_Nodes
-from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes
+from orbit.py_linac.lattice_modifications import (
+    Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes,
+)
 from orbit.py_linac.lattice_modifications import Replace_Quads_to_OverlappingQuads_Nodes
 
 from orbit.py_linac.lattice import GetGlobalQuadGradient
@@ -52,7 +54,13 @@ sns_linac_factory = SNS_LinacLatticeFactory()
 sns_linac_factory.setMaxDriftLength(0.1)
 
 
-def getQuadFiledsDistribution(seq_name, xml_file_name, rf_field_location, use_overlapped_fields=False, reverse_latt=False):
+def getQuadFiledsDistribution(
+    seq_name,
+    xml_file_name,
+    rf_field_location,
+    use_overlapped_fields=False,
+    reverse_latt=False,
+):
     accLattice = sns_linac_factory.getLinacAccLattice(
         [
             seq_name,
@@ -98,7 +106,12 @@ def getQuadFiledsDistribution(seq_name, xml_file_name, rf_field_location, use_ov
     print("debug =============== DIRECT nodes N=", len(nodes))
     for node_ind in range(len(nodes)):
         node = nodes[node_ind]
-        print("debug direct node= %35s " % node.getName(), " pos = %7.3f " % node.getPosition(), " Nchildren=", node.getNumberOfChildren())
+        print(
+            "debug direct node= %35s " % node.getName(),
+            " pos = %7.3f " % node.getPosition(),
+            " Nchildren=",
+            node.getNumberOfChildren(),
+        )
         child_nodes = node.getAllChildren()
         for child_node in child_nodes:
             print("                       child = %35s " % child_node.getName())
@@ -120,7 +133,12 @@ def getQuadFiledsDistribution(seq_name, xml_file_name, rf_field_location, use_ov
     for node_ind in range(len(nodes)):
         node = nodes[node_ind]
         pos = accLattice.getLength() - node.getPosition()
-        print("debug reverse node= %35s " % node.getName(), " pos = %7.3f " % pos, " Nchildren=", node.getNumberOfChildren())
+        print(
+            "debug reverse node= %35s " % node.getName(),
+            " pos = %7.3f " % pos,
+            " Nchildren=",
+            node.getNumberOfChildren(),
+        )
         child_nodes = node.getAllChildren()
         for child_node in child_nodes:
             print("                       child = %35s " % child_node.getName())
@@ -166,11 +184,19 @@ import matplotlib.pyplot as plt
 
 for seq_name in names:
     (z_arr, g_arr, gp_arr, ez_arr) = getQuadFiledsDistribution(
-        seq_name, xml_file_name, rf_field_location, use_overlapped_fields=True, reverse_latt=False
+        seq_name,
+        xml_file_name,
+        rf_field_location,
+        use_overlapped_fields=True,
+        reverse_latt=False,
     )
 
     (z1_arr, g1_arr, gp1_arr, ez1_arr) = getQuadFiledsDistribution(
-        seq_name, xml_file_name, rf_field_location, use_overlapped_fields=True, reverse_latt=True
+        seq_name,
+        xml_file_name,
+        rf_field_location,
+        use_overlapped_fields=True,
+        reverse_latt=True,
     )
 
     plt.plot(z_arr, g_arr)

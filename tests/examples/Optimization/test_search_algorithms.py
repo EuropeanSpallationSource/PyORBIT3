@@ -12,7 +12,13 @@
 import math
 import sys
 
-from orbit.utils.fitting.Solver_lib import Solver, Scorer, SolveStopperFactory, VariableProxy, TrialPoint
+from orbit.utils.fitting.Solver_lib import (
+    Solver,
+    Scorer,
+    SolveStopperFactory,
+    VariableProxy,
+    TrialPoint,
+)
 
 from orbit.utils.fitting.BisectionSearch1D import BisectionSearchAlgorithm
 from orbit.utils.fitting.GoldenSectionSearch1D import GoldenSectionSearchAlgorithm

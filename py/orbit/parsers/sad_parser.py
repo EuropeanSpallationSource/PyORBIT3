@@ -542,17 +542,29 @@ class SAD_Parser:
         dict = {}
         for var in self.__accValues:
             if var.getName() in dict:
-                print("Warning the variable:", var.getName(), " was redefined. Are you are sure?")
+                print(
+                    "Warning the variable:",
+                    var.getName(),
+                    " was redefined. Are you are sure?",
+                )
             dict[var.getName()] = var
         dict = {}
         for elem in self.__accElements:
             if elem.getName() in dict:
-                print("Warning the element:", elem.getName(), " was redefined. Are you are sure?")
+                print(
+                    "Warning the element:",
+                    elem.getName(),
+                    " was redefined. Are you are sure?",
+                )
             dict[elem.getName()] = elem
         dict = {}
         for line in self.__accLines:
             if line.getName() in dict:
-                print("Warning the line:", line.getName(), " was redefined. Are you are sure?")
+                print(
+                    "Warning the line:",
+                    line.getName(),
+                    " was redefined. Are you are sure?",
+                )
             dict[line.getName()] = line
         # -------------------------------------------------------
         # Then let's calculate numerical values.

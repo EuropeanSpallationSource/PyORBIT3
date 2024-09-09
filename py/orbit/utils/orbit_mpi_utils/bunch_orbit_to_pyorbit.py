@@ -7,7 +7,13 @@ from orbit.core.orbit_mpi import mpi_datatype
 from orbit.core.bunch import Bunch
 
 
-def bunch_orbit_to_pyorbit(ringLength, kineticEnergy, name_of_orbit_mpi_bunch_file, pyOrbitBunch=None, number_parts=-1):
+def bunch_orbit_to_pyorbit(
+    ringLength,
+    kineticEnergy,
+    name_of_orbit_mpi_bunch_file,
+    pyOrbitBunch=None,
+    number_parts=-1,
+):
     """
     Translates ORBIT_MPI bunch to pyORBIT bunch and returns it. PyORBIT bunch needs
     the ring length (m) and energy, mass and charge of the synchronous particle, but
@@ -63,7 +69,14 @@ def bunch_orbit_to_pyorbit(ringLength, kineticEnergy, name_of_orbit_mpi_bunch_fi
             if recv_rank != main_rank:
                 orbit_mpi.MPI_Send(val_arr, mpi_datatype.MPI_DOUBLE, recv_rank, 111, comm)
             else:
-                pyOrbitBunch.addParticle(val_arr[0], val_arr[1], val_arr[2], val_arr[3], val_arr[4], val_arr[5])
+                pyOrbitBunch.addParticle(
+                    val_arr[0],
+                    val_arr[1],
+                    val_arr[2],
+                    val_arr[3],
+                    val_arr[4],
+                    val_arr[5],
+                )
         if rank == recv_rank and rank != main_rank:
             val_arr = orbit_mpi.MPI_Recv(mpi_datatype.MPI_DOUBLE, main_rank, 111, comm)
             pyOrbitBunch.addParticle(val_arr[0], val_arr[1], val_arr[2], val_arr[3], val_arr[4], val_arr[5])

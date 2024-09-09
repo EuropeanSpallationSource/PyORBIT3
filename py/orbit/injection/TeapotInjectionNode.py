@@ -23,12 +23,32 @@ class TeapotInjectionNode(DriftTEAPOT):
     The injection node class for TEAPOT lattice
     """
 
-    def __init__(self, nparts, bunch, lostbunch, foilparams, xDistFunc, yDistFunc, lDistFun, nmaxmacroparticles=-1, name="injection"):
+    def __init__(
+        self,
+        nparts,
+        bunch,
+        lostbunch,
+        foilparams,
+        xDistFunc,
+        yDistFunc,
+        lDistFun,
+        nmaxmacroparticles=-1,
+        name="injection",
+    ):
         """
         Constructor. Creates the Injection TEAPOT element.
         """
         DriftTEAPOT.__init__(self, name)
-        self.injectparts = InjectParts(nparts, bunch, lostbunch, foilparams, xDistFunc, yDistFunc, lDistFun, nmaxmacroparticles)
+        self.injectparts = InjectParts(
+            nparts,
+            bunch,
+            lostbunch,
+            foilparams,
+            xDistFunc,
+            yDistFunc,
+            lDistFun,
+            nmaxmacroparticles,
+        )
         self.setType("Injection")
         self.setLength(0.0)
 

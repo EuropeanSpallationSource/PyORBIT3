@@ -189,7 +189,12 @@ class close_orbit_bumps:
     def find_kicks(self, method="Simplex"):
         p0 = self.get_start_value()
         if method == "Simplex":
-            res = minimize(self.optimzation_function, p0, method="Nelder-Mead", options={"xtol": 1e-8, "disp": None, "maxiter": 20000})
+            res = minimize(
+                self.optimzation_function,
+                p0,
+                method="Nelder-Mead",
+                options={"xtol": 1e-8, "disp": None, "maxiter": 20000},
+            )
             return res.x
         if method == "LeastSq":
             res = minimize(self.optimzation_function, p0, method="SLSQP")

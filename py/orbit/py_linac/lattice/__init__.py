@@ -6,14 +6,32 @@
 ## - LinacAccNodes         - Module. Collection of the linac accelerator nodes: drifts, quads, RF gaps etc..
 ## - LinacRfGapNodes       - Module. Collection of RF Gap models
 
-from orbit.py_linac.lattice.LinacAccLatticeLib import LinacAccLattice, RF_Cavity, Sequence
+from orbit.py_linac.lattice.LinacAccLatticeLib import (
+    LinacAccLattice,
+    RF_Cavity,
+    Sequence,
+)
 
-from orbit.py_linac.lattice.LinacAccNodes import BaseLinacNode, LinacNode, LinacMagnetNode
-from orbit.py_linac.lattice.LinacAccNodes import MarkerLinacNode, Drift, Quad, AbstractRF_Gap, Bend
+from orbit.py_linac.lattice.LinacAccNodes import (
+    BaseLinacNode,
+    LinacNode,
+    LinacMagnetNode,
+)
+from orbit.py_linac.lattice.LinacAccNodes import (
+    MarkerLinacNode,
+    Drift,
+    Quad,
+    AbstractRF_Gap,
+    Bend,
+)
 from orbit.py_linac.lattice.LinacAccNodes import DCorrectorH, DCorrectorV
 from orbit.py_linac.lattice.LinacAccNodes import ThickKick
 
-from orbit.py_linac.lattice.LinacRfGapNodes import BaseRF_Gap, AxisFieldRF_Gap, RF_AxisFieldsStore
+from orbit.py_linac.lattice.LinacRfGapNodes import (
+    BaseRF_Gap,
+    AxisFieldRF_Gap,
+    RF_AxisFieldsStore,
+)
 
 from orbit.py_linac.lattice.LinacApertureNodes import LinacApertureNode
 from orbit.py_linac.lattice.LinacApertureNodes import CircleLinacApertureNode
@@ -34,7 +52,9 @@ from orbit.py_linac.lattice.LinacAccLatticeFunc import getAllNodesInLattice
 from orbit.py_linac.lattice.LinacAccLatticeFunc import getAllMagnetsInLattice
 
 from orbit.py_linac.lattice.LinacTransportMatrixGenNodes import LinacTrMatrixGenNode
-from orbit.py_linac.lattice.LinacTransportMatrixGenNodes import LinacTrMatricesController
+from orbit.py_linac.lattice.LinacTransportMatrixGenNodes import (
+    LinacTrMatricesController,
+)
 
 from orbit.py_linac.lattice.LinacDiagnosticsNodes import LinacBPM
 

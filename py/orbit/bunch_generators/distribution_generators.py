@@ -186,7 +186,12 @@ class KVDist3D:
     that 100% emittance is 8 times bigger for 3D KV distribution.
     """
 
-    def __init__(self, twissX=TwissContainer(0.0, 1.0, 1.0), twissY=TwissContainer(0.0, 1.0, 1.0), twissZ=TwissContainer(0.0, 1.0, 1.0)):
+    def __init__(
+        self,
+        twissX=TwissContainer(0.0, 1.0, 1.0),
+        twissY=TwissContainer(0.0, 1.0, 1.0),
+        twissZ=TwissContainer(0.0, 1.0, 1.0),
+    ):
         """Constructor"""
         (alpha_x, beta_x, emittance_x) = twissX.getAlphaBetaEmitt()
         (alpha_y, beta_y, emittance_y) = twissY.getAlphaBetaEmitt()
@@ -240,7 +245,12 @@ class WaterBagDist3D:
     that 100% emittance is 8 times bigger for 3D WaterBag distribution.
     """
 
-    def __init__(self, twissX=TwissContainer(0.0, 1.0, 1.0), twissY=TwissContainer(0.0, 1.0, 1.0), twissZ=TwissContainer(0.0, 1.0, 1.0)):
+    def __init__(
+        self,
+        twissX=TwissContainer(0.0, 1.0, 1.0),
+        twissY=TwissContainer(0.0, 1.0, 1.0),
+        twissZ=TwissContainer(0.0, 1.0, 1.0),
+    ):
         """Constructor"""
         (alpha_x, beta_x, emittance_x) = twissX.getAlphaBetaEmitt()
         (alpha_y, beta_y, emittance_y) = twissY.getAlphaBetaEmitt()
@@ -292,7 +302,12 @@ class GaussDist2D:
     Generates the 2D Gauss distribution. exp(-x**2/(2*sigma**2)) The cut_off value is x_cutoff/sigma.
     """
 
-    def __init__(self, twissX=TwissContainer(0.0, 1.0, 1.0), twissY=TwissContainer(0.0, 1.0, 1.0), cut_off=-1.0):
+    def __init__(
+        self,
+        twissX=TwissContainer(0.0, 1.0, 1.0),
+        twissY=TwissContainer(0.0, 1.0, 1.0),
+        cut_off=-1.0,
+    ):
         """Constructor"""
         self.twissX = twissX
         self.twissY = twissY
@@ -317,7 +332,11 @@ class GaussDist3D:
     """
 
     def __init__(
-        self, twissX=TwissContainer(0.0, 1.0, 1.0), twissY=TwissContainer(0.0, 1.0, 1.0), twissZ=TwissContainer(0.0, 1.0, 1.0), cut_off=-1.0
+        self,
+        twissX=TwissContainer(0.0, 1.0, 1.0),
+        twissY=TwissContainer(0.0, 1.0, 1.0),
+        twissZ=TwissContainer(0.0, 1.0, 1.0),
+        cut_off=-1.0,
     ):
         """Constructor"""
         self.twissX = twissX

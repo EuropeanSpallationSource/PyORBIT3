@@ -58,7 +58,14 @@ lostbunch.addPartAttr("LostParticleAttributes")
 teapot_latt = teapot.TEAPOT_Ring()
 print("Read MAD.")
 teapot_latt.readMAD(os.path.join(script_dir, "SNSring_pyOrbitBenchmark.LAT"), "RING")
-print("Lattice=", teapot_latt.getName(), " length [m] =", teapot_latt.getLength(), " nodes=", len(teapot_latt.getNodes()))
+print(
+    "Lattice=",
+    teapot_latt.getName(),
+    " length [m] =",
+    teapot_latt.getLength(),
+    " nodes=",
+    len(teapot_latt.getNodes()),
+)
 lattlength = teapot_latt.getLength()
 
 # ----------------------------------------------
@@ -209,7 +216,12 @@ sc1Dnode = SC1D_AccNode(b_a, length, nMacrosMin, useSpaceCharge, nBins)
 nodes = teapot_latt.getNodes()
 i = 0
 for node in nodes:
-    print(i, " node=", node.getName(), " s start,stop = %4.3f %4.3f " % teapot_latt.getNodePositionsDict()[node])
+    print(
+        i,
+        " node=",
+        node.getName(),
+        " s start,stop = %4.3f %4.3f " % teapot_latt.getNodePositionsDict()[node],
+    )
     print("There are ", node.getNumberOfBodyChildren(), " child nodes.")
     i = i + 1
 

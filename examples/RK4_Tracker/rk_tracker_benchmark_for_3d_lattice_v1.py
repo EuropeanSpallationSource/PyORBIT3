@@ -67,7 +67,11 @@ for kicker in kickers:
     kicker.setFieldBx(0.0)
     kicker.setFieldBy(0.0)
     kicker.setnParts(n_kicker_parts)
-    print("kicker=", kicker.getName(), " field (X,Y) [T] = (%6.5f,%6.5f) " % (kicker.getFieldBx(), kicker.getFieldBy()))
+    print(
+        "kicker=",
+        kicker.getName(),
+        " field (X,Y) [T] = (%6.5f,%6.5f) " % (kicker.getFieldBx(), kicker.getFieldBy()),
+    )
 
 print("========================================================")
 quads = accLattice.getNodesOfClass(Quad)
@@ -139,7 +143,14 @@ def action_account(paramsDict):
         bunchI.z(0) * 1000.0,
         bunchI.dE(0) * 1000.0,
     )
-    st += " (x,xp,y,yp,z,dE) = ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f )" % (x, xp, y, yp, z, dE)
+    st += " (x,xp,y,yp,z,dE) = ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f )" % (
+        x,
+        xp,
+        y,
+        yp,
+        z,
+        dE,
+    )
     (x, xp, y, yp, z, dE) = (
         bunchI.x(1) * 1000.0,
         bunchI.xp(1) * 1000.0,
@@ -157,7 +168,13 @@ actionContainer.addAction(action_account, AccActionsContainer.BODY)
 actionContainer.addAction(action_account, AccActionsContainer.EXIT)
 
 print("============================================================================================")
-accLattice.trackBunch(bunch_tmp, paramsDict=paramsDict, actionContainer=actionContainer, index_start=start_ind, index_stop=stop_ind)
+accLattice.trackBunch(
+    bunch_tmp,
+    paramsDict=paramsDict,
+    actionContainer=actionContainer,
+    index_start=start_ind,
+    index_stop=stop_ind,
+)
 print("============================================================================================")
 
 print("============================ final TEAPOT bunch ===========================")
@@ -170,7 +187,14 @@ st = ""
     bunch_tmp.z(0) * 1000.0,
     bunch_tmp.dE(0) * 1000.0,
 )
-st += " (x,xp,y,yp,z,dE) = ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f)" % (x, xp, y, yp, z, dE)
+st += " (x,xp,y,yp,z,dE) = ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f)" % (
+    x,
+    xp,
+    y,
+    yp,
+    z,
+    dE,
+)
 (x, xp, y, yp, z, dE) = (
     bunch_tmp.x(1) * 1000.0,
     bunch_tmp.xp(1) * 1000.0,
@@ -316,7 +340,14 @@ st = " pos = %8.5f " % d_entr
     bunch_tmp.z(0) * 1000.0,
     bunch_tmp.dE(0) * 1000.0,
 )
-st += " (x,xp,y,yp,z,dE) = ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f)" % (x, xp, y, yp, z, dE)
+st += " (x,xp,y,yp,z,dE) = ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f)" % (
+    x,
+    xp,
+    y,
+    yp,
+    z,
+    dE,
+)
 (x, xp, y, yp, z, dE) = (
     bunch_tmp.x(1) * 1000.0,
     bunch_tmp.xp(1) * 1000.0,
@@ -329,7 +360,16 @@ st += " ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f)" % (x, xp, y, yp, z, dE)
 print(st)
 print("======================================================================================")
 
-print("debug d_start=", d_start, " d_stop=", d_stop, " space_step=", space_step, " n_space_parts=", n_space_parts)
+print(
+    "debug d_start=",
+    d_start,
+    " d_stop=",
+    d_stop,
+    " space_step=",
+    space_step,
+    " n_space_parts=",
+    n_space_parts,
+)
 for space_ind in range(n_space_parts):
     d_plane_start = -(d_start + space_step * space_ind)
     d_plane_stop = -d_plane_start + space_step
@@ -343,7 +383,11 @@ for space_ind in range(n_space_parts):
     synch_part_pvector = bunch_synch_part.getSyncParticle().pVector()
     synch_part_rvector = bunch_synch_part.getSyncParticle().rVector()
     momentum = math.sqrt(synch_part_pvector[0] ** 2 + synch_part_pvector[1] ** 2 + synch_part_pvector[2] ** 2)
-    norm_final_v = [synch_part_pvector[0] / momentum, synch_part_pvector[1] / momentum, synch_part_pvector[2] / momentum]
+    norm_final_v = [
+        synch_part_pvector[0] / momentum,
+        synch_part_pvector[1] / momentum,
+        synch_part_pvector[2] / momentum,
+    ]
     d_parameter = (
         norm_final_v[0] * synch_part_rvector[0] + norm_final_v[1] * synch_part_rvector[1] + norm_final_v[2] * synch_part_rvector[2]
     )
@@ -361,7 +405,14 @@ for space_ind in range(n_space_parts):
         bunch_tmp.z(0) * 1000.0,
         bunch_tmp.dE(0) * 1000.0,
     )
-    st += " (x,xp,y,yp,z,dE) = ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f)" % (x, xp, y, yp, z, dE)
+    st += " (x,xp,y,yp,z,dE) = ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f)" % (
+        x,
+        xp,
+        y,
+        yp,
+        z,
+        dE,
+    )
     (x, xp, y, yp, z, dE) = (
         bunch_tmp.x(1) * 1000.0,
         bunch_tmp.xp(1) * 1000.0,

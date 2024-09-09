@@ -22,10 +22,18 @@ from orbit.py_linac.lattice import Quad, Drift
 
 from orbit.py_linac.lattice import OverlappingQuadsNode
 
-from orbit.py_linac.lattice_modifications.rf_quad_overlap_modifications_lib import GetEngeFunction
+from orbit.py_linac.lattice_modifications.rf_quad_overlap_modifications_lib import (
+    GetEngeFunction,
+)
 
 
-def Replace_Quads_to_OverlappingQuads_Nodes(accLattice, z_step, accSeq_Names=[], quad_Names=[], EngeFunctionFactory=GetEngeFunction):
+def Replace_Quads_to_OverlappingQuads_Nodes(
+    accLattice,
+    z_step,
+    accSeq_Names=[],
+    quad_Names=[],
+    EngeFunctionFactory=GetEngeFunction,
+):
     """
     Function will replace  Quad nodes by OverlappingQuadsNode nodes.
     The replacement will be performed only for specified sequences.
@@ -85,7 +93,13 @@ def Replace_Quads_to_OverlappingQuads_Nodes(accLattice, z_step, accSeq_Names=[],
             return
         # ---- let's check that the ends of fields of groups of quads cover the drifts
         for group_ind in range(len(quad_groups_and_ind_arr)):
-            [quads_arr, pos_start, pos_end, ind_start, ind_end] = quad_groups_and_ind_arr[group_ind]
+            [
+                quads_arr,
+                pos_start,
+                pos_end,
+                ind_start,
+                ind_end,
+            ] = quad_groups_and_ind_arr[group_ind]
             for node_ind in range(ind_start, ind_end + 1):
                 node = nodes[node_ind]
                 if (group_ind == 0 or group_ind == (len(quad_groups_and_ind_arr) - 1)) and node in quads_arr:
@@ -145,7 +159,13 @@ def Replace_Quads_to_OverlappingQuads_Nodes(accLattice, z_step, accSeq_Names=[],
         # ---- 1st STEP - cut the length of drift nodes at the beginning and the end
         # ----            of quad groups
         for quad_group_ind in range(n_groups):
-            [quads_arr, pos_start, pos_end, ind_start, ind_end] = quad_groups_and_ind_arr[quad_group_ind]
+            [
+                quads_arr,
+                pos_start,
+                pos_end,
+                ind_start,
+                ind_end,
+            ] = quad_groups_and_ind_arr[quad_group_ind]
             # ---- if the node with index=ind_start or ind_end is a drift
             # ---- its length should be cut by the length of the overlapping
             # ---- region. These drifts are added to the new nodes
@@ -160,7 +180,13 @@ def Replace_Quads_to_OverlappingQuads_Nodes(accLattice, z_step, accSeq_Names=[],
                         # ---- we have to check that this node is not the end node of the previous quad group
                         # ---- if it is true we have to skip it because we already accounted for this node
                         # ---- earlier when we considered node at the end of the previous group
-                        [quads_arr0, pos_start0, pos_end0, ind_start0, ind_end0] = quad_groups_and_ind_arr[quad_group_ind - 1]
+                        [
+                            quads_arr0,
+                            pos_start0,
+                            pos_end0,
+                            ind_start0,
+                            ind_end0,
+                        ] = quad_groups_and_ind_arr[quad_group_ind - 1]
                         if ind_start != ind_end0:
                             node_new = Drift(node.getName())
                             node_new.setLength(new_length)
@@ -181,7 +207,13 @@ def Replace_Quads_to_OverlappingQuads_Nodes(accLattice, z_step, accSeq_Names=[],
                     if quad_group_ind < n_groups - 1:
                         # ---- we have to check that this node is not the start node of the next quad group
                         # ---- if it is true we have to account for the cat in the length from this group also
-                        [quads_arr1, pos_start1, pos_end1, ind_start1, ind_end1] = quad_groups_and_ind_arr[quad_group_ind + 1]
+                        [
+                            quads_arr1,
+                            pos_start1,
+                            pos_end1,
+                            ind_start1,
+                            ind_end1,
+                        ] = quad_groups_and_ind_arr[quad_group_ind + 1]
                         if ind_end == ind_start1:
                             delta1 = node_pos_end - pos_start1
                             new_length = abs(new_length - delta1)
@@ -213,15 +245,33 @@ def Replace_Quads_to_OverlappingQuads_Nodes(accLattice, z_step, accSeq_Names=[],
         # --------------------------------------------------------------------------
         # ---- 4st STEP - nodes between the quad groups
         for quad_group_ind in range(n_groups - 1):
-            [quads_arr0, pos_start0, pos_end0, ind_start0, ind_end0] = quad_groups_and_ind_arr[quad_group_ind]
-            [quads_arr1, pos_start1, pos_end1, ind_start1, ind_end1] = quad_groups_and_ind_arr[quad_group_ind + 1]
+            [
+                quads_arr0,
+                pos_start0,
+                pos_end0,
+                ind_start0,
+                ind_end0,
+            ] = quad_groups_and_ind_arr[quad_group_ind]
+            [
+                quads_arr1,
+                pos_start1,
+                pos_end1,
+                ind_start1,
+                ind_end1,
+            ] = quad_groups_and_ind_arr[quad_group_ind + 1]
             for node_ind in range(ind_end0 + 1, ind_start1):
                 # --- we keep the old positions
                 new_nodes.append(nodes[node_ind])
         # --------------------------------------------------------------------------
         # ---- 5st STEP - create OverlappingQuadsNode nodes to cover all the quad groups
         for quad_group_ind in range(n_groups):
-            [quads_arr, group_pos_start, group_pos_end, ind_start, ind_end] = quad_groups_and_ind_arr[quad_group_ind]
+            [
+                quads_arr,
+                group_pos_start,
+                group_pos_end,
+                ind_start,
+                ind_end,
+            ] = quad_groups_and_ind_arr[quad_group_ind]
             (quads_tmp, zero_length_nodes) = Get_quads_zeroLengthNodes_in_range(accSeq, ind_start, ind_end)
             node_pos_start = group_pos_start - accSeq_z_start
             node_pos_end = group_pos_end - accSeq_z_start
@@ -318,7 +368,13 @@ def Find_Groups_of_Quads(accLattice, accSeq, quads, enge_func_quad_dict, node_to
             [arr_tmp, pos_start, pos_end, ind_start, ind_end] = quad_groups_and_ind_arr[len(quad_groups_and_ind_arr) - 1]
             pos_end = pos0_center + z0_max
             ind_end = index
-            quad_groups_and_ind_arr[len(quad_groups_and_ind_arr) - 1] = [arr_tmp, pos_start, pos_end, ind_start, ind_end]
+            quad_groups_and_ind_arr[len(quad_groups_and_ind_arr) - 1] = [
+                arr_tmp,
+                pos_start,
+                pos_end,
+                ind_start,
+                ind_end,
+            ]
             quads_arr = []
     # ----------------------------------- DEBUG PRINTING START
     """

@@ -36,7 +36,14 @@ script_dir = os.path.dirname(__file__)
 teapot_latt = teapot.TEAPOT_Lattice()
 print("Read MAD.")
 teapot_latt.readMAD(os.path.join(script_dir, "MAD_Lattice/LATTICE"), "RING")
-print("Lattice=", teapot_latt.getName(), " length [m] =", teapot_latt.getLength(), " nodes=", len(teapot_latt.getNodes()))
+print(
+    "Lattice=",
+    teapot_latt.getName(),
+    " length [m] =",
+    teapot_latt.getLength(),
+    " nodes=",
+    len(teapot_latt.getNodes()),
+)
 
 Aperturenode = CircleApertureNode(0.01)
 # Aperturenode = CircleApertureNode(.01, .002, .0025)
@@ -45,7 +52,14 @@ addTeapotApertureNode(teapot_latt, 240, Aperturenode)
 # addEllipseApertureSet(.02, .01,  teapot_latt, 150, 195)
 
 print("===========Lattice modified =======================================")
-print("New Lattice=", teapot_latt.getName(), " length [m] =", teapot_latt.getLength(), " nodes=", len(teapot_latt.getNodes()))
+print(
+    "New Lattice=",
+    teapot_latt.getName(),
+    " length [m] =",
+    teapot_latt.getLength(),
+    " nodes=",
+    len(teapot_latt.getNodes()),
+)
 
 print("============= nodes inside the region ===========")
 # print all nodes around the specified position

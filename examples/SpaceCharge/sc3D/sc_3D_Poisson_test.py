@@ -64,7 +64,11 @@ for i in range(n_angle_steps):
         (chrage_pos_x - x) * (chrage_pos_x - x) + (chrage_pos_y - y) * (chrage_pos_y - y) + (chrage_pos_z - z) * (chrage_pos_z - z)
     )
     phi_th = 1.0 / dist
-    print("", i, " %7.4f  %7.4f  %7.4f  %7.4f  %12.5g  %12.5g  %12.7g  " % (x, y, z, dist, phi, phi_th, (phi / phi_th)))
+    print(
+        "",
+        i,
+        " %7.4f  %7.4f  %7.4f  %7.4f  %12.5g  %12.5g  %12.7g  " % (x, y, z, dist, phi, phi_th, (phi / phi_th)),
+    )
 
 print("Stop.")
 

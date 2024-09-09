@@ -14,5 +14,6 @@ import orbit.core.collimator
 import orbit.core.error_base
 
 from orbit.core.bunch import Bunch
+
 b = Bunch()
 print(b)

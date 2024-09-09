@@ -57,7 +57,17 @@ accelDict = {}
 accelDict["gammaTrans"] = 1.0e10
 accelDict["RFHNum"] = 1
 accelDict["n_tuple"] = 8
-accelDict["time"] = (0, 5.0e-09, 10.0e-09, 15.0e-09, 20.0e-09, 25.0e-09, 30.0e-09, 35.0e-09, 40.0e-09)
+accelDict["time"] = (
+    0,
+    5.0e-09,
+    10.0e-09,
+    15.0e-09,
+    20.0e-09,
+    25.0e-09,
+    30.0e-09,
+    35.0e-09,
+    40.0e-09,
+)
 accelDict["SyncPhase"] = (0.0, 10.0, 20.0, 30.0, 40.0, 30.0, 20.0, 10.0, 0.0)
 accelDict["RFVoltage"] = (0.1, 0.11, 0.12, 0.13, 0.14, 0.13, 0.12, 0.11, 0.1)
 accelDict["RFPhase"] = (0.0, 30.0, 60.0, 90.0, 90.0, 90.0, 60.0, 30.0, 0.0)
@@ -102,7 +112,10 @@ print("==========================================")
 print("lattice length=", lattice.getLength())
 print("beta=", b.getSyncParticle().beta())
 print("TEAPOT time[sec]=", b.getSyncParticle().time())
-print("SIMPLE time[sec]=", lattice.getLength() / (b.getSyncParticle().beta() * 2.99792458e8))
+print(
+    "SIMPLE time[sec]=",
+    lattice.getLength() / (b.getSyncParticle().beta() * 2.99792458e8),
+)
 
 print("Stop.")
 

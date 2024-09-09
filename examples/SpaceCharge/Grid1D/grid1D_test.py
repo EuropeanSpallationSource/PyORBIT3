@@ -54,7 +54,25 @@ for iz in range(sizeTestp):
     diff = math.sqrt((1.0 - grad / grad0) ** 2)
     diffS = math.sqrt((1.0 - gradS / grad0) ** 2)
 
-    print(z, "   ", func0, "   ", func, "   ", funcS, "   ", grad0, "   ", grad, "   ", gradS, "   ", diff, "   ", diffS)
+    print(
+        z,
+        "   ",
+        func0,
+        "   ",
+        func,
+        "   ",
+        funcS,
+        "   ",
+        grad0,
+        "   ",
+        grad,
+        "   ",
+        gradS,
+        "   ",
+        diff,
+        "   ",
+        diffS,
+    )
 
     if diff > diff_max:
         diff_max = diff

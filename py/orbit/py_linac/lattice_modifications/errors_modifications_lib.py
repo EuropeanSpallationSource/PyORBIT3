@@ -117,7 +117,14 @@ class CoordinateDisplacementNodesModification(ErrorForNodesModification):
         ErrorForNodesModification.__init__(self, name, "CoordinateDisplacementNodesModification")
         # ---- these parameters can be interpreted as just values or sigmas for
         # ---- for Gaussian distributions
-        self.param_dict = {"dx": 0.0, "dxp": 0.0, "dy": 0.0, "dyp": 0.0, "dz": 0.0, "dE": 0.0}
+        self.param_dict = {
+            "dx": 0.0,
+            "dxp": 0.0,
+            "dy": 0.0,
+            "dyp": 0.0,
+            "dz": 0.0,
+            "dE": 0.0,
+        }
 
     def _getInstanceOfErrorController(self):
         """

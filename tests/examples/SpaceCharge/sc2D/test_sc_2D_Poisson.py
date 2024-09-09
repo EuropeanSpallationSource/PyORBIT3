@@ -24,7 +24,14 @@ yMin = -5.0
 yMax = +5.0
 
 scale_coeff = 3.0
-solver = PoissonSolverFFT2D(sizeX, sizeY, xMin / scale_coeff, xMax / scale_coeff, yMin / scale_coeff, yMax / scale_coeff)
+solver = PoissonSolverFFT2D(
+    sizeX,
+    sizeY,
+    xMin / scale_coeff,
+    xMax / scale_coeff,
+    yMin / scale_coeff,
+    yMax / scale_coeff,
+)
 
 gridRho = Grid2D(sizeX, sizeY, xMin, xMax, yMin, yMax)
 gridPhi = Grid2D(sizeX, sizeY, xMin, xMax, yMin, yMax)

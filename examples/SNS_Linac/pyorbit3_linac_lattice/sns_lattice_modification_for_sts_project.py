@@ -19,7 +19,23 @@ from orbit.utils.xml import XmlDataAdaptor
 print("==============START=======================")
 
 # ---- define the sequences in the linac accelerator lattice
-names = ["MEBT", "DTL1", "DTL2", "DTL3", "DTL4", "DTL5", "DTL6", "CCL1", "CCL2", "CCL3", "CCL4", "SCLMed", "SCLHigh", "HEBT1", "HEBT2"]
+names = [
+    "MEBT",
+    "DTL1",
+    "DTL2",
+    "DTL3",
+    "DTL4",
+    "DTL5",
+    "DTL6",
+    "CCL1",
+    "CCL2",
+    "CCL3",
+    "CCL4",
+    "SCLMed",
+    "SCLHigh",
+    "HEBT1",
+    "HEBT2",
+]
 
 # ---- the XML file name with the structure
 xml_file_name = "../sns_linac_xml/sns_linac.xml"
@@ -38,7 +54,12 @@ for node in accSeq_da.childAdaptors():
         count += 1
         if count > 23:
             dcv_da_arr.append(node)
-            print("node=", node.stringValue("name"), " pos = %12.5f " % pos, " delta=  %12.5f " % delta_pos)
+            print(
+                "node=",
+                node.stringValue("name"),
+                " pos = %12.5f " % pos,
+                " delta=  %12.5f " % delta_pos,
+            )
 
 
 def getIndexAndNode(da, name):
@@ -51,14 +72,26 @@ def getIndexAndNode(da, name):
 
 (ind_dcv22, dcv22_node_da) = getIndexAndNode(accSeq_da, "SCL_Mag:DCV22")
 pos_0 = accSeq_da.childAdaptors()[ind_dcv22].doubleValue("pos")
-print("ind=", ind_dcv22, " node=", accSeq_da.childAdaptors()[ind_dcv22].stringValue("name"))
+print(
+    "ind=",
+    ind_dcv22,
+    " node=",
+    accSeq_da.childAdaptors()[ind_dcv22].stringValue("name"),
+)
 
 gaps_arr = []
 for ind in range(ind_dcv22 + 1, ind_dcv22 + 24 + 1):
     node = accSeq_da.childAdaptors()[ind]
     pos = node.doubleValue("pos")
     pos_new = pos - pos_0
-    print("ind=", ind, " node=", node.stringValue("name"), " pos = %12.5f " % node.doubleValue("pos"), " delta= %12.5f" % pos_new)
+    print(
+        "ind=",
+        ind,
+        " node=",
+        node.stringValue("name"),
+        " pos = %12.5f " % node.doubleValue("pos"),
+        " delta= %12.5f" % pos_new,
+    )
     node_new = node.getDeepCopy()
     node_new.setValue("pos", pos_new)
     gaps_arr.append(node_new)
@@ -87,7 +120,14 @@ for ind in range(23, 32):
             gap_da.setValue("pos", float("%12.5f" % pos))
             gap_da.childAdaptors("parameters")[0].setValue("cavity", cav_name)
             accSeq_da.childAdaptors().insert(gap_count + ind_dcv + 1, gap_da)
-            print("debug cav=", cav_name, " rf gap=", gap_da.stringValue("name"), " pos=", gap_da.doubleValue("pos"))
+            print(
+                "debug cav=",
+                cav_name,
+                " rf gap=",
+                gap_da.stringValue("name"),
+                " pos=",
+                gap_da.doubleValue("pos"),
+            )
             gap_count += 1
         cav_new_names.append([cav_name, float("%12.5f" % (pos_cav_avg / 6.0))])
 

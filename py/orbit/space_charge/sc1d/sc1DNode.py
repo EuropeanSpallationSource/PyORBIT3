@@ -63,7 +63,17 @@ class SC1D_AccNode(DriftTEAPOT):
 
 
 class FreqDep_SC1D_AccNode(DriftTEAPOT):
-    def __init__(self, b_a, phaseLength, nMacrosMin, useSpaceCharge, nBins, bunch, impeDict, name="freq. dep. long sc node"):
+    def __init__(
+        self,
+        b_a,
+        phaseLength,
+        nMacrosMin,
+        useSpaceCharge,
+        nBins,
+        bunch,
+        impeDict,
+        name="freq. dep. long sc node",
+    ):
         """
         Constructor. Creates the FreqDep_SC1D-teapot element.
         """
@@ -127,7 +137,17 @@ class FreqDep_SC1D_AccNode(DriftTEAPOT):
 
 
 class BetFreqDep_SC1D_AccNode(DriftTEAPOT):
-    def __init__(self, b_a, phaseLength, nMacrosMin, useSpaceCharge, nBins, bunch, impeDict, name="freq. dep. long sc node"):
+    def __init__(
+        self,
+        b_a,
+        phaseLength,
+        nMacrosMin,
+        useSpaceCharge,
+        nBins,
+        bunch,
+        impeDict,
+        name="freq. dep. long sc node",
+    ):
         """
         Constructor. Creates the BetFreqDep_SC1D-teapot element.
         """
@@ -149,7 +169,15 @@ class BetFreqDep_SC1D_AccNode(DriftTEAPOT):
         Z = []
         for n in range(self.nBins / 2 - 1):
             freq_mode = Freq0 * (n + 1)
-            z_mode = bilinterp(BetaRel, freq_mode, self.bet_range, self.freq_range, self.bet_tuple, self.freq_tuple, self.z_bf)
+            z_mode = bilinterp(
+                BetaRel,
+                freq_mode,
+                self.bet_range,
+                self.freq_range,
+                self.bet_tuple,
+                self.freq_tuple,
+                self.z_bf,
+            )
             Z.append(z_mode)
         self.lspacecharge.assignImpedance(Z)
 
@@ -164,7 +192,15 @@ class BetFreqDep_SC1D_AccNode(DriftTEAPOT):
         Z = []
         for n in range(self.nBins / 2 - 1):
             freq_mode = Freq0 * (n + 1)
-            z_mode = bilinterp(BetaRel, freq_mode, self.bet_range, self.freq_range, self.bet_tuple, self.freq_tuple, self.z_bf)
+            z_mode = bilinterp(
+                BetaRel,
+                freq_mode,
+                self.bet_range,
+                self.freq_range,
+                self.bet_tuple,
+                self.freq_tuple,
+                self.z_bf,
+            )
             Z.append(z_mode)
         self.lspacecharge.assignImpedance(Z)
         self.lspacecharge.trackBunch(bunch)
@@ -181,7 +217,15 @@ class BetFreqDep_SC1D_AccNode(DriftTEAPOT):
         Z = []
         for n in range(self.nBins / 2 - 1):
             freq_mode = Freq0 * (n + 1)
-            z_mode = bilinterp(BetaRel, freq_mode, self.bet_range, self.freq_range, self.bet_tuple, self.freq_tuple, self.z_bf)
+            z_mode = bilinterp(
+                BetaRel,
+                freq_mode,
+                self.bet_range,
+                self.freq_range,
+                self.bet_tuple,
+                self.freq_tuple,
+                self.z_bf,
+            )
             Z.append(z_mode)
         self.lspacecharge.assignImpedance(Z)
         self.lspacecharge.trackBunch(bunch)

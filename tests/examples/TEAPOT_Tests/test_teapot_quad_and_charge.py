@@ -14,12 +14,13 @@ from orbit.core.bunch import Bunch
 def compare_values_from_files(expected_file, test_file):
     expected_data = read_values_from_file(expected_file)
     test_data = read_values_from_file(test_file)
-    
+
     assert len(expected_data) == len(test_data)
-    
+
     for e, a in zip(expected_data, test_data):
         assert e == pytest.approx(a, abs=0.00000000001)
-    
+
+
 def read_values_from_file(file_path):
     values = []
 
@@ -31,6 +32,7 @@ def read_values_from_file(file_path):
                     values.extend(map(float, line.split()))
 
     return values
+
 
 def getTransportMatrix(kq, charge, length):
     """
@@ -97,12 +99,13 @@ def trackBunchThroughTransportMatrix(bunch, matrix):
 def compare_values_from_files(expected_file, test_file):
     expected_data = read_values_from_file(expected_file)
     test_data = read_values_from_file(test_file)
-    
+
     assert len(expected_data) == len(test_data)
-    
+
     for e, a in zip(expected_data, test_data):
         assert e == pytest.approx(a, abs=0.00000000001)
-    
+
+
 def read_values_from_file(file_path):
     values = []
 
@@ -114,7 +117,8 @@ def read_values_from_file(file_path):
                     values.extend(map(float, line.split()))
 
     return values
-	
+
+
 # =====================================================
 #   START OF THE SCRIPT
 # =====================================================
@@ -215,20 +219,24 @@ lattice.trackBunch(b, paramsDict)
 # Let's compare bunches after TEAPOT and Matrix tracking
 # --------------------------------------------------------------
 
-b.dumpBunch('final_bunch.dat')
+b.dumpBunch("final_bunch.dat")
 script_dir = os.path.dirname(__file__)
 
 
 def test_teapot_tracking():
-    compare_values_from_files(os.path.join(script_dir, "expected_final_bunch.dat"), 'final_bunch.dat')
+    compare_values_from_files(os.path.join(script_dir, "expected_final_bunch.dat"), "final_bunch.dat")
+
 
 matrx = getTransportMatrix(quad_k1, charge, quad_Length)
 bunch_matrix = trackBunchThroughTransportMatrix(b_init, matrx)
-bunch_matrix.dumpBunch('final_bunch_matrix.dat')
+bunch_matrix.dumpBunch("final_bunch_matrix.dat")
+
 
 def test_matrix_tracking():
-    compare_values_from_files(os.path.join(script_dir, "expected_final_bunch_matrix.dat"), 'final_bunch_matrix.dat')
+    compare_values_from_files(
+        os.path.join(script_dir, "expected_final_bunch_matrix.dat"),
+        "final_bunch_matrix.dat",
+    )
 
 
-        
 print("=================STOP========================")

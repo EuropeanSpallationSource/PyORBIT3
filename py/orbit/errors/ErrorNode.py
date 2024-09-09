@@ -843,11 +843,25 @@ class AddErrorNode:
             Indexf = len(lattice.getNodes())
             for node in lattice.getNodes()[0 : nodeIndexf + 1]:
                 if isinstance(node, BendTEAPOT):
-                    print("Bend node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                    print(
+                        "Bend node = ",
+                        node.getName(),
+                        " type = ",
+                        node.getType(),
+                        " L = ",
+                        node.getLength(),
+                    )
                     orbitFinalize("Can't add StraightError around a Bend! Stop!")
         for node in lattice.getNodes()[nodeIndexi:Indexf]:
             if isinstance(node, BendTEAPOT):
-                print("Bend node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                print(
+                    "Bend node = ",
+                    node.getName(),
+                    " type = ",
+                    node.getType(),
+                    " L = ",
+                    node.getLength(),
+                )
                 orbitFinalize("Can't add StraightError around a Bend! Stop!")
         nodei = lattice.getNodes()[nodeIndexi]
         nodef = lattice.getNodes()[nodeIndexf]
@@ -958,7 +972,14 @@ class AddErrorNode:
             if nodeIndexi > nodeIndexf:
                 for node in lattice.getNodes()[0 : nodeIndexf + 1]:
                     if not isinstance(node, KickTEAPOT):
-                        print("node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                        print(
+                            "node = ",
+                            node.getName(),
+                            " type = ",
+                            node.getType(),
+                            " L = ",
+                            node.getLength(),
+                        )
                         orbitFinalize("Field Error: Wanted a Kick node! Stop!")
                     kx = node.getParam("kx") * (1.0 + fracerr)
                     ky = node.getParam("ky") * (1.0 + fracerr)
@@ -966,7 +987,14 @@ class AddErrorNode:
                     node.setParam("ky", ky)
             for node in lattice.getNodes()[nodeIndexi:Indexf]:
                 if not isinstance(node, KickTEAPOT):
-                    print("node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                    print(
+                        "node = ",
+                        node.getName(),
+                        " type = ",
+                        node.getType(),
+                        " L = ",
+                        node.getLength(),
+                    )
                     orbitFinalize("Field Error: Wanted a Kick node! Stop!")
                 kx = node.getParam("kx") * (1.0 + fracerr)
                 ky = node.getParam("ky") * (1.0 + fracerr)
@@ -976,13 +1004,27 @@ class AddErrorNode:
             if nodeIndexi > nodeIndexf:
                 for node in lattice.getNodes()[0 : nodeIndexf + 1]:
                     if not isinstance(node, SolenoidTEAPOT):
-                        print("node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                        print(
+                            "node = ",
+                            node.getName(),
+                            " type = ",
+                            node.getType(),
+                            " L = ",
+                            node.getLength(),
+                        )
                         orbitFinalize("Field Error: Wanted a Solenoid node! Stop!")
                     B = node.getParam("B") * (1.0 + fracerr)
                     node.setParam("B", B)
             for node in lattice.getNodes()[nodeIndexi:Indexf]:
                 if not isinstance(node, SolenoidTEAPOT):
-                    print("node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                    print(
+                        "node = ",
+                        node.getName(),
+                        " type = ",
+                        node.getType(),
+                        " L = ",
+                        node.getLength(),
+                    )
                     orbitFinalize("Field Error: Wanted a Solenoid node! Stop!")
                 B = node.getParam("B") * (1.0 + fracerr)
                 node.setParam("B", B)
@@ -990,7 +1032,14 @@ class AddErrorNode:
             if nodeIndexi > nodeIndexf:
                 for node in lattice.getNodes()[0 : nodeIndexf + 1]:
                     if not isinstance(node, MultipoleTEAPOT):
-                        print("node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                        print(
+                            "node = ",
+                            node.getName(),
+                            " type = ",
+                            node.getType(),
+                            " L = ",
+                            node.getLength(),
+                        )
                         orbitFinalize("Field Error: Wanted a Multipole node! Stop!")
                     klArr = node.getParam("kls")
                     for i in range(len(klArr)):
@@ -998,7 +1047,14 @@ class AddErrorNode:
                     node.setParam("kls", klArr)
             for node in lattice.getNodes()[nodeIndexi:Indexf]:
                 if not isinstance(node, MultipoleTEAPOT):
-                    print("node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                    print(
+                        "node = ",
+                        node.getName(),
+                        " type = ",
+                        node.getType(),
+                        " L = ",
+                        node.getLength(),
+                    )
                     orbitFinalize("Field Error: Wanted a Multipole node! Stop!")
                 klArr = node.getParam("kls")
                 for i in range(len(klArr)):
@@ -1008,7 +1064,14 @@ class AddErrorNode:
             if nodeIndexi > nodeIndexf:
                 for node in lattice.getNodes()[0 : nodeIndexf + 1]:
                     if not isinstance(node, QuadTEAPOT):
-                        print("node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                        print(
+                            "node = ",
+                            node.getName(),
+                            " type = ",
+                            node.getType(),
+                            " L = ",
+                            node.getLength(),
+                        )
                         orbitFinalize("Field Error: Wanted a Quadrupole node! Stop!")
                     kq = node.getParam("kq") * (1.0 + fracerr)
                     node.setParam("kq", kq)
@@ -1018,7 +1081,14 @@ class AddErrorNode:
                     node.setParam("kls", klArr)
             for node in lattice.getNodes()[nodeIndexi:Indexf]:
                 if not isinstance(node, QuadTEAPOT):
-                    print("node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                    print(
+                        "node = ",
+                        node.getName(),
+                        " type = ",
+                        node.getType(),
+                        " L = ",
+                        node.getLength(),
+                    )
                     orbitFinalize("Field Error: Wanted a Quadrupole node! Stop!")
                 kq = node.getParam("kq") * (1.0 + fracerr)
                 node.setParam("kq", kq)
@@ -1030,7 +1100,14 @@ class AddErrorNode:
             if nodeIndexi > nodeIndexf:
                 for node in lattice.getNodes()[0 : nodeIndexf + 1]:
                     if not isinstance(node, BendTEAPOT):
-                        print("node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                        print(
+                            "node = ",
+                            node.getName(),
+                            " type = ",
+                            node.getType(),
+                            " L = ",
+                            node.getLength(),
+                        )
                         orbitFinalize("Field Error: Wanted a Bend node! Stop!")
                     klArr = node.getParam("kls")
                     for i in range(len(klArr)):
@@ -1038,7 +1115,14 @@ class AddErrorNode:
                     node.setParam("kls", klArr)
             for node in lattice.getNodes()[nodeIndexi:Indexf]:
                 if not isinstance(node, BendTEAPOT):
-                    print("node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                    print(
+                        "node = ",
+                        node.getName(),
+                        " type = ",
+                        node.getType(),
+                        " L = ",
+                        node.getLength(),
+                    )
                     orbitFinalize("Field Error: Wanted a Bend node! Stop!")
                 klArr = node.getParam("kls")
                 for i in range(len(klArr)):
@@ -1079,13 +1163,27 @@ class AddErrorNode:
             Indexf = len(lattice.getNodes())
             for node in lattice.getNodes()[0 : nodeIndexf + 1]:
                 if not isinstance(node, BendTEAPOT):
-                    print("Node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                    print(
+                        "Node = ",
+                        node.getName(),
+                        " type = ",
+                        node.getType(),
+                        " L = ",
+                        node.getLength(),
+                    )
                     orbitFinalize("Can't add BendError around a Straight! Stop!")
                 else:
                     theta += node.getParam("theta")
         for node in lattice.getNodes()[nodeIndexi:Indexf]:
             if not isinstance(node, BendTEAPOT):
-                print("Node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                print(
+                    "Node = ",
+                    node.getName(),
+                    " type = ",
+                    node.getType(),
+                    " L = ",
+                    node.getLength(),
+                )
                 orbitFinalize("Can't add BendError around a Straight! Stop!")
             else:
                 theta += node.getParam("theta")
@@ -1138,14 +1236,28 @@ class AddErrorNode:
                 Indexf = len(lattice.getNodes())
                 for node in lattice.getNodes()[0 : nodeIndexf + 1]:
                     if not isinstance(node, BendTEAPOT):
-                        print("Node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                        print(
+                            "Node = ",
+                            node.getName(),
+                            " type = ",
+                            node.getType(),
+                            " L = ",
+                            node.getLength(),
+                        )
                         orbitFinalize("Can't add BendError around a Straight! Stop!")
                     else:
                         rhoi = 1.0 / node.getParam("rho")
                         theta += node.getParam("theta")
             for node in lattice.getNodes()[nodeIndexi:Indexf]:
                 if not isinstance(node, BendTEAPOT):
-                    print("Node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                    print(
+                        "Node = ",
+                        node.getName(),
+                        " type = ",
+                        node.getType(),
+                        " L = ",
+                        node.getLength(),
+                    )
                     orbitFinalize("Can't add BendError around a Straight! Stop!")
                 else:
                     rhoi = 1.0 / node.getParam("rho")
@@ -1155,11 +1267,25 @@ class AddErrorNode:
                 Indexf = len(lattice.getNodes())
                 for node in lattice.getNodes()[0 : nodeIndexf + 1]:
                     if isinstance(node, BendTEAPOT):
-                        print("Node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                        print(
+                            "Node = ",
+                            node.getName(),
+                            " type = ",
+                            node.getType(),
+                            " L = ",
+                            node.getLength(),
+                        )
                         orbitFinalize("Can't add StraigtError around a Bend! Stop!")
             for node in lattice.getNodes()[nodeIndexi:Indexf]:
                 if isinstance(node, BendTEAPOT):
-                    print("Node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength())
+                    print(
+                        "Node = ",
+                        node.getName(),
+                        " type = ",
+                        node.getType(),
+                        " L = ",
+                        node.getLength(),
+                    )
                     orbitFinalize("Can't add StraigtError around a Bend! Stop!")
         nodei = lattice.getNodes()[nodeIndexi]
         nodef = lattice.getNodes()[nodeIndexf]
@@ -1174,7 +1300,16 @@ class AddErrorNode:
 
 # Add a set of error nodes
 class AddErrorSet:
-    def __init__(self, lattice, positioni, positionf, setDict, paramsDict, name="Error Set", seed_value=None):
+    def __init__(
+        self,
+        lattice,
+        positioni,
+        positionf,
+        setDict,
+        paramsDict,
+        name="Error Set",
+        seed_value=None,
+    ):
         """
         Constructor. Adds the nodes.
         """

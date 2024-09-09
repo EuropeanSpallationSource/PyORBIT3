@@ -132,7 +132,11 @@ for iz in range(sizeZ):
     val = longGrid.getValue(z_1)
     grad_1 = longGrid.calcGradient(z_1)
     grad_2 = longDerivGrid.getValue(z_1) * z_step
-    st = "ind =", iz, " z[m]= %12.6g   dz= %12.6g    val= %12.6g    grad1,2 = ( %12.6g , %12.6g) " % (z_1, dz, val, grad_1, grad_2)
+    st = (
+        "ind =",
+        iz,
+        " z[m]= %12.6g   dz= %12.6g    val= %12.6g    grad1,2 = ( %12.6g , %12.6g) " % (z_1, dz, val, grad_1, grad_2),
+    )
     print(st)
 print("=========================================================")
 

@@ -39,7 +39,14 @@ print("Start.")
 teapot_latt = teapot.TEAPOT_Lattice()
 print("Read MAD.")
 teapot_latt.readMAD(os.path.join(script_dir, "../Apertures/MAD_Lattice/LATTICE"), "RING")
-print("Lattice=", teapot_latt.getName(), " length [m] =", teapot_latt.getLength(), " nodes=", len(teapot_latt.getNodes()))
+print(
+    "Lattice=",
+    teapot_latt.getName(),
+    " length [m] =",
+    teapot_latt.getLength(),
+    " nodes=",
+    len(teapot_latt.getNodes()),
+)
 
 n_drifts = 0
 drift_length = 0.0
@@ -57,7 +64,16 @@ pos_stop = 20.5
 for node in teapot_latt.getNodes():
     (node_pos_start, node_pos_stop) = teapot_latt.getNodePositionsDict()[node]
     if node_pos_start > pos_start and node_pos_stop < pos_stop:
-        print("node=", node.getName(), " type=", node.getType(), "  pos=", node_pos_start, " L=", node.getLength())
+        print(
+            "node=",
+            node.getName(),
+            " type=",
+            node.getType(),
+            "  pos=",
+            node_pos_start,
+            " L=",
+            node.getLength(),
+        )
 
 
 length = 0.5
@@ -76,7 +92,14 @@ collimator = TeapotCollimatorNode(length, ma, density_fac, shape, a, b, c, d, an
 addTeapotCollimatorNode(teapot_latt, pos, collimator)
 
 print("===========Lattice modified =======================================")
-print("New Lattice=", teapot_latt.getName(), " length [m] =", teapot_latt.getLength(), " nodes=", len(teapot_latt.getNodes()))
+print(
+    "New Lattice=",
+    teapot_latt.getName(),
+    " length [m] =",
+    teapot_latt.getLength(),
+    " nodes=",
+    len(teapot_latt.getNodes()),
+)
 
 n_drifts = 0
 drift_length = 0.0
@@ -93,7 +116,16 @@ print("============= nodes inside the region ===========")
 for node in teapot_latt.getNodes():
     (node_pos_start, node_pos_stop) = teapot_latt.getNodePositionsDict()[node]
     if node_pos_start > pos_start and node_pos_stop < pos_stop:
-        print("node=", node.getName(), " type=", node.getType(), "  pos=", node_pos_start, " L=", node.getLength())
+        print(
+            "node=",
+            node.getName(),
+            " type=",
+            node.getType(),
+            "  pos=",
+            node_pos_start,
+            " L=",
+            node.getLength(),
+        )
 
 
 # ------------------------------

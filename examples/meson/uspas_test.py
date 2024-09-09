@@ -77,11 +77,11 @@ D5.setLength(drift_end_len)
 list_of_nodes.append(D5)
 
 # Define the sequence and add the list of nodes to the sequence.
-fodo = Sequence('FODO')
+fodo = Sequence("FODO")
 fodo.setNodes(list_of_nodes)
 
 # Define the lattice, add the list of nodes to the lattice, and initialize the lattice.
-my_lattice = LinacAccLattice('My Lattice')
+my_lattice = LinacAccLattice("My Lattice")
 my_lattice.setNodes(list_of_nodes)
 my_lattice.initialize()
 print("Total length=", my_lattice.getLength())
@@ -152,8 +152,8 @@ my_lattice.trackBunch(bunch, paramsDict=my_params, actionContainer=my_container)
 x_array = np.array(x_array)
 num_of_parts = bunch.getSizeGlobal()
 for n in range(3):
-    plt.plot(pos_array, x_array[:, n], label='Particle ' + str(n+1))
-plt.xlabel('Lattice position [m]')
-plt.ylabel('Horizontal Position [mm]')
+    plt.plot(pos_array, x_array[:, n], label="Particle " + str(n + 1))
+plt.xlabel("Lattice position [m]")
+plt.ylabel("Horizontal Position [mm]")
 plt.legend()
 plt.show()

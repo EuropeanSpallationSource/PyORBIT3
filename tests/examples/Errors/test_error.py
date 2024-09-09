@@ -58,7 +58,11 @@ string = "Start lattice, z =  {}\n".format(z)
 for acc_elem in lattice.getNodes():
     z += acc_elem.getLength()
     string += "Node =  {}  type =  {}  L =  {}  N child nodes =  {}  z =  {}\n".format(
-        acc_elem.getName(), acc_elem.getType(), acc_elem.getLength(), acc_elem.getNumberOfChildren(), z
+        acc_elem.getName(),
+        acc_elem.getType(),
+        acc_elem.getLength(),
+        acc_elem.getNumberOfChildren(),
+        z,
     )
     if acc_elem.getType() == "quad teapot":
         acc_elem.setnParts(5)

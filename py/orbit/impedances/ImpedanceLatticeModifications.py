@@ -41,7 +41,14 @@ def addImpedanceNode(lattice, position, Impedance_Node):
     for node in lattice.getNodes()[node_start_ind : node_stop_ind + 1]:
         # print "debug node=",node.getName()," type=",node.getType()," L=",node.getLength()
         if not isinstance(node, DriftTEAPOT):
-            print("Non-drift node=", node.getName(), " type=", node.getType(), " L=", node.getLength())
+            print(
+                "Non-drift node=",
+                node.getName(),
+                " type=",
+                node.getType(),
+                " L=",
+                node.getLength(),
+            )
             orbitFinalize("We have non-drift element at the place of the longitudinal space charge node! Stop!")
             # if(node.getNumberOfChildren() != 4):
             # print "Node=",node.getName()," type=",node.getType()," L=",node.getLength()," N children nodes=",node.getNumberOfChildren()

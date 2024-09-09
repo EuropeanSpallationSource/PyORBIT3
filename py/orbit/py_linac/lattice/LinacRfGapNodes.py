@@ -21,7 +21,15 @@ from orbit.core.orbit_utils import Polynomial, Function
 from orbit.py_linac.lattice.LinacAccNodes import BaseLinacNode
 
 # from linac import the RF gap classes
-from orbit.core.linac import BaseRfGap, MatrixRfGap, RfGapTTF, RfGapThreePointTTF, BaseRfGap_slow, RfGapTTF_slow, RfGapThreePointTTF_slow
+from orbit.core.linac import (
+    BaseRfGap,
+    MatrixRfGap,
+    RfGapTTF,
+    RfGapThreePointTTF,
+    BaseRfGap_slow,
+    RfGapTTF_slow,
+    RfGapThreePointTTF_slow,
+)
 
 # The abstract RF gap import
 from orbit.py_linac.lattice.LinacAccNodes import AbstractRF_Gap
@@ -211,7 +219,10 @@ class BaseRF_Gap(AbstractRF_Gap):
         if self.__isFirstGap:
             if rfCavity.isDesignSetUp():
                 # print "debug RF =",self.getName(),"  phase=",(phase*180./math.pi - 180.)
-                phase = math.fmod(frequency * (arrival_time - designArrivalTime) * 2.0 * math.pi + phase, 2.0 * math.pi)
+                phase = math.fmod(
+                    frequency * (arrival_time - designArrivalTime) * 2.0 * math.pi + phase,
+                    2.0 * math.pi,
+                )
                 # print "debug RF =",self.getName(),"  phase=",(phase*180./math.pi - 180.)
             else:
                 sequence = self.getSequence()
@@ -234,7 +245,10 @@ class BaseRF_Gap(AbstractRF_Gap):
                 msg = msg + os.linesep
                 orbitFinalize(msg)
         else:
-            phase = math.fmod(frequency * (arrival_time - designArrivalTime) * 2.0 * math.pi + phase, 2.0 * math.pi)
+            phase = math.fmod(
+                frequency * (arrival_time - designArrivalTime) * 2.0 * math.pi + phase,
+                2.0 * math.pi,
+            )
         # ---- rf gap input phase -----
         self.setGapPhase(phase)
         # call rf gap model to track the bunch
@@ -273,7 +287,10 @@ class BaseRF_Gap(AbstractRF_Gap):
         else:
             first_gap_arr_time = rfCavity.getDesignArrivalTime()
             # print "debug name=",self.getName()," delta_phase=",frequency*(arrival_time - first_gap_arr_time)*360.0," phase=",phase*180/math.pi
-            phase = math.fmod(frequency * (arrival_time - first_gap_arr_time) * 2.0 * math.pi + phase, 2.0 * math.pi)
+            phase = math.fmod(
+                frequency * (arrival_time - first_gap_arr_time) * 2.0 * math.pi + phase,
+                2.0 * math.pi,
+            )
         # print "debug design name=",self.getName()," arr_time=",arrival_time," phase=",phase*180./math.pi," E0TL=",E0TL*1.0e+3," freq=",frequency
         # ---- rf gap input phase -----
         self.setGapPhase(phase)
@@ -326,7 +343,16 @@ class BaseRF_Gap(AbstractRF_Gap):
             msg = msg + "beta max=" + str(beta_max)
             msg = msg + os.linesep
             orbitFinalize(msg)
-        self.cppGapModel.trackBunch(bunch, frequency, E0L, phase, self.polyT, self.polyS, self.polyTp, self.polySp)
+        self.cppGapModel.trackBunch(
+            bunch,
+            frequency,
+            E0L,
+            phase,
+            self.polyT,
+            self.polyS,
+            self.polyTp,
+            self.polySp,
+        )
 
 
 # -----------------------------------------------------------------------
@@ -612,7 +638,10 @@ class AxisFieldRF_Gap(AbstractRF_Gap):
         phase_shift = rfCavity.getPhase() - rfCavity.getDesignPhase()
         phase = rfCavity.getFirstGapEtnrancePhase() + phase_shift
         # ----------------------------------------
-        phase = math.fmod(frequency * (arrival_time - designArrivalTime) * 2.0 * math.pi + phase, 2.0 * math.pi)
+        phase = math.fmod(
+            frequency * (arrival_time - designArrivalTime) * 2.0 * math.pi + phase,
+            2.0 * math.pi,
+        )
         if index == 0:
             self.part_pos = self.z_min
             self.gap_phase_vs_z_arr = [
@@ -639,7 +668,15 @@ class AxisFieldRF_Gap(AbstractRF_Gap):
         # s += " dE= %9.6f "%((eKin_out-eKin_in)*1000.)
         # print s
         # ---- this part is the debugging ---STOP---
-        self.cppGapModel.trackBunch(bunch, part_length / 2, Em, E0, Ep, frequency, phase + delta_phase + modePhase)
+        self.cppGapModel.trackBunch(
+            bunch,
+            part_length / 2,
+            Em,
+            E0,
+            Ep,
+            frequency,
+            phase + delta_phase + modePhase,
+        )
         self.tracking_module.drift(bunch, part_length / 2)
         # ---- advance the particle position
         self.part_pos += part_length / 2
@@ -714,7 +751,10 @@ class AxisFieldRF_Gap(AbstractRF_Gap):
         else:
             first_gap_arr_time = rfCavity.getDesignArrivalTime()
             # print "debug name=",self.getName()," delta_phase=",frequency*(arrival_time - first_gap_arr_time)*360.0," phase=",phase*180/math.pi
-            phase = math.fmod(frequency * (arrival_time - first_gap_arr_time) * 2.0 * math.pi + phase, 2.0 * math.pi)
+            phase = math.fmod(
+                frequency * (arrival_time - first_gap_arr_time) * 2.0 * math.pi + phase,
+                2.0 * math.pi,
+            )
         if index == 0:
             self.part_pos = self.z_min
             self.gap_phase_vs_z_arr = [
@@ -742,7 +782,15 @@ class AxisFieldRF_Gap(AbstractRF_Gap):
         # s += " dE= %9.6f "%((eKin_out-eKin_in)*1000.)
         # print s
         # ---- this part is the debugging ---STOP---
-        self.cppGapModel.trackBunch(bunch, part_length / 2, Em, E0, Ep, frequency, phase + delta_phase + modePhase)
+        self.cppGapModel.trackBunch(
+            bunch,
+            part_length / 2,
+            Em,
+            E0,
+            Ep,
+            frequency,
+            phase + delta_phase + modePhase,
+        )
         self.tracking_module.drift(bunch, part_length / 2)
         # ---- advance the particle position
         self.part_pos += part_length / 2
@@ -839,7 +887,15 @@ class AxisFieldRF_Gap(AbstractRF_Gap):
                 # s += " ekin= %9.5f"%(syncPart.kinEnergy()*1000.)
                 # s += " phase = %9.2f "%(phaseNearTargetPhaseDeg((phase_start+delta_phase+modePhase)*180./math.pi,0.))
                 # print s
-                self.cppGapModel.trackBunch(bunch, half_step, Em, E0, Ep, frequency, phase_start + delta_phase + modePhase)
+                self.cppGapModel.trackBunch(
+                    bunch,
+                    half_step,
+                    Em,
+                    E0,
+                    Ep,
+                    frequency,
+                    phase_start + delta_phase + modePhase,
+                )
                 self.tracking_module.drift(bunch, half_step)
                 # time_gap = syncPart.time()
                 # delta_phase = 2*math.pi*time_gap*frequency

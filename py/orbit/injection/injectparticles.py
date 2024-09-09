@@ -24,7 +24,17 @@ class InjectParts:
     functions.
     """
 
-    def __init__(self, nparts, bunch, lostbunch, injectregion, xDistFunc, yDistFunc, lDistFunc, nmaxmacroparticles=-1):
+    def __init__(
+        self,
+        nparts,
+        bunch,
+        lostbunch,
+        injectregion,
+        xDistFunc,
+        yDistFunc,
+        lDistFunc,
+        nmaxmacroparticles=-1,
+    ):
         self.nparts = nparts
         self.npartsfloat = float(nparts)
         self.bunch = bunch
@@ -118,7 +128,16 @@ class InjectParts:
         i_stop = (rank + 1) * n_inj_local
         for i in range(i_start, i_stop):
             particleId = nPartsTotalGlobal + i
-            self.addInjectedParticle(self.bunch, x_local[i], xp_local[i], y_local[i], yp_local[i], z_local[i], dE_local[i], particleId)
+            self.addInjectedParticle(
+                self.bunch,
+                x_local[i],
+                xp_local[i],
+                y_local[i],
+                yp_local[i],
+                z_local[i],
+                dE_local[i],
+                particleId,
+            )
 
         # ---- inject the reminder of the particles
         n_max_index = numprocs * n_inj_local

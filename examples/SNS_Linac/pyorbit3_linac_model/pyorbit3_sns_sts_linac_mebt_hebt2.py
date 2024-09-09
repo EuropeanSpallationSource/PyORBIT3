@@ -45,7 +45,9 @@ from orbit.bunch_generators import WaterBagDist3D, GaussDist3D, KVDist3D
 
 from orbit.py_linac.lattice_modifications import Add_quad_apertures_to_lattice
 from orbit.py_linac.lattice_modifications import Add_rfgap_apertures_to_lattice
-from orbit.py_linac.lattice_modifications import AddMEBTChopperPlatesAperturesToSNS_Lattice
+from orbit.py_linac.lattice_modifications import (
+    AddMEBTChopperPlatesAperturesToSNS_Lattice,
+)
 from orbit.py_linac.lattice_modifications import AddScrapersAperturesToLattice
 
 from orbit.core.bunch import Bunch, BunchTwissAnalysis
@@ -89,57 +91,83 @@ def setSynchPhase(bunch_in, accLattice, cav_name, synchPhaseDeg):
     # print "debug cav=",cav_name," phase=",cav_phase," delta_e max=",(e_kin_max-e_kin_in)/1.0e-3
     return cav_phase
 
-def correctLatticeXML(xml_file_name,gap_phases_dict):
-	"""
-	This function will replace RF Gap phases in xml_file_name,
-	and it will return the new Data Adaptor with values.
-	The lattice XML file is in a file with the name 'xml_file_name'
-	and gap_phases_dict[rf_gap_name] = phase
-	"""
-	acc_da = XmlDataAdaptor.adaptorForFile(xml_file_name)
-	seq_names  = ["SCLHigh",]
-	for seq_name in seq_names:
-		#print ("========  Sequence = ",seq_name," ==========")
-		accSeq_da = acc_da.childAdaptors(seq_name)[0]
-		for node_da in accSeq_da.childAdaptors("accElement"):
-			if(node_da.hasAttribute("type") and (node_da.stringValue("type") == "RFGAP")):
-				rf_gap_name = node_da.stringValue("name")
-				params_da = node_da.childAdaptors("parameters")[0]
-				#print ("debug node=",rf_gap_name)
-				if(rf_gap_name in gap_phases_dict):
-					phase_new = gap_phases_dict[rf_gap_name]
-					phase_old = params_da.doubleValue("phase")
-					params_da.setValue("phase","%9.4f"%phase_new)
-					print ("debug gap=",rf_gap_name," old_phase= %+9.4f "%phase_old," new phase=  %+9.4f "%params_da.doubleValue("phase"))
-	return acc_da
-	
+
+def correctLatticeXML(xml_file_name, gap_phases_dict):
+    """
+    This function will replace RF Gap phases in xml_file_name,
+    and it will return the new Data Adaptor with values.
+    The lattice XML file is in a file with the name 'xml_file_name'
+    and gap_phases_dict[rf_gap_name] = phase
+    """
+    acc_da = XmlDataAdaptor.adaptorForFile(xml_file_name)
+    seq_names = [
+        "SCLHigh",
+    ]
+    for seq_name in seq_names:
+        # print ("========  Sequence = ",seq_name," ==========")
+        accSeq_da = acc_da.childAdaptors(seq_name)[0]
+        for node_da in accSeq_da.childAdaptors("accElement"):
+            if node_da.hasAttribute("type") and (node_da.stringValue("type") == "RFGAP"):
+                rf_gap_name = node_da.stringValue("name")
+                params_da = node_da.childAdaptors("parameters")[0]
+                # print ("debug node=",rf_gap_name)
+                if rf_gap_name in gap_phases_dict:
+                    phase_new = gap_phases_dict[rf_gap_name]
+                    phase_old = params_da.doubleValue("phase")
+                    params_da.setValue("phase", "%9.4f" % phase_new)
+                    print(
+                        "debug gap=",
+                        rf_gap_name,
+                        " old_phase= %+9.4f " % phase_old,
+                        " new phase=  %+9.4f " % params_da.doubleValue("phase"),
+                    )
+    return acc_da
+
+
 def removeDuplicates(acc_da):
-	"""
-	It will remove the duplicates entries with the same names.
-	It will do this only for 1st level of accElement XML elements.
-	"""
-	acc_da = acc_da.getDeepCopy()
-	seqs_da = acc_da.childAdaptors()
-	for accSeq_da in seqs_da:
-		accElem_repeat_names = []
-		accElems_repeat_da = []
-		for accElem_da in accSeq_da.childAdaptors("accElement"):
-			if(accElem_da.stringValue("name") in accElem_repeat_names):
-				accElems_repeat_da.append(accElem_da)
-			else:
-				accElem_repeat_names.append(accElem_da.stringValue("name"))
-		#-------- remove reperted elements
-		for accElem_da in accElems_repeat_da:
-			accSeq_da.data_adaptors.remove(accElem_da)
-	return acc_da
-	
+    """
+    It will remove the duplicates entries with the same names.
+    It will do this only for 1st level of accElement XML elements.
+    """
+    acc_da = acc_da.getDeepCopy()
+    seqs_da = acc_da.childAdaptors()
+    for accSeq_da in seqs_da:
+        accElem_repeat_names = []
+        accElems_repeat_da = []
+        for accElem_da in accSeq_da.childAdaptors("accElement"):
+            if accElem_da.stringValue("name") in accElem_repeat_names:
+                accElems_repeat_da.append(accElem_da)
+            else:
+                accElem_repeat_names.append(accElem_da.stringValue("name"))
+        # -------- remove reperted elements
+        for accElem_da in accElems_repeat_da:
+            accSeq_da.data_adaptors.remove(accElem_da)
+    return acc_da
+
+
 # -------------------------------------------------------------------
 #          Start of the script
 # -------------------------------------------------------------------
 
 random.seed(100)
 
-names = ["MEBT", "DTL1", "DTL2", "DTL3", "DTL4", "DTL5", "DTL6", "CCL1", "CCL2", "CCL3", "CCL4", "SCLMed", "SCLHigh", "HEBT1", "HEBT2"]
+names = [
+    "MEBT",
+    "DTL1",
+    "DTL2",
+    "DTL3",
+    "DTL4",
+    "DTL5",
+    "DTL6",
+    "CCL1",
+    "CCL2",
+    "CCL3",
+    "CCL4",
+    "SCLMed",
+    "SCLHigh",
+    "HEBT1",
+    "HEBT2",
+]
 
 # ---- create the factory instance
 sns_linac_factory = SNS_LinacLatticeFactory()
@@ -458,7 +486,7 @@ cav_synch_phases["SCL:Cav32d"] = -30.0
 # ------scl25 added -----stop----
 
 for key in cav_synch_phases:
-	cav_synch_phases[key] -= 12.06
+    cav_synch_phases[key] -= 12.06
 
 # -----TWISS Parameters at the entrance of MEBT ---------------
 # transverse emittances are unnormalized and in pi*mm*mrad
@@ -520,9 +548,14 @@ bunch_in = bunch_gen.getBunch(nParticles=100000, distributorClass=WaterBagDist3D
 print("Bunch Generation completed.")
 
 for cav_name in cav_names:
-	cav_synch_phase = cav_synch_phases[cav_name]
-	setSynchPhase(bunch_in, accLattice, cav_name, cav_synch_phase)
-	print ("debug cav=",cav_name," eKIn_In=",(bunch_in.getSyncParticle().kinEnergy() * 1.0e3))
+    cav_synch_phase = cav_synch_phases[cav_name]
+    setSynchPhase(bunch_in, accLattice, cav_name, cav_synch_phase)
+    print(
+        "debug cav=",
+        cav_name,
+        " eKIn_In=",
+        (bunch_in.getSyncParticle().kinEnergy() * 1.0e3),
+    )
 
 # set up design
 bunch_out = accLattice.trackDesignBunch(bunch_in)
@@ -533,35 +566,49 @@ bunch_out = accLattice.trackDesignBunch(bunch_in)
 cavs = accLattice.getRF_Cavities()
 for cav in cavs:
     avg_phase = phaseNearTargetPhaseDeg(cav.getAvgGapPhaseDeg() - 180.0, 0.0)
-    print("debug cav=", cav.getName(), " gaps phaseAvg= %+8.3f "%avg_phase," cav phase= %+8.3f"%(cav.getPhase()*180./math.pi), " cav_amp=", cav.getAmp())
+    print(
+        "debug cav=",
+        cav.getName(),
+        " gaps phaseAvg= %+8.3f " % avg_phase,
+        " cav phase= %+8.3f" % (cav.getPhase() * 180.0 / math.pi),
+        " cav_amp=",
+        cav.getAmp(),
+    )
 
-print("Design tracking completed. eKin_Out = ",(bunch_out.getSyncParticle().kinEnergy() * 1.0e3))
+print(
+    "Design tracking completed. eKin_Out = ",
+    (bunch_out.getSyncParticle().kinEnergy() * 1.0e3),
+)
 
 cav_gap_phases_dict = {}
 gap_phases_dict = {}
 for cav in cavs:
-	if(cav.getName() in cav_synch_phases):
-		cav_gap_phases = []
-		print ("debug cav=",cav.getName()," ==========================")
-		rf_gaps = cav.getRF_GapNodes()
-		for rf_gap in rf_gaps:
-			phase = phaseNearTargetPhaseDeg(rf_gap.getGapPhase()*180./math.pi,0.)
-			gap_phases_dict[rf_gap.getName()] = phase
-			#print ("   gap name=",rf_gap.getName())
-			cav_gap_phases.append(phase)
-		cav_gap_phases_dict[cav.getName()] = cav_gap_phases
-		print ("cav=",cav.getName()," rf gap phases = %+6.3f %+6.3f %+6.3f %+6.3f %+6.3f %+6.3f "%tuple(cav_gap_phases))
+    if cav.getName() in cav_synch_phases:
+        cav_gap_phases = []
+        print("debug cav=", cav.getName(), " ==========================")
+        rf_gaps = cav.getRF_GapNodes()
+        for rf_gap in rf_gaps:
+            phase = phaseNearTargetPhaseDeg(rf_gap.getGapPhase() * 180.0 / math.pi, 0.0)
+            gap_phases_dict[rf_gap.getName()] = phase
+            # print ("   gap name=",rf_gap.getName())
+            cav_gap_phases.append(phase)
+        cav_gap_phases_dict[cav.getName()] = cav_gap_phases
+        print(
+            "cav=",
+            cav.getName(),
+            " rf gap phases = %+6.3f %+6.3f %+6.3f %+6.3f %+6.3f %+6.3f " % tuple(cav_gap_phases),
+        )
 
 
-new_acc_da = correctLatticeXML(xml_file_name,gap_phases_dict)
+new_acc_da = correctLatticeXML(xml_file_name, gap_phases_dict)
 
-#----------------------------------------------------------------------
+# ----------------------------------------------------------------------
 # This was and addition to get the correct sts linac lattice XML file
-#----------------------------------------------------------------------
-#new_acc_da.writeToFile("../sns_linac_xml/sns_sts_linac_new.xml")
-#new_acc_da = removeDuplicates(new_acc_da)
-#new_acc_da.writeToFile("../sns_linac_xml/sns_sts_linac_new_new.xml")
-#sys.exit(0)
+# ----------------------------------------------------------------------
+# new_acc_da.writeToFile("../sns_linac_xml/sns_sts_linac_new.xml")
+# new_acc_da = removeDuplicates(new_acc_da)
+# new_acc_da.writeToFile("../sns_linac_xml/sns_sts_linac_new_new.xml")
+# sys.exit(0)
 
 # track through the lattice
 paramsDict = {"old_pos": -1.0, "count": 0, "pos_step": 0.1}
@@ -603,9 +650,21 @@ def action_entrance(paramsDict):
     z_to_phase_coeff = bunch_gen.getZtoPhaseCoeff(bunch)
     z_rms_deg = z_to_phase_coeff * z_rms / 1000.0
     nParts = bunch.getSizeGlobal()
-    (alphaX, betaX, emittX) = (twiss_analysis.getTwiss(0)[0], twiss_analysis.getTwiss(0)[1], twiss_analysis.getTwiss(0)[3] * 1.0e6)
-    (alphaY, betaY, emittY) = (twiss_analysis.getTwiss(1)[0], twiss_analysis.getTwiss(1)[1], twiss_analysis.getTwiss(1)[3] * 1.0e6)
-    (alphaZ, betaZ, emittZ) = (twiss_analysis.getTwiss(2)[0], twiss_analysis.getTwiss(2)[1], twiss_analysis.getTwiss(2)[3] * 1.0e6)
+    (alphaX, betaX, emittX) = (
+        twiss_analysis.getTwiss(0)[0],
+        twiss_analysis.getTwiss(0)[1],
+        twiss_analysis.getTwiss(0)[3] * 1.0e6,
+    )
+    (alphaY, betaY, emittY) = (
+        twiss_analysis.getTwiss(1)[0],
+        twiss_analysis.getTwiss(1)[1],
+        twiss_analysis.getTwiss(1)[3] * 1.0e6,
+    )
+    (alphaZ, betaZ, emittZ) = (
+        twiss_analysis.getTwiss(2)[0],
+        twiss_analysis.getTwiss(2)[1],
+        twiss_analysis.getTwiss(2)[3] * 1.0e6,
+    )
     norm_emittX = emittX * gamma * beta
     norm_emittY = emittY * gamma * beta
     # ---- phi_de_emittZ will be in [pi*deg*MeV]
@@ -619,7 +678,11 @@ def action_entrance(paramsDict):
     s += "  %10.6f   %8d " % (eKin, nParts)
     file_out.write(s + "\n")
     file_out.flush()
-    s_prt = " %5d  %35s  %4.5f " % (paramsDict["count"], node.getName(), pos + pos_start)
+    s_prt = " %5d  %35s  %4.5f " % (
+        paramsDict["count"],
+        node.getName(),
+        pos + pos_start,
+    )
     s_prt += "  %5.3f  %5.3f   %5.3f " % (x_rms, y_rms, z_rms_deg)
     s_prt += "  %10.6f   %8d " % (eKin, nParts)
     print(s_prt)
@@ -643,7 +706,13 @@ rf_gaps = rf_cav.getRF_GapNodes()
 ind_stop = accLattice.getNodeIndex(rf_gaps[len(rf_gaps) - 1])
 
 # ------------Track bunch to the last RF gap in SCL:Cav23d
-accLattice.trackBunch(bunch_in, paramsDict=paramsDict, actionContainer=actionContainer, index_start=-1, index_stop=ind_stop)
+accLattice.trackBunch(
+    bunch_in,
+    paramsDict=paramsDict,
+    actionContainer=actionContainer,
+    index_start=-1,
+    index_stop=ind_stop,
+)
 
 # ---- Dump and read the bunch into the disk if necessary
 # bunch_in.dumpBunch("bunch_sts_after_scl_23d_rg06.dat")
@@ -652,7 +721,12 @@ accLattice.trackBunch(bunch_in, paramsDict=paramsDict, actionContainer=actionCon
 # bunch_in.readBunch("bunch_sts_after_scl_23d_rg06.dat")
 
 # ------------Now track the bunch to the end
-accLattice.trackBunch(bunch_in, paramsDict=paramsDict, actionContainer=actionContainer, index_start=(ind_stop + 1))
+accLattice.trackBunch(
+    bunch_in,
+    paramsDict=paramsDict,
+    actionContainer=actionContainer,
+    index_start=(ind_stop + 1),
+)
 
 time_exec = time.process_time() - time_start
 print("time[sec]=", time_exec)

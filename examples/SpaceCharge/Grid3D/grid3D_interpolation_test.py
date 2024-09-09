@@ -33,7 +33,11 @@ def Func(x, y, z):
 
 
 def FuncGrad(x, y, z):
-    return (-2 * x / (x * x + y * y + z * z) ** 2, -2 * y / (x * x + y * y + z * z) ** 2, -2 * z / (x * x + y * y + z * z) ** 2)
+    return (
+        -2 * x / (x * x + y * y + z * z) ** 2,
+        -2 * y / (x * x + y * y + z * z) ** 2,
+        -2 * z / (x * x + y * y + z * z) ** 2,
+    )
 
 
 for ix in range(sizeX):

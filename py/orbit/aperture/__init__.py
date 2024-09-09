@@ -4,9 +4,18 @@
 ## Classes:
 
 
-from .TeapotApertureNode import TeapotApertureNode, CircleApertureNode, EllipseApertureNode, RectangleApertureNode
+from .TeapotApertureNode import (
+    TeapotApertureNode,
+    CircleApertureNode,
+    EllipseApertureNode,
+    RectangleApertureNode,
+)
 from .ApertureLatticeModifications import addTeapotApertureNode
-from .ApertureLatticeRangeModifications import addCircleApertureSet, addEllipseApertureSet, addRectangleApertureSet
+from .ApertureLatticeRangeModifications import (
+    addCircleApertureSet,
+    addEllipseApertureSet,
+    addRectangleApertureSet,
+)
 
 # from TeapotApertureShapeNode import CircleApertureNode
 

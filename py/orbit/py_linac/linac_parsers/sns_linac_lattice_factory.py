@@ -17,7 +17,16 @@ from orbit.utils.xml import XmlDataAdaptor
 from orbit.py_linac.lattice import LinacAccLattice
 from orbit.py_linac.lattice import LinacAccNodes
 
-from orbit.py_linac.lattice import BaseLinacNode, LinacNode, LinacMagnetNode, MarkerLinacNode, Drift, Quad, AbstractRF_Gap, Bend
+from orbit.py_linac.lattice import (
+    BaseLinacNode,
+    LinacNode,
+    LinacMagnetNode,
+    MarkerLinacNode,
+    Drift,
+    Quad,
+    AbstractRF_Gap,
+    Bend,
+)
 from orbit.py_linac.lattice import DCorrectorH, DCorrectorV, ThickKick
 from orbit.py_linac.lattice import RF_Cavity, Sequence
 from orbit.py_linac.lattice import BaseRF_Gap
@@ -268,7 +277,13 @@ class SNS_LinacLatticeFactory:
                 elif node_type == "VACWIN":
                     material_index = params_da.doubleValue("material_index")
                     density_factor = params_da.doubleValue("density_factor")
-                    accNode = VacuumWindowNode(node_length, material_index, density_factor, node_da.stringValue("name"), node_pos)
+                    accNode = VacuumWindowNode(
+                        node_length,
+                        material_index,
+                        density_factor,
+                        node_da.stringValue("name"),
+                        node_pos,
+                    )
                     accSeq.addNode(accNode)
                 else:
                     if node_length != 0.0:
@@ -313,7 +328,12 @@ class SNS_LinacLatticeFactory:
                                 s_path += accNode.getLength(part_ind)
                                 if delta_pos <= s_path + self.zeroDistance:
                                     break
-                            accNode.addChildNode(thinNode, place=AccNode.BODY, part_index=part_ind_in, place_in_part=AccNode.AFTER)
+                            accNode.addChildNode(
+                                thinNode,
+                                place=AccNode.BODY,
+                                part_index=part_ind_in,
+                                place_in_part=AccNode.AFTER,
+                            )
                             thinNode.setParam("pos", (pos - length / 2) + s_path)
                 if not isInside:
                     unusedThinNodes.append(thinNode)
@@ -378,7 +398,10 @@ class SNS_LinacLatticeFactory:
                     for idrift in range(nDrifts):
                         drift = Drift(accSeq.getName() + ":" + lastNode.getName() + ":" + str(idrift + 1) + ":drift")
                         drift.setLength(driftLength)
-                        drift.setParam("pos", lastNode.getParam("pos") + lastNode.getLength() / 2.0 + drift.getLength() * (idrift + 0.5))
+                        drift.setParam(
+                            "pos",
+                            lastNode.getParam("pos") + lastNode.getLength() / 2.0 + drift.getLength() * (idrift + 0.5),
+                        )
                         driftNodes.append(drift)
                     driftNodes_after = driftNodes
             # now move on and generate drifts between (i,i+1) nodes from copyAccNodes
@@ -421,7 +444,10 @@ class SNS_LinacLatticeFactory:
                     for idrift in range(nDrifts):
                         drift = Drift(accSeq.getName() + ":" + accNode0.getName() + ":" + str(idrift + 1) + ":drift")
                         drift.setLength(driftLength)
-                        drift.setParam("pos", accNode0.getParam("pos") + accNode0.getLength() * 0.5 + drift.getLength() * (idrift + 0.5))
+                        drift.setParam(
+                            "pos",
+                            accNode0.getParam("pos") + accNode0.getLength() * 0.5 + drift.getLength() * (idrift + 0.5),
+                        )
                         driftNodes.append(drift)
                     newAccNodes += driftNodes
                 else:

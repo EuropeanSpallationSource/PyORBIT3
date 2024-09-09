@@ -56,7 +56,14 @@ class VacuumWindowNode(BaseLinacNode):
         BaseLinacNode.__init__(self, name)
         # ---- material
         self.ma = int(ma)
-        self.materials_arr = ["carbon", "aluminum", "iron", "copper", "tantalum", "tungstun"]
+        self.materials_arr = [
+            "carbon",
+            "aluminum",
+            "iron",
+            "copper",
+            "tantalum",
+            "tungstun",
+        ]
         self.materials_arr += ["platinum", "lead", "black absorber"]
         # ---- by default the shape is circle
         shape = 1

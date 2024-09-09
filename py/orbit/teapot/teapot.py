@@ -1041,7 +1041,18 @@ class BendTEAPOT(NodeTEAPOT):
                             TPB.multpfringeIN(bunch, pole, kl, skew, useCharge)
                     frinout = 1
                     TPB.wedgerotate(bunch, e, frinout)
-                TPB.wedgebendCF(bunch, e, inout, rho, len(poleArr), poleArr, klArr, skewArr, nParts - 1, useCharge)
+                TPB.wedgebendCF(
+                    bunch,
+                    e,
+                    inout,
+                    rho,
+                    len(poleArr),
+                    poleArr,
+                    klArr,
+                    skewArr,
+                    nParts - 1,
+                    useCharge,
+                )
             else:
                 if usageIN:
                     TPB.bendfringeIN(bunch, rho)
@@ -1067,7 +1078,18 @@ class BendTEAPOT(NodeTEAPOT):
             nParts = paramsDict["parentNode"].getnParts()
             if e != 0.0:
                 inout = 1
-                TPB.wedgebendCF(bunch, e, inout, rho, len(poleArr), poleArr, klArr, skewArr, nParts - 1, useCharge)
+                TPB.wedgebendCF(
+                    bunch,
+                    e,
+                    inout,
+                    rho,
+                    len(poleArr),
+                    poleArr,
+                    klArr,
+                    skewArr,
+                    nParts - 1,
+                    useCharge,
+                )
                 if usageOUT:
                     frinout = 0
                     TPB.wedgerotate(bunch, -e, frinout)

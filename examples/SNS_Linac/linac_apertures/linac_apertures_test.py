@@ -11,12 +11,21 @@ import math
 import sys
 import os
 
-from orbit.core.orbit_mpi import mpi_comm, mpi_datatype, mpi_op, MPI_Comm_rank, MPI_Comm_size, MPI_Bcast
+from orbit.core.orbit_mpi import (
+    mpi_comm,
+    mpi_datatype,
+    mpi_op,
+    MPI_Comm_rank,
+    MPI_Comm_size,
+    MPI_Bcast,
+)
 
 from orbit.py_linac.linac_parsers import SNS_LinacLatticeFactory
 
 from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_to_AxisField_Nodes
-from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes
+from orbit.py_linac.lattice_modifications import (
+    Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes,
+)
 from orbit.py_linac.lattice_modifications import Replace_Quads_to_OverlappingQuads_Nodes
 
 from orbit.py_linac.overlapping_fields import SNS_EngeFunctionFactory
@@ -25,7 +34,9 @@ from orbit.py_linac.lattice_modifications import Add_quad_apertures_to_lattice
 from orbit.py_linac.lattice_modifications import Add_rfgap_apertures_to_lattice
 from orbit.py_linac.lattice_modifications import GetLostDistributionArr
 from orbit.py_linac.lattice_modifications import AddScrapersAperturesToLattice
-from orbit.py_linac.lattice_modifications import AddMEBTChopperPlatesAperturesToSNS_Lattice
+from orbit.py_linac.lattice_modifications import (
+    AddMEBTChopperPlatesAperturesToSNS_Lattice,
+)
 
 from orbit.lattice import AccLattice, AccActionsContainer
 
@@ -278,6 +289,10 @@ lost_parts_bunch.dumpBunch("lostbunch.dat")
 aprtNodes_loss_arr = GetLostDistributionArr(aprtNodes, lost_parts_bunch)
 total_loss = 0.0
 for [aprtNode, loss] in aprtNodes_loss_arr:
-    print("aprt. node= %30s " % aprtNode.getName(), " pos= %9.3f " % aprtNode.getPosition(), " loss= %6.0f " % loss)
+    print(
+        "aprt. node= %30s " % aprtNode.getName(),
+        " pos= %9.3f " % aprtNode.getPosition(),
+        " loss= %6.0f " % loss,
+    )
     total_loss += loss
 print("Total loss=", total_loss)

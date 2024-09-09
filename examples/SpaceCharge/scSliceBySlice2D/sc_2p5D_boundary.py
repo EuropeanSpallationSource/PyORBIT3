@@ -25,7 +25,14 @@ print("Start.")
 lattice = teapot.TEAPOT_Lattice()
 print("Read MAD.")
 lattice.readMAD("SNSring_pyOrbitBenchmark.LAT", "RING")
-print("Lattice=", lattice.getName(), " length [m] =", lattice.getLength(), " nodes=", len(lattice.getNodes()))
+print(
+    "Lattice=",
+    lattice.getName(),
+    " length [m] =",
+    lattice.getLength(),
+    " nodes=",
+    len(lattice.getNodes()),
+)
 
 # ------------------------------
 # Main Bunch init

@@ -70,7 +70,14 @@ def bunch_orbit_to_pyorbit_nHarm(ringLength, nHarm, kineticEnergy, name_of_orbit
             if recv_rank != main_rank:
                 orbit_mpi.MPI_Send(val_arr, mpi_datatype.MPI_DOUBLE, recv_rank, 111, comm)
             else:
-                pyOrbitBunch.addParticle(val_arr[0], val_arr[1], val_arr[2], val_arr[3], val_arr[4], val_arr[5])
+                pyOrbitBunch.addParticle(
+                    val_arr[0],
+                    val_arr[1],
+                    val_arr[2],
+                    val_arr[3],
+                    val_arr[4],
+                    val_arr[5],
+                )
         if rank == recv_rank and rank != main_rank:
             val_arr = orbit_mpi.MPI_Recv(mpi_datatype.MPI_DOUBLE, main_rank, 111, comm)
             pyOrbitBunch.addParticle(val_arr[0], val_arr[1], val_arr[2], val_arr[3], val_arr[4], val_arr[5])

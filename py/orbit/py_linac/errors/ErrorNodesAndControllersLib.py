@@ -436,7 +436,14 @@ class ErrorCntrlCoordDisplacement(BaseErrorController):
         self.exitErrorAccNode = ErrorCoordDisplacementNode()
         self.entranceErrorAccNode.setErrorControllerParamFunc(self.getEntanceNodeParameters)
         self.exitErrorAccNode.setErrorControllerParamFunc(self.getExitNodeParameters)
-        self.param_dict = {"dx": 0.0, "dxp": 0.0, "dy": 0.0, "dyp": 0.0, "dz": 0.0, "dE": 0.0}
+        self.param_dict = {
+            "dx": 0.0,
+            "dxp": 0.0,
+            "dy": 0.0,
+            "dyp": 0.0,
+            "dz": 0.0,
+            "dE": 0.0,
+        }
 
     def getEntanceNodeParameters(self):
         """

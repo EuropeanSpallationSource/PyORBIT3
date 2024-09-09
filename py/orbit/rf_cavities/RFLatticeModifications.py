@@ -40,7 +40,16 @@ def addRFNode(lattice, position, rf_node):
         # print "debug node = ", node.getName(),\
         # " type = ", node.getType()," L = ", node.getLength()
         if not isinstance(node, DriftTEAPOT):
-            print(("Non-drift node = ", node.getName(), " type = ", node.getType(), " L = ", node.getLength()))
+            print(
+                (
+                    "Non-drift node = ",
+                    node.getName(),
+                    " type = ",
+                    node.getType(),
+                    " L = ",
+                    node.getLength(),
+                )
+            )
             orbitFinalize(
                 "We have a non-drift element at the\
 			location of the rf node! Stop!"

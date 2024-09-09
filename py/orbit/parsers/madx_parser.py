@@ -495,7 +495,11 @@ class MADX_Parser:
                     print("Warning: Lattice parsing resulted in a lattice with length longer than specified by sequence command.")
 
         if aper_warning >= 1:
-            print("Warning, adding", aper_warning, "aperture nodes to the teapot lattice. That will slow down the simluation.")
+            print(
+                "Warning, adding",
+                aper_warning,
+                "aperture nodes to the teapot lattice. That will slow down the simluation.",
+            )
             print("If the lost of particles on the aperture is not necessary, please use a madx file without the aperture labels.")
 
     def calculateVariables(self):

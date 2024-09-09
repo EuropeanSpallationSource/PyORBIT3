@@ -26,14 +26,18 @@ from orbit.lattice import AccLattice, AccNode, AccActionsContainer
 
 from orbit.py_linac.lattice_modifications import Add_quad_apertures_to_lattice
 from orbit.py_linac.lattice_modifications import Add_rfgap_apertures_to_lattice
-from orbit.py_linac.lattice_modifications import AddMEBTChopperPlatesAperturesToSNS_Lattice
+from orbit.py_linac.lattice_modifications import (
+    AddMEBTChopperPlatesAperturesToSNS_Lattice,
+)
 from orbit.py_linac.lattice_modifications import AddScrapersAperturesToLattice
 
 from orbit.py_linac.lattice import AxisField_and_Quad_RF_Gap
 from orbit.py_linac.lattice import OverlappingQuadsNode
 
 from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_to_AxisField_Nodes
-from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes
+from orbit.py_linac.lattice_modifications import (
+    Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes,
+)
 from orbit.py_linac.lattice_modifications import Replace_Quads_to_OverlappingQuads_Nodes
 
 from orbit.py_linac.overlapping_fields import SNS_EngeFunctionFactory
@@ -50,7 +54,21 @@ random.seed(100)
 # names = ["MEBT","DTL1","DTL2","DTL3",]
 # names = ["MEBT","DTL1"]
 # names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed"]
-names = ["MEBT", "DTL1", "DTL2", "DTL3", "DTL4", "DTL5", "DTL6", "CCL1", "CCL2", "CCL3", "CCL4", "SCLMed", "SCLHigh"]
+names = [
+    "MEBT",
+    "DTL1",
+    "DTL2",
+    "DTL3",
+    "DTL4",
+    "DTL5",
+    "DTL6",
+    "CCL1",
+    "CCL2",
+    "CCL3",
+    "CCL4",
+    "SCLMed",
+    "SCLHigh",
+]
 # names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6"]
 # names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4"]
 
@@ -76,7 +94,12 @@ for cav in cavs:
     rf_gaps = cav.getRF_GapNodes()
     print("debug cav = ", cav.getName(), " phase [deg] =", cav_phase * 180.0 / math.pi)
     for rf_gap in rf_gaps:
-        print("      debug rf_gap = ", rf_gap.getName(), " gap phase [deg] =", rf_gap.getGapPhase() * 180.0 / math.pi)
+        print(
+            "      debug rf_gap = ",
+            rf_gap.getName(),
+            " gap phase [deg] =",
+            rf_gap.getGapPhase() * 180.0 / math.pi,
+        )
 
 print("=============================================")
 
@@ -294,20 +317,40 @@ def TrackingBunch(accLattice, bunch, print_info=False):
         z_to_phase_coeff = bunch_gen.getZtoPhaseCoeff(bunch)
         z_rms_deg = z_to_phase_coeff * z_rms / 1000.0
         nParts = bunch.getSizeGlobal()
-        (alphaX, betaX, emittX) = (twiss_analysis.getTwiss(0)[0], twiss_analysis.getTwiss(0)[1], twiss_analysis.getTwiss(0)[3] * 1.0e6)
-        (alphaY, betaY, emittY) = (twiss_analysis.getTwiss(1)[0], twiss_analysis.getTwiss(1)[1], twiss_analysis.getTwiss(1)[3] * 1.0e6)
-        (alphaZ, betaZ, emittZ) = (twiss_analysis.getTwiss(2)[0], twiss_analysis.getTwiss(2)[1], twiss_analysis.getTwiss(2)[3] * 1.0e6)
+        (alphaX, betaX, emittX) = (
+            twiss_analysis.getTwiss(0)[0],
+            twiss_analysis.getTwiss(0)[1],
+            twiss_analysis.getTwiss(0)[3] * 1.0e6,
+        )
+        (alphaY, betaY, emittY) = (
+            twiss_analysis.getTwiss(1)[0],
+            twiss_analysis.getTwiss(1)[1],
+            twiss_analysis.getTwiss(1)[3] * 1.0e6,
+        )
+        (alphaZ, betaZ, emittZ) = (
+            twiss_analysis.getTwiss(2)[0],
+            twiss_analysis.getTwiss(2)[1],
+            twiss_analysis.getTwiss(2)[3] * 1.0e6,
+        )
         norm_emittX = emittX * gamma * beta
         norm_emittY = emittY * gamma * beta
         # ---- phi_de_emittZ will be in [pi*deg*MeV]
         phi_de_emittZ = z_to_phase_coeff * emittZ
         eKin = bunch.getSyncParticle().kinEnergy() * 1.0e3
-        s_prt = " %5d  %35s  %4.5f " % (paramsDict["count"], node.getName(), pos + pos_start)
+        s_prt = " %5d  %35s  %4.5f " % (
+            paramsDict["count"],
+            node.getName(),
+            pos + pos_start,
+        )
         s_prt += "  %5.3f  %5.3f   %5.3f " % (x_rms, y_rms, z_rms_deg)
         s_prt += "  %10.6f   %8d " % (eKin, nParts)
         if print_info:
             print(s_prt)
-        twiss_arr = [(alphaX, betaX, emittX, norm_emittX), (alphaY, betaY, emittY, norm_emittY), (alphaZ, betaZ, emittZ, phi_de_emittZ)]
+        twiss_arr = [
+            (alphaX, betaX, emittX, norm_emittX),
+            (alphaY, betaY, emittY, norm_emittY),
+            (alphaZ, betaZ, emittZ, phi_de_emittZ),
+        ]
         rms_arr = [x_rms, y_rms, z_rms_deg]
         results_arr.append([node.getName(), pos, rms_arr, twiss_arr, eKin, nParts])
 
@@ -359,7 +402,12 @@ for cav in cavs:
     rf_gaps = cav.getRF_GapNodes()
     print("debug cav = ", cav.getName(), " phase [deg] =", cav_phase * 180.0 / math.pi)
     for rf_gap in rf_gaps:
-        print("      debug rf_gap = ", rf_gap.getName(), " gap phase [deg] =", rf_gap.getGapPhase() * 180.0 / math.pi)
+        print(
+            "      debug rf_gap = ",
+            rf_gap.getName(),
+            " gap phase [deg] =",
+            rf_gap.getGapPhase() * 180.0 / math.pi,
+        )
 
 print("=============================================")
 print("====== Start backward tracking ")

@@ -15,7 +15,17 @@ class JohoTransverse:
     This class has the Joho distribution function generators in each plane.
     """
 
-    def __init__(self, order, alpha, beta, emitlim, centerpos=0, centermom=0, tailfraction=0, tailfactor=1):
+    def __init__(
+        self,
+        order,
+        alpha,
+        beta,
+        emitlim,
+        centerpos=0,
+        centermom=0,
+        tailfraction=0,
+        tailfactor=1,
+    ):
         self.name = "JohoTransverse"
         self.order = order
         self.alpha = alpha
@@ -63,7 +73,17 @@ class JohoLongitudinal:
     This class has the Joho distribution function generators in each plane.
     """
 
-    def __init__(self, order, zlim, dElim, nlongbunches=0, deltazbunch=0, deltaznotch=0, tailfraction=0, tailfactor=1):
+    def __init__(
+        self,
+        order,
+        zlim,
+        dElim,
+        nlongbunches=0,
+        deltazbunch=0,
+        deltaznotch=0,
+        tailfraction=0,
+        tailfactor=1,
+    ):
         self.name = "JohoLongitudinal"
         self.order = order
         self.zlim = zlim

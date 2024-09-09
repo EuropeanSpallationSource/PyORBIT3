@@ -15,7 +15,16 @@ import time
 from orbit.py_linac.lattice import LinacAccLattice
 from orbit.py_linac.lattice import LinacAccNodes
 
-from orbit.py_linac.lattice import BaseLinacNode, LinacNode, LinacMagnetNode, MarkerLinacNode, Drift, Quad, AbstractRF_Gap, Bend
+from orbit.py_linac.lattice import (
+    BaseLinacNode,
+    LinacNode,
+    LinacMagnetNode,
+    MarkerLinacNode,
+    Drift,
+    Quad,
+    AbstractRF_Gap,
+    Bend,
+)
 from orbit.py_linac.lattice import DCorrectorH, DCorrectorV
 from orbit.py_linac.lattice import RF_Cavity, Sequence
 from orbit.py_linac.lattice import BaseRF_Gap
@@ -48,11 +57,25 @@ def printBunch(bunch):
     print("synch part Ekin [MeV] =  %16.9g " % (eKin * 1000.0))
     print("synch part time [us]  =  %16.9g " % (bunch.getSyncParticle().time() * 1.0e6))
     for ind in range(n_parts):
-        (x, xp, y, yp, z, dE) = (bunch.x(ind), bunch.xp(ind), bunch.y(ind), bunch.yp(ind), bunch.z(ind), bunch.dE(ind))
+        (x, xp, y, yp, z, dE) = (
+            bunch.x(ind),
+            bunch.xp(ind),
+            bunch.y(ind),
+            bunch.yp(ind),
+            bunch.z(ind),
+            bunch.dE(ind),
+        )
         print("i= %3d       (z,dE) [mm,MeV] = ( %16.9g , %16.9g )" % (ind, z * 1000.0, (eKin + dE) * 1000.0))
     print("     --- distances ---")
     for ind in range(n_parts - 1):
-        (x, xp, y, yp, z, dE) = (bunch.x(ind), bunch.xp(ind), bunch.y(ind), bunch.yp(ind), bunch.z(ind), bunch.dE(ind))
+        (x, xp, y, yp, z, dE) = (
+            bunch.x(ind),
+            bunch.xp(ind),
+            bunch.y(ind),
+            bunch.yp(ind),
+            bunch.z(ind),
+            bunch.dE(ind),
+        )
         (x1, xp1, y1, yp1, z1, dE1) = (
             bunch.x(ind + 1),
             bunch.xp(ind + 1),

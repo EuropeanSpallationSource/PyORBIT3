@@ -8,7 +8,12 @@ import math
 from orbit.teapot import DriftTEAPOT
 
 # import RF cavity classes
-from orbit.core.rfcavities import Frequency_Cav, Harmonic_Cav, Barrier_Cav, Dual_Harmonic_Cav
+from orbit.core.rfcavities import (
+    Frequency_Cav,
+    Harmonic_Cav,
+    Barrier_Cav,
+    Dual_Harmonic_Cav,
+)
 
 
 class Base_RFNode(DriftTEAPOT):
@@ -116,7 +121,18 @@ class Harmonic_RFNode(Base_RFNode):
 
 
 class Dual_Harmonic_RFNode(Base_RFNode):
-    def __init__(self, ZtoPhi, RFHNum, RatioRFHNum, RFVoltage, RatioVoltage, RFPhase, RFPhase2, length, name="harmonic_rfnode"):
+    def __init__(
+        self,
+        ZtoPhi,
+        RFHNum,
+        RatioRFHNum,
+        RFVoltage,
+        RatioVoltage,
+        RFPhase,
+        RFPhase2,
+        length,
+        name="harmonic_rfnode",
+    ):
         """
         Constructor. Creates Harmonic
         RF Cavity TEAPOT element
@@ -367,7 +383,17 @@ class SyncPhaseDep_Harmonic_RFNode(Base_RFNode):
 
 
 class Barrier_RFNode(Base_RFNode):
-    def __init__(self, ZtoPhi, RFVoltage, RFPhasep, RFPhasem, dRFPhasep, dRFPhasem, length, name="barrier_rfnode"):
+    def __init__(
+        self,
+        ZtoPhi,
+        RFVoltage,
+        RFPhasep,
+        RFPhasem,
+        dRFPhasep,
+        dRFPhasem,
+        length,
+        name="barrier_rfnode",
+    ):
         """
         Constructor. Creates Barrier
         RF Cavity TEAPOT element

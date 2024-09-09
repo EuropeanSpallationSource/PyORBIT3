@@ -95,9 +95,10 @@ def Replace_BaseRF_Gap_to_AxisField_Nodes(accLattice, z_step, dir_location="", a
                     orbitFinalize(msg)
         # ---- af_rf_gap_dict[rf_gap] = AxisFieldRF_Gap(rf_gap)
         # ---- rf_gap_ind_up_down_arr[[rf_gap,gap_ind,drift_down_ind,drift_up_ind],...]
-        (af_rf_gap_dict, rf_gap_ind_up_down_arr) = Make_AxisFieldRF_Gaps_and_Find_Neihbor_Nodes(
-            rf_length_tolerance, accLattice, accSeq, dir_location, cavs
-        )
+        (
+            af_rf_gap_dict,
+            rf_gap_ind_up_down_arr,
+        ) = Make_AxisFieldRF_Gaps_and_Find_Neihbor_Nodes(rf_length_tolerance, accLattice, accSeq, dir_location, cavs)
         for rf_gap in af_rf_gap_dict.keys():
             af_rf_gap_dict[rf_gap].setZ_Step(z_step)
         # ---- check that all elements covered by the axis rf fields are drifts
@@ -321,7 +322,10 @@ def Make_AxisFieldRF_Gaps_and_Find_Neihbor_Nodes(rf_length_tolerance, accLattice
                     msg = msg + "RF gap 1 = " + rf_gap1.getName()
                     msg = msg + os.linesep
                     (z_min, z_max) = af_rf_gap_dict[rf_gap0].getZ_Min_Max()
-                    (pos_start, pos_stop) = (gap0_pos_start + z_min, gap0_pos_start + z_max)
+                    (pos_start, pos_stop) = (
+                        gap0_pos_start + z_min,
+                        gap0_pos_start + z_max,
+                    )
                     msg = msg + "Gap 0 (pos_start,pos_stop)= " + str((pos_start, pos_stop))
                     msg = msg + os.linesep
                     (z_min, z_max) = af_rf_gap_dict[rf_gap1].getZ_Min_Max()
@@ -370,13 +374,19 @@ def Make_AxisFieldRF_Gaps_and_Find_Neihbor_Nodes(rf_length_tolerance, accLattice
                         # ---- by default gap_pos_start=gap_pos_end for rf gap with length=0
                         (gap_pos_start, gap_pos_end) = node_pos_dict[rf_gap]
                         (z_min, z_max) = af_rf_gap_dict[rf_gap].getZ_Min_Max()
-                        (gap_pos_start, gap_pos_end) = (gap_pos_start + z_min, gap_pos_end + z_max)
+                        (gap_pos_start, gap_pos_end) = (
+                            gap_pos_start + z_min,
+                            gap_pos_end + z_max,
+                        )
                         (pos_start, pos_end) = node_pos_dict[node]
                         func = af_rf_gap_dict[rf_gap].getAxisFieldFunction()
                         delta_cut = pos_start - gap_pos_start
                         func_new = RenormalizeFunction(func, z_min + delta_cut, z_max)
                         af_rf_gap_dict[rf_gap].setAxisFieldFunction(func_new)
-                        (z_min_new, z_max_new) = (func_new.getMinX(), func_new.getMaxX())
+                        (z_min_new, z_max_new) = (
+                            func_new.getMinX(),
+                            func_new.getMaxX(),
+                        )
                         af_rf_gap_dict[rf_gap].setZ_Min_Max(z_min_new, z_max_new)
                         msg = "debug =============== WARNING  START ================ RF Gap=" + rf_gap.getName()
                         msg += os.linesep
@@ -430,7 +440,10 @@ def Make_AxisFieldRF_Gaps_and_Find_Neihbor_Nodes(rf_length_tolerance, accLattice
                         msg += os.linesep
                         (gap_pos_start, gap_pos_end) = node_pos_dict[rf_gap]
                         (z_min, z_max) = af_rf_gap_dict[rf_gap].getZ_Min_Max()
-                        (gap_pos_start, gap_pos_end) = (gap_pos_end + z_min, gap_pos_end + z_max)
+                        (gap_pos_start, gap_pos_end) = (
+                            gap_pos_end + z_min,
+                            gap_pos_end + z_max,
+                        )
                         (pos_start, pos_end) = node_pos_dict[node]
                         msg += "node (pos_start,pos_end)   = " + str((pos_start, pos_end))
                         msg += os.linesep

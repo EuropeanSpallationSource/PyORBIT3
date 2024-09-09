@@ -65,7 +65,11 @@ for kicker in kickers:
     kicker.setFieldBx(0.0)
     kicker.setFieldBy(0.2)
     kicker.setnParts(n_kicker_parts)
-    print("kicker=", kicker.getName(), " field (X,Y) [T] = (%6.5f,%6.5f) " % (kicker.getFieldBx(), kicker.getFieldBy()))
+    print(
+        "kicker=",
+        kicker.getName(),
+        " field (X,Y) [T] = (%6.5f,%6.5f) " % (kicker.getFieldBx(), kicker.getFieldBy()),
+    )
 
 print("========================================================")
 quads = accLattice.getNodesOfClass(Quad)
@@ -145,8 +149,18 @@ def action_account(paramsDict):
         bunchI.z(1) * 1000.0,
         bunchI.dE(1) * 1000.0,
     )
-    st += " ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f )" % (x1 - x0, xp1 - xp0, y1 - y0, yp1 - yp0, z1 - z0, dE1 - dE0)
-    st += " synch_part x = %8.4f  xp= %8.4f " % (bunchI.x(0) * 1000.0, bunchI.xp(0) * 1000.0)
+    st += " ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f )" % (
+        x1 - x0,
+        xp1 - xp0,
+        y1 - y0,
+        yp1 - yp0,
+        z1 - z0,
+        dE1 - dE0,
+    )
+    st += " synch_part x = %8.4f  xp= %8.4f " % (
+        bunchI.x(0) * 1000.0,
+        bunchI.xp(0) * 1000.0,
+    )
     print(st)
 
 
@@ -155,7 +169,13 @@ actionContainer.addAction(action_account, AccActionsContainer.BODY)
 actionContainer.addAction(action_account, AccActionsContainer.EXIT)
 
 print("============================================================================================")
-accLattice.trackBunch(bunch_tmp, paramsDict=paramsDict, actionContainer=actionContainer, index_start=start_ind, index_stop=stop_ind)
+accLattice.trackBunch(
+    bunch_tmp,
+    paramsDict=paramsDict,
+    actionContainer=actionContainer,
+    index_start=start_ind,
+    index_stop=stop_ind,
+)
 print("============================================================================================")
 
 print("============================ final TEAPOT bunch ===========================")
@@ -176,7 +196,14 @@ st = ""
     bunch_tmp.z(1) * 1000.0,
     bunch_tmp.dE(1) * 1000.0,
 )
-st += " ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f )" % (x1 - x0, xp1 - xp0, y1 - y0, yp1 - yp0, z1 - z0, dE1 - dE0)
+st += " ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f )" % (
+    x1 - x0,
+    xp1 - xp0,
+    y1 - y0,
+    yp1 - yp0,
+    z1 - z0,
+    dE1 - dE0,
+)
 print(st)
 print("===========================================================================")
 
@@ -321,11 +348,27 @@ st = " pos = %8.5f " % d_entr
     bunch_tmp.z(1) * 1000.0,
     bunch_tmp.dE(1) * 1000.0,
 )
-st += " ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f )" % (x1 - x0, xp1 - xp0, y1 - y0, yp1 - yp0, z1 - z0, dE1 - dE0)
+st += " ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f )" % (
+    x1 - x0,
+    xp1 - xp0,
+    y1 - y0,
+    yp1 - yp0,
+    z1 - z0,
+    dE1 - dE0,
+)
 print(st)
 print("======================================================================================")
 
-print("debug d_start=", d_start, " d_stop=", d_stop, " space_step=", space_step, " n_space_parts=", n_space_parts)
+print(
+    "debug d_start=",
+    d_start,
+    " d_stop=",
+    d_stop,
+    " space_step=",
+    space_step,
+    " n_space_parts=",
+    n_space_parts,
+)
 print("======================================================================================")
 print("======================Results of 3D tracking =========================================")
 for space_ind in range(n_space_parts):
@@ -341,7 +384,11 @@ for space_ind in range(n_space_parts):
     synch_part_pvector = bunch_synch_part.getSyncParticle().pVector()
     synch_part_rvector = bunch_synch_part.getSyncParticle().rVector()
     momentum = math.sqrt(synch_part_pvector[0] ** 2 + synch_part_pvector[1] ** 2 + synch_part_pvector[2] ** 2)
-    norm_final_v = [synch_part_pvector[0] / momentum, synch_part_pvector[1] / momentum, synch_part_pvector[2] / momentum]
+    norm_final_v = [
+        synch_part_pvector[0] / momentum,
+        synch_part_pvector[1] / momentum,
+        synch_part_pvector[2] / momentum,
+    ]
     d_parameter = (
         norm_final_v[0] * synch_part_rvector[0] + norm_final_v[1] * synch_part_rvector[1] + norm_final_v[2] * synch_part_rvector[2]
     )
@@ -369,8 +416,18 @@ for space_ind in range(n_space_parts):
     )
     synch_part_rvector = bunch_tmp.getSyncParticle().rVector()
     synch_part_pvector = bunch_tmp.getSyncParticle().pVector()
-    st += " ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f )" % (x1 - x0, xp1 - xp0, y1 - y0, yp1 - yp0, z1 - z0, dE1 - dE0)
-    st += "  synch_particle x = %8.4f  xp =  %8.4f " % (synch_part_rvector[0] * 1000.0, synch_part_pvector[0] * 1000.0 / momentum)
+    st += " ( %8.4f %8.4f   %8.4f %8.4f   %8.4f %8.4f )" % (
+        x1 - x0,
+        xp1 - xp0,
+        y1 - y0,
+        yp1 - yp0,
+        z1 - z0,
+        dE1 - dE0,
+    )
+    st += "  synch_particle x = %8.4f  xp =  %8.4f " % (
+        synch_part_rvector[0] * 1000.0,
+        synch_part_pvector[0] * 1000.0 / momentum,
+    )
     print(st)
 
 print("======================================================================================")

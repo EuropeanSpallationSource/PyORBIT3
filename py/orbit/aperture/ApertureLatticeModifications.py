@@ -45,9 +45,23 @@ def addTeapotApertureNode(lattice, position, Aperture_node):
         if not isinstance(node, DriftTEAPOT):
             if isinstance(node, LinacDrift):
                 print("You are trying to work with linac lattice! This method is working only with TEAPOT lattice!")
-                print("Node=", node.getName(), " type=", node.getType(), " L=", node.getLength())
+                print(
+                    "Node=",
+                    node.getName(),
+                    " type=",
+                    node.getType(),
+                    " L=",
+                    node.getLength(),
+                )
                 orbitFinalize("addTeapotCollimatorNode function is used on Linac lattice! Stop!")
-            print("Non-drift node=", node.getName(), " type=", node.getType(), " L=", node.getLength())
+            print(
+                "Non-drift node=",
+                node.getName(),
+                " type=",
+                node.getType(),
+                " L=",
+                node.getLength(),
+            )
             orbitFinalize("We have non-drift element at the place of the Aperture node! Stop!")
         # if(node.getNumberOfChildren() != 4):
         # print "Node=",node.getName()," type=",node.getType()," L=",node.getLength()," N children nodes=",node.getNumberOfChildren()

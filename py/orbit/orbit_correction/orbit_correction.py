@@ -149,9 +149,27 @@ class correction:
                         pos = self.lattice.getNodePositionsDict()[node][1]
                         if abs(pos_old - pos) > eps_length:
                             bpm_x.append(
-                                [muX[j][1], arrPosBetaX[j][1], arrPosAlphaX[j][1], pos, m, node.getName(), OrbitX[j][1], muX[-1][1]]
+                                [
+                                    muX[j][1],
+                                    arrPosBetaX[j][1],
+                                    arrPosAlphaX[j][1],
+                                    pos,
+                                    m,
+                                    node.getName(),
+                                    OrbitX[j][1],
+                                    muX[-1][1],
+                                ]
                             )
                             bpm_y.append(
-                                [muY[j][1], arrPosBetaY[j][1], arrPosAlphaY[j][1], pos, m, node.getName(), OrbitY[j][1], muY[-1][1]]
+                                [
+                                    muY[j][1],
+                                    arrPosBetaY[j][1],
+                                    arrPosAlphaY[j][1],
+                                    pos,
+                                    m,
+                                    node.getName(),
+                                    OrbitY[j][1],
+                                    muY[-1][1],
+                                ]
                             )
         return bpm_x, bpm_y

@@ -293,7 +293,14 @@ addLongitudinalSpaceChargeNode(lattice, position, bf_sc1Dnode)
 """
 
 print("===========Lattice modified =======================================")
-print("New Lattice = ", lattice.getName(), " length [m] = ", lattice.getLength(), " nodes = ", len(lattice.getNodes()))
+print(
+    "New Lattice = ",
+    lattice.getName(),
+    " length [m] = ",
+    lattice.getLength(),
+    " nodes = ",
+    len(lattice.getNodes()),
+)
 
 print("Ready to track")
 

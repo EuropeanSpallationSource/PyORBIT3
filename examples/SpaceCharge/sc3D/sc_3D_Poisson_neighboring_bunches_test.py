@@ -106,7 +106,11 @@ for i in range(n_angle_steps):
     )
     phi_th = potential3D.getPotential([x, y, z])
     theta = angle * 180.0 / math.pi
-    print("", i, " %8.4f  %7.4f  %7.4f  %7.4f  %7.4f  %12.5g  %12.5g  %12.7g  " % (theta, x, y, z, dist, phi, phi_th, (phi / phi_th)))
+    print(
+        "",
+        i,
+        " %8.4f  %7.4f  %7.4f  %7.4f  %7.4f  %12.5g  %12.5g  %12.7g  " % (theta, x, y, z, dist, phi, phi_th, (phi / phi_th)),
+    )
 
 print("Stop.")
 

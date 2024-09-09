@@ -36,7 +36,14 @@ print("Start.")
 teapot_latt = teapot.TEAPOT_Lattice()
 print("Read MAD.")
 teapot_latt.readMAD(os.path.join(script_dir, "../Apertures/MAD_Lattice/LATTICE"), "RING")
-print("Lattice=", teapot_latt.getName(), " length [m] =", teapot_latt.getLength(), " nodes=", len(teapot_latt.getNodes()))
+print(
+    "Lattice=",
+    teapot_latt.getName(),
+    " length [m] =",
+    teapot_latt.getLength(),
+    " nodes=",
+    len(teapot_latt.getNodes()),
+)
 
 # ====Injection aperature============
 xmin = -0.050
@@ -95,7 +102,14 @@ injectnode = TeapotInjectionNode(nparts, b, lostbunch, injectparams, xFunc, yFun
 addTeapotInjectionNode(teapot_latt, 0.0, injectnode)
 
 print("===========Lattice modified =======================================")
-print("New Lattice=", teapot_latt.getName(), " length [m] =", teapot_latt.getLength(), " nodes=", len(teapot_latt.getNodes()))
+print(
+    "New Lattice=",
+    teapot_latt.getName(),
+    " length [m] =",
+    teapot_latt.getLength(),
+    " nodes=",
+    len(teapot_latt.getNodes()),
+)
 
 injectnode.track(paramsDict)
 

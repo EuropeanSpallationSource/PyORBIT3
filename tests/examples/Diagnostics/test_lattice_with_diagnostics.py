@@ -49,7 +49,14 @@ macrosize = 1
 teapot_latt = teapot.TEAPOT_Ring()
 print("Read MAD.")
 teapot_latt.readMAD(SNS_ring_file, "RING")
-print("Lattice=", teapot_latt.getName(), " length [m] =", teapot_latt.getLength(), " nodes=", len(teapot_latt.getNodes()))
+print(
+    "Lattice=",
+    teapot_latt.getName(),
+    " length [m] =",
+    teapot_latt.getLength(),
+    " nodes=",
+    len(teapot_latt.getNodes()),
+)
 
 
 controlbunch_600 = os.path.join(script_dir, "Bunches/controlbunch_600.dat")
@@ -76,7 +83,14 @@ addTeapotMomentsNodeSet(teapot_latt, "moments", 3)
 addTeapotStatLatsNodeSet(teapot_latt, "statlats")
 
 print("===========Lattice modified =======================================")
-print("New Lattice=", teapot_latt.getName(), " length [m] =", teapot_latt.getLength(), " nodes=", len(teapot_latt.getNodes()))
+print(
+    "New Lattice=",
+    teapot_latt.getName(),
+    " length [m] =",
+    teapot_latt.getLength(),
+    " nodes=",
+    len(teapot_latt.getNodes()),
+)
 
 # print "============= nodes inside the region ==========="
 # print all nodes around the specified position

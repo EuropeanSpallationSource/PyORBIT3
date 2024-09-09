@@ -62,7 +62,12 @@ b.mass(consts.mass_proton)
 ERef = 1.0  # Gev
 energy = 1.5
 print("energy is:", energy)
-bunch_orbit_to_pyorbit(lattice.getLength(), energy, os.path.join(script_dir, "../SpaceCharge/sc1D/Bm_KV_Uniform_10000"), b)
+bunch_orbit_to_pyorbit(
+    lattice.getLength(),
+    energy,
+    os.path.join(script_dir, "../SpaceCharge/sc1D/Bm_KV_Uniform_10000"),
+    b,
+)
 b.getSyncParticle().kinEnergy(energy)
 nParticlesGlobal = b.getSizeGlobal()
 b.macroSize(total_macroSize / nParticlesGlobal)
@@ -265,7 +270,14 @@ addImpedanceNode(lattice, position, f_impedancenode)
 
 
 print("===========Lattice modified =======================================")
-print("New Lattice = ", lattice.getName(), " length [m] = ", lattice.getLength(), " nodes = ", len(lattice.getNodes()))
+print(
+    "New Lattice = ",
+    lattice.getName(),
+    " length [m] = ",
+    lattice.getLength(),
+    " nodes = ",
+    len(lattice.getNodes()),
+)
 
 print("Ready to track")
 

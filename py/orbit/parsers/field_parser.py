@@ -182,10 +182,25 @@ class Field_Parser3D:
                 XGrid.append(rawNumbers[0] / 100.0)
                 YGrid.append(rawNumbers[1] / 100.0)
                 ZGrid.append(rawNumbers[2] / 100.0)
-                BXGrid.setValue(rawNumbers[3] / 10000.0, coordinates[0], coordinates[1], coordinates[2])
-                BYGrid.setValue(rawNumbers[4] / 10000.0, coordinates[0], coordinates[1], coordinates[2])
+                BXGrid.setValue(
+                    rawNumbers[3] / 10000.0,
+                    coordinates[0],
+                    coordinates[1],
+                    coordinates[2],
+                )
+                BYGrid.setValue(
+                    rawNumbers[4] / 10000.0,
+                    coordinates[0],
+                    coordinates[1],
+                    coordinates[2],
+                )
 
-                BZGrid.setValue(rawNumbers[5] / 10000.0, coordinates[0], coordinates[1], coordinates[2])
+                BZGrid.setValue(
+                    rawNumbers[5] / 10000.0,
+                    coordinates[0],
+                    coordinates[1],
+                    coordinates[2],
+                )
                 getMag = ((rawNumbers[3] ** 2.0 + rawNumbers[4] ** 2.0 + rawNumbers[5] ** 2.0) ** 0.5) / 10000.0
 
                 fieldgrid3DMag.setValue(getMag, coordinates[0], coordinates[1], coordinates[2])

@@ -22,7 +22,14 @@ macrosize = 1
 teapot_latt = teapot.TEAPOT_Ring()
 print("Read MAD.")
 teapot_latt.readMAD("SNSring_pyOrbitBenchmark.LAT", "RING")
-print("Lattice=", teapot_latt.getName(), " length [m] =", teapot_latt.getLength(), " nodes=", len(teapot_latt.getNodes()))
+print(
+    "Lattice=",
+    teapot_latt.getName(),
+    " length [m] =",
+    teapot_latt.getLength(),
+    " nodes=",
+    len(teapot_latt.getNodes()),
+)
 
 b = Bunch()
 b.mass(0.93827231)
@@ -45,7 +52,14 @@ addTeapotMomentsNodeSet(teapot_latt, "moments", 3)
 addTeapotStatLatsNodeSet(teapot_latt, "statlats")
 
 print("===========Lattice modified =======================================")
-print("New Lattice=", teapot_latt.getName(), " length [m] =", teapot_latt.getLength(), " nodes=", len(teapot_latt.getNodes()))
+print(
+    "New Lattice=",
+    teapot_latt.getName(),
+    " length [m] =",
+    teapot_latt.getLength(),
+    " nodes=",
+    len(teapot_latt.getNodes()),
+)
 
 # print "============= nodes inside the region ==========="
 # print all nodes around the specified position

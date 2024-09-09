@@ -4,7 +4,12 @@ import math
 from orbit.core import orbit_mpi
 from orbit.core.orbit_mpi import mpi_comm
 
-from orbit.core.orbit_utils import Function, SplineCH, GaussLegendreIntegrator, Polynomial
+from orbit.core.orbit_utils import (
+    Function,
+    SplineCH,
+    GaussLegendreIntegrator,
+    Polynomial,
+)
 from orbit.utils.fitting import PolynomialFit
 
 
@@ -385,7 +390,10 @@ class RF_AxisFieldAnalysis:
         fl_out = open(file_ttf_out, "w")
         st = "rf_frequency " + str(self.rf_freq)
         fl_out.write(st + "\n")
-        st = "beta_min_max %9.6f %9.6f " % (self.beta_arr[len(self.beta_arr) - 1], self.beta_arr[0])
+        st = "beta_min_max %9.6f %9.6f " % (
+            self.beta_arr[len(self.beta_arr) - 1],
+            self.beta_arr[0],
+        )
         fl_out.write(st + "\n")
         st = "ngaps " + str(len(self.gap_slpline_arr))
         fl_out.write(st + "\n")
@@ -410,7 +418,12 @@ class RF_AxisFieldAnalysis:
             st = st + " %8.6f " % (self.e0l_normalized_arr[i])
         fl_out.write(st + "\n")
         for i in range(len(self.gap_polynoms_coef_arr)):
-            [t_coef_err_arr, tp_coef_err_arr, s_coef_err_arr, sp_coef_err_arr] = self.gap_polynoms_coef_arr[i]
+            [
+                t_coef_err_arr,
+                tp_coef_err_arr,
+                s_coef_err_arr,
+                sp_coef_err_arr,
+            ] = self.gap_polynoms_coef_arr[i]
             st = "gap " + str(i + 1) + " polynom Tcoef= "
             [coef_arr, err_arr] = t_coef_err_arr
             for j in range(len(coef_arr)):

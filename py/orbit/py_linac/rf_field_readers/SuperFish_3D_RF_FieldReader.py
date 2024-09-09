@@ -6,7 +6,12 @@ from orbit.core.orbit_mpi import mpi_comm, mpi_datatype, mpi_op
 
 from spacecharge import Grid2D
 
-from orbit.core.orbit_utils import Function, SplineCH, GaussLegendreIntegrator, Polynomial
+from orbit.core.orbit_utils import (
+    Function,
+    SplineCH,
+    GaussLegendreIntegrator,
+    Polynomial,
+)
 from orbit.utils.fitting import PolynomialFit
 
 

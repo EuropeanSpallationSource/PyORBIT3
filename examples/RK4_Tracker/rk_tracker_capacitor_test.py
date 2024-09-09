@@ -61,7 +61,14 @@ b_init.addParticle(0.001, 0.0, 0.0, 0.0, 0.0, 0.0)
 b_init.compress()
 
 print("============before================================================================")
-(x, xp, y, yp, z, dE) = (b_init.x(0), b_init.xp(0), b_init.y(0), b_init.yp(0), b_init.z(0), b_init.dE(0))
+(x, xp, y, yp, z, dE) = (
+    b_init.x(0),
+    b_init.xp(0),
+    b_init.y(0),
+    b_init.yp(0),
+    b_init.z(0),
+    b_init.dE(0),
+)
 print("(x,xp,y,yp,z,dE)= (%12.9f,%12.9f,%12.9f,%12.9f,%12.9f,%12.9f)" % (x, xp, y, yp, z, dE))
 
 # -------------------------------------------

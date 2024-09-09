@@ -37,7 +37,12 @@ extension_mod = Extension(
     sources=src,
     libraries=["fftw3"],
     include_dirs=include,
-    extra_compile_args=["-std=gnu++11", f"-DUSE_MPI=${USE_MPI}", "-fPIC", "-Wl,--enable-new-dtags"],
+    extra_compile_args=[
+        "-std=gnu++11",
+        f"-DUSE_MPI=${USE_MPI}",
+        "-fPIC",
+        "-Wl,--enable-new-dtags",
+    ],
     extra_link_args=["-lfftw3", "-lm", "-fPIC"],
 )
 

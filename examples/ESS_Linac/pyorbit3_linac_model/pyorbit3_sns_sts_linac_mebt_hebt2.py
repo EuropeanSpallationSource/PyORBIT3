@@ -42,7 +42,9 @@ from orbit.bunch_generators import WaterBagDist3D, GaussDist3D, KVDist3D
 
 from orbit.py_linac.lattice_modifications import Add_quad_apertures_to_lattice
 from orbit.py_linac.lattice_modifications import Add_rfgap_apertures_to_lattice
-from orbit.py_linac.lattice_modifications import AddMEBTChopperPlatesAperturesToSNS_Lattice
+from orbit.py_linac.lattice_modifications import (
+    AddMEBTChopperPlatesAperturesToSNS_Lattice,
+)
 from orbit.py_linac.lattice_modifications import AddScrapersAperturesToLattice
 
 from orbit.core.bunch import Bunch, BunchTwissAnalysis
@@ -93,7 +95,23 @@ def setSynchPhase(bunch_in, accLattice, cav_name, synchPhaseDeg):
 
 random.seed(100)
 
-names = ["MEBT", "DTL1", "DTL2", "DTL3", "DTL4", "DTL5", "DTL6", "CCL1", "CCL2", "CCL3", "CCL4", "SCLMed", "SCLHigh", "HEBT1", "HEBT2"]
+names = [
+    "MEBT",
+    "DTL1",
+    "DTL2",
+    "DTL3",
+    "DTL4",
+    "DTL5",
+    "DTL6",
+    "CCL1",
+    "CCL2",
+    "CCL3",
+    "CCL4",
+    "SCLMed",
+    "SCLHigh",
+    "HEBT1",
+    "HEBT2",
+]
 
 # ---- create the factory instance
 sns_linac_factory = SNS_LinacLatticeFactory()
@@ -483,7 +501,14 @@ accLattice.trackDesignBunch(bunch_in)
 cavs = accLattice.getRF_Cavities()
 for cav in cavs:
     avg_phase = phaseNearTargetPhaseDeg(cav.getAvgGapPhaseDeg() - 180.0, 0.0)
-    print("debug cav=", cav.getName(), " gaps phaseAvg=", avg_phase, " cav_amp=", cav.getAmp())
+    print(
+        "debug cav=",
+        cav.getName(),
+        " gaps phaseAvg=",
+        avg_phase,
+        " cav_amp=",
+        cav.getAmp(),
+    )
 
 print("Design tracking completed.")
 
@@ -527,9 +552,21 @@ def action_entrance(paramsDict):
     z_to_phase_coeff = bunch_gen.getZtoPhaseCoeff(bunch)
     z_rms_deg = z_to_phase_coeff * z_rms / 1000.0
     nParts = bunch.getSizeGlobal()
-    (alphaX, betaX, emittX) = (twiss_analysis.getTwiss(0)[0], twiss_analysis.getTwiss(0)[1], twiss_analysis.getTwiss(0)[3] * 1.0e6)
-    (alphaY, betaY, emittY) = (twiss_analysis.getTwiss(1)[0], twiss_analysis.getTwiss(1)[1], twiss_analysis.getTwiss(1)[3] * 1.0e6)
-    (alphaZ, betaZ, emittZ) = (twiss_analysis.getTwiss(2)[0], twiss_analysis.getTwiss(2)[1], twiss_analysis.getTwiss(2)[3] * 1.0e6)
+    (alphaX, betaX, emittX) = (
+        twiss_analysis.getTwiss(0)[0],
+        twiss_analysis.getTwiss(0)[1],
+        twiss_analysis.getTwiss(0)[3] * 1.0e6,
+    )
+    (alphaY, betaY, emittY) = (
+        twiss_analysis.getTwiss(1)[0],
+        twiss_analysis.getTwiss(1)[1],
+        twiss_analysis.getTwiss(1)[3] * 1.0e6,
+    )
+    (alphaZ, betaZ, emittZ) = (
+        twiss_analysis.getTwiss(2)[0],
+        twiss_analysis.getTwiss(2)[1],
+        twiss_analysis.getTwiss(2)[3] * 1.0e6,
+    )
     norm_emittX = emittX * gamma * beta
     norm_emittY = emittY * gamma * beta
     # ---- phi_de_emittZ will be in [pi*deg*MeV]
@@ -542,7 +579,11 @@ def action_entrance(paramsDict):
     s += "   %5.3f  %5.3f  %5.3f " % (x_rms, y_rms, z_rms_deg)
     file_out.write(s + "\n")
     file_out.flush()
-    s_prt = " %5d  %35s  %4.5f " % (paramsDict["count"], node.getName(), pos + pos_start)
+    s_prt = " %5d  %35s  %4.5f " % (
+        paramsDict["count"],
+        node.getName(),
+        pos + pos_start,
+    )
     s_prt += "  %5.3f  %5.3f   %5.3f " % (x_rms, y_rms, z_rms_deg)
     s_prt += "  %10.6f   %8d " % (eKin, nParts)
     print(s_prt)
@@ -566,7 +607,13 @@ rf_gaps = rf_cav.getRF_GapNodes()
 ind_stop = accLattice.getNodeIndex(rf_gaps[len(rf_gaps) - 1])
 
 # ------------Track bunch to the last RF gap in SCL:Cav23d
-accLattice.trackBunch(bunch_in, paramsDict=paramsDict, actionContainer=actionContainer, index_start=-1, index_stop=ind_stop)
+accLattice.trackBunch(
+    bunch_in,
+    paramsDict=paramsDict,
+    actionContainer=actionContainer,
+    index_start=-1,
+    index_stop=ind_stop,
+)
 
 # ---- Dump and read the bunch into the disk if necessary
 # bunch_in.dumpBunch("bunch_sts_after_scl_23d_rg06.dat")
@@ -575,7 +622,12 @@ accLattice.trackBunch(bunch_in, paramsDict=paramsDict, actionContainer=actionCon
 # bunch_in.readBunch("bunch_sts_after_scl_23d_rg06.dat")
 
 # ------------Now track the bunch to the end
-accLattice.trackBunch(bunch_in, paramsDict=paramsDict, actionContainer=actionContainer, index_start=(ind_stop + 1))
+accLattice.trackBunch(
+    bunch_in,
+    paramsDict=paramsDict,
+    actionContainer=actionContainer,
+    index_start=(ind_stop + 1),
+)
 
 time_exec = time.process_time() - time_start
 print("time[sec]=", time_exec)

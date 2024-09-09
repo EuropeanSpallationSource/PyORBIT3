@@ -153,7 +153,21 @@ class SNSESpreadDist:
     and then adding sinusoidal energy spread and random centroid jitter
     """
 
-    def __init__(self, lattlength, zmin, zmax, tailfraction, sp, emean, esigma, etrunc, emin, emax, ecparams, esparams):
+    def __init__(
+        self,
+        lattlength,
+        zmin,
+        zmax,
+        tailfraction,
+        sp,
+        emean,
+        esigma,
+        etrunc,
+        emin,
+        emax,
+        ecparams,
+        esparams,
+    ):
         self.name = "JohoLongitudinal"
         self.lattlength = lattlength
         self.zmin = zmin
@@ -210,7 +224,16 @@ class SNSESpreadDist:
         # If ecmin >= 0, then this will indicate that a
         # truncated Gaussian distribution is desired.
 
-        (ecmean, ecsigma, ectrunc, ecmin, ecmax, ecdrifti, ecdriftf, drifttime) = self.ecparams
+        (
+            ecmean,
+            ecsigma,
+            ectrunc,
+            ecmin,
+            ecmax,
+            ecdrifti,
+            ecdriftf,
+            drifttime,
+        ) = self.ecparams
 
         pmin = 0.0
         pmax = 1.0
@@ -271,7 +294,21 @@ class SNSESpreadDistPaint:
     zmin and zmax
     """
 
-    def __init__(self, lattlength, zminFunc, zmaxFunc, tailfraction, sp, emean, esigma, etrunc, emin, emax, ecparams, esparams):
+    def __init__(
+        self,
+        lattlength,
+        zminFunc,
+        zmaxFunc,
+        tailfraction,
+        sp,
+        emean,
+        esigma,
+        etrunc,
+        emin,
+        emax,
+        ecparams,
+        esparams,
+    ):
         # checks for correct input arguement types (to a certain extent)
         if not (type(zminFunc) is list and type(zmaxFunc) is list):
             sys.exit(
@@ -367,7 +404,16 @@ class SNSESpreadDistPaint:
         # If ecmin >= 0, then this will indicate that a truncated \
         # Gaussian distribution is desired.
 
-        (ecmean, ecsigma, ectrunc, ecmin, ecmax, ecdrifti, ecdriftf, drifttime) = self.ecparams
+        (
+            ecmean,
+            ecsigma,
+            ectrunc,
+            ecmin,
+            ecmax,
+            ecdrifti,
+            ecdriftf,
+            drifttime,
+        ) = self.ecparams
 
         pmin = 0.0
         pmax = 1.0

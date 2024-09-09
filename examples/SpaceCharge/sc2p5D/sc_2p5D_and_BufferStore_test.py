@@ -91,7 +91,11 @@ print("Number of SC nodes =", len(scNodes_arr))
 
 nodes = lattice.getNodes()
 for node in nodes:
-    print("node=", node.getName(), " s start,stop = %4.3f %4.3f " % lattice.getNodePositionsDict()[node])
+    print(
+        "node=",
+        node.getName(),
+        " s start,stop = %4.3f %4.3f " % lattice.getNodePositionsDict()[node],
+    )
     print("There are ", node.getNumberOfBodyChildren(), " child nodes.")
 
 

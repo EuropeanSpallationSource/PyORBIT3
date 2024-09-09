@@ -9,7 +9,12 @@ from ..lattice import AccLattice, AccNode, AccActionsContainer, AccNodeBunchTrac
 
 # import Teapot Aperture node
 from orbit.core.aperture import Aperture
-from .TeapotApertureNode import TeapotApertureNode, CircleApertureNode, EllipseApertureNode, RectangleApertureNode
+from .TeapotApertureNode import (
+    TeapotApertureNode,
+    CircleApertureNode,
+    EllipseApertureNode,
+    RectangleApertureNode,
+)
 from .ApertureLatticeModifications import addTeapotApertureNode
 
 # import teapot drift class

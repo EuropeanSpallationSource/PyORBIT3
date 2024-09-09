@@ -34,7 +34,9 @@ from orbit.py_linac.overlapping_fields import EngeFunction
 
 from orbit.core.orbit_utils import Function
 
-from orbit.py_linac.lattice_modifications.rf_models_modifications_lib import Make_AxisFieldRF_Gaps_and_Find_Neihbor_Nodes
+from orbit.py_linac.lattice_modifications.rf_models_modifications_lib import (
+    Make_AxisFieldRF_Gaps_and_Find_Neihbor_Nodes,
+)
 
 
 def GetEngeFunction(quad):
@@ -65,7 +67,12 @@ def GetEngeFunction(quad):
 
 
 def Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(
-    accLattice, z_step, dir_location="", accSeq_Names=[], cavs_Names=[], EngeFunctionFactory=GetEngeFunction
+    accLattice,
+    z_step,
+    dir_location="",
+    accSeq_Names=[],
+    cavs_Names=[],
+    EngeFunctionFactory=GetEngeFunction,
 ):
     """
     Function will replace  BaseRF_Gap nodes by AxisField_and_Quad_RF_Gap.
@@ -152,9 +159,10 @@ def Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(
                     orbitFinalize(msg)
         # ---- af_rf_gap_dict[rf_gap] = AxisFieldRF_Gap(rf_gap)
         # ---- rf_gap_ind_up_down_arr[[rf_gap,gap_ind,drift_down_ind,drift_up_ind],...]
-        (af_rf_gap_dict, rf_gap_ind_up_down_arr) = Make_AxisFieldRF_Gaps_and_Find_Neihbor_Nodes(
-            rf_length_tolerance, accLattice, accSeq, dir_location, cavs
-        )
+        (
+            af_rf_gap_dict,
+            rf_gap_ind_up_down_arr,
+        ) = Make_AxisFieldRF_Gaps_and_Find_Neihbor_Nodes(rf_length_tolerance, accLattice, accSeq, dir_location, cavs)
         if len(rf_gap_ind_up_down_arr) == 0:
             msg = "The Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes function. "
             msg += "This Acc. Sequence does not have BaseRF_Gaps!"
@@ -185,7 +193,10 @@ def Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(
         accSeq_z_start = node_pos_start
         (rf_gap_pos_start, rf_gap_pos_end) = node_pos_dict[rf_gap]
         (z_gap_min, z_gap_max) = af_rf_gap_dict[rf_gap].getZ_Min_Max()
-        (rf_gap_pos_start, rf_gap_pos_end) = (rf_gap_pos_start + z_gap_min, rf_gap_pos_end + z_gap_max)
+        (rf_gap_pos_start, rf_gap_pos_end) = (
+            rf_gap_pos_start + z_gap_min,
+            rf_gap_pos_end + z_gap_max,
+        )
         # print "debug rf gap=",rf_gap.getName()," (rf_gap_pos_start, rf_gap_pos_end)=",(rf_gap_pos_start, rf_gap_pos_end)
         # print "debug      (node_ind_start,node_ind_end) = ",(node_ind_start,node_ind_end)
         # for ind in range(node_ind_start,rf_gap_ind_up_down_arr[0][1]+1):
@@ -235,7 +246,10 @@ def Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(
         node_ind_end = len(nodes) - 1
         (rf_gap_pos_start, rf_gap_pos_end) = node_pos_dict[rf_gap]
         (z_gap_min, z_gap_max) = af_rf_gap_dict[rf_gap].getZ_Min_Max()
-        (rf_gap_pos_start, rf_gap_pos_end) = (rf_gap_pos_start + z_gap_min, rf_gap_pos_end + z_gap_max)
+        (rf_gap_pos_start, rf_gap_pos_end) = (
+            rf_gap_pos_start + z_gap_min,
+            rf_gap_pos_end + z_gap_max,
+        )
         node_pos_start = rf_gap_pos_end
         (node_pos_tmp, node_pos_end) = node_pos_dict[nodes[node_ind_end]]
         (local_quads, zero_length_nodes) = Get_quads_zeroLengthNodes_in_range(accSeq, node_ind_start, node_ind_end)
@@ -288,7 +302,10 @@ def Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(
             (rf_gap_pos_start, rf_gap_pos_end) = node_pos_dict[rf_gap]
             rf_gap_pos_zero = rf_gap_pos_start - accSeq_z_start
             (z_gap_min, z_gap_max) = axisFieldRF_Gap.getZ_Min_Max()
-            (rf_gap_pos_start, rf_gap_pos_end) = (rf_gap_pos_start + z_gap_min, rf_gap_pos_end + z_gap_max)
+            (rf_gap_pos_start, rf_gap_pos_end) = (
+                rf_gap_pos_start + z_gap_min,
+                rf_gap_pos_end + z_gap_max,
+            )
             pos_start = rf_gap_pos_start - accSeq_z_start
             pos_end = rf_gap_pos_end - accSeq_z_start
             # --------------------------------------------------------
@@ -314,7 +331,11 @@ def Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(
                 axisField_and_Quad_RF_Gap.setZ_Min_Max(z_min, z_max)
                 axisField_and_Quad_RF_Gap.setPosition(pos)
                 for quad in local_quads:
-                    axisField_and_Quad_RF_Gap.addQuad(quad, enge_func_quad_dict[quad], quad.getPosition() - rf_gap_pos_zero)
+                    axisField_and_Quad_RF_Gap.addQuad(
+                        quad,
+                        enge_func_quad_dict[quad],
+                        quad.getPosition() - rf_gap_pos_zero,
+                    )
                 axisField_and_Quad_RF_Gap.setZ_Step(z_step)
                 new_nodes.append(axisField_and_Quad_RF_Gap)
                 ovrlp_count += 1
@@ -324,14 +345,30 @@ def Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(
         # --------------------------------------------------------------------------
         # ---- 4st STEP - nodes between two RF gaps
         for local_gap_ind in range(n_rf_gaps - 1):
-            [rf_gap0, gap0_ind, drift_down0_ind, drift_up0_ind] = rf_gap_ind_up_down_arr[local_gap_ind]
-            [rf_gap1, gap1_ind, drift_down1_ind, drift_up1_ind] = rf_gap_ind_up_down_arr[local_gap_ind + 1]
+            [
+                rf_gap0,
+                gap0_ind,
+                drift_down0_ind,
+                drift_up0_ind,
+            ] = rf_gap_ind_up_down_arr[local_gap_ind]
+            [
+                rf_gap1,
+                gap1_ind,
+                drift_down1_ind,
+                drift_up1_ind,
+            ] = rf_gap_ind_up_down_arr[local_gap_ind + 1]
             (rf_gap0_pos_start, rf_gap0_pos_end) = node_pos_dict[rf_gap0]
             (z_gap0_min, z_gap0_max) = af_rf_gap_dict[rf_gap0].getZ_Min_Max()
-            (rf_gap0_pos_start, rf_gap0_pos_end) = (rf_gap0_pos_start + z_gap0_min, rf_gap0_pos_end + z_gap0_max)
+            (rf_gap0_pos_start, rf_gap0_pos_end) = (
+                rf_gap0_pos_start + z_gap0_min,
+                rf_gap0_pos_end + z_gap0_max,
+            )
             (rf_gap1_pos_start, rf_gap1_pos_end) = node_pos_dict[rf_gap1]
             (z_gap1_min, z_gap1_max) = af_rf_gap_dict[rf_gap1].getZ_Min_Max()
-            (rf_gap1_pos_start, rf_gap1_pos_end) = (rf_gap1_pos_start + z_gap1_min, rf_gap1_pos_end + z_gap1_max)
+            (rf_gap1_pos_start, rf_gap1_pos_end) = (
+                rf_gap1_pos_start + z_gap1_min,
+                rf_gap1_pos_end + z_gap1_max,
+            )
             (local_quads, zero_length_nodes) = Get_quads_zeroLengthNodes_in_range(accSeq, drift_up0_ind, drift_down1_ind)
             node_pos_start = rf_gap0_pos_end - accSeq_z_start
             node_pos_end = rf_gap1_pos_start - accSeq_z_start
@@ -357,7 +394,11 @@ def Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes(
                     node.setLength(length)
                     node.setPosition(pos)
                     for quad in local_quads:
-                        node.addQuad(quad, enge_func_quad_dict[quad], quad.getPosition() - pos_start)
+                        node.addQuad(
+                            quad,
+                            enge_func_quad_dict[quad],
+                            quad.getPosition() - pos_start,
+                        )
                     node.setZ_Step(z_step)
                     nParts = int(length / z_step) + 1
                     node.setnParts(nParts)

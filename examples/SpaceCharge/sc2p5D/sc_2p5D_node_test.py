@@ -138,7 +138,11 @@ for ip in range(10):
 # printout lattice
 nodes = teapot_lattice.getNodes()
 for node in nodes:
-    print("node=", node.getName(), " s start,stop = %4.3f %4.3f " % teapot_lattice.getNodePositionsDict()[node])
+    print(
+        "node=",
+        node.getName(),
+        " s start,stop = %4.3f %4.3f " % teapot_lattice.getNodePositionsDict()[node],
+    )
     print("There are ", node.getNumberOfBodyChildren(), " children nodes.")
     childnodes = node.getChildNodes(AccNode.BODY)
     for childnode in childnodes:

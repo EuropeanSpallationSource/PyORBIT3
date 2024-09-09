@@ -14,7 +14,9 @@ import sys
 import os
 
 from orbit.py_linac.overlapping_fields.overlapping_quad_fields_lib import EngeFunction
-from orbit.py_linac.overlapping_fields.overlapping_quad_fields_lib import SimpleQuadFieldFunc
+from orbit.py_linac.overlapping_fields.overlapping_quad_fields_lib import (
+    SimpleQuadFieldFunc,
+)
 
 
 def SNS_EngeFunctionFactory(quad):
@@ -32,8 +34,18 @@ def SNS_EngeFunctionFactory(quad):
             cutoff_level = 0.001
             func = EngeFunction(length_param, acceptance_diameter_param, cutoff_level)
             return func
-        names_032mm = ["MEBT_Mag:QH01", "MEBT_Mag:QV02", "MEBT_Mag:QH03", "MEBT_Mag:QV04"]
-        names_032mm += ["MEBT_Mag:QV11", "MEBT_Mag:QH12", "MEBT_Mag:QV13", "MEBT_Mag:QH14"]
+        names_032mm = [
+            "MEBT_Mag:QH01",
+            "MEBT_Mag:QV02",
+            "MEBT_Mag:QH03",
+            "MEBT_Mag:QV04",
+        ]
+        names_032mm += [
+            "MEBT_Mag:QV11",
+            "MEBT_Mag:QH12",
+            "MEBT_Mag:QV13",
+            "MEBT_Mag:QH14",
+        ]
         if name in names_032mm:
             length_param = 0.061
             acceptance_diameter_param = 0.029

@@ -112,7 +112,11 @@ for ind in range(1, g_func.getSize()):
         ish = 3 * dir_ind
         ind1 = 0 + 2 * dir_ind
         ind2 = 1 + 2 * dir_ind
-        trTwissMtrx.set(0 + ish, 0 + ish, trMtrx.get(ind1, ind1) * trMtrx.get(ind2, ind2) + trMtrx.get(ind1, ind2) * trMtrx.get(ind2, ind1))
+        trTwissMtrx.set(
+            0 + ish,
+            0 + ish,
+            trMtrx.get(ind1, ind1) * trMtrx.get(ind2, ind2) + trMtrx.get(ind1, ind2) * trMtrx.get(ind2, ind1),
+        )
         trTwissMtrx.set(0 + ish, 1 + ish, -trMtrx.get(ind1, ind1) * trMtrx.get(ind2, ind1))
         trTwissMtrx.set(0 + ish, 2 + ish, -trMtrx.get(ind1, ind2) * trMtrx.get(ind2, ind2))
         trTwissMtrx.set(1 + ish, 0 + ish, -2 * trMtrx.get(ind1, ind1) * trMtrx.get(ind1, ind2))
@@ -164,7 +168,14 @@ for ind in range(len(matrix_arr)):
     beta_y = v_out.get(4)
     gamma_y = v_out.get(5)
     v_in = v_out
-    st = " %4d %9.3f   %12.6f  %12.6f    %12.6f  %12.6f " % (ind, z_avg, alpha_x, beta_x, alpha_y, beta_y)
+    st = " %4d %9.3f   %12.6f  %12.6f    %12.6f  %12.6f " % (
+        ind,
+        z_avg,
+        alpha_x,
+        beta_x,
+        alpha_y,
+        beta_y,
+    )
     if ind % 100 == 0:
         print(st)
     fl_out.write(st + "\n")

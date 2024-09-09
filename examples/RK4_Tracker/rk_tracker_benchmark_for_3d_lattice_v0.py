@@ -69,7 +69,11 @@ for kicker in kickers:
     kicker.setFieldBx(0.0)
     kicker.setFieldBy(0.0)
     kicker.setnParts(n_kicker_parts)
-    print("kicker=", kicker.getName(), " field (X,Y) [T] = (%6.5f,%6.5f) " % (kicker.getFieldBx(), kicker.getFieldBy()))
+    print(
+        "kicker=",
+        kicker.getName(),
+        " field (X,Y) [T] = (%6.5f,%6.5f) " % (kicker.getFieldBx(), kicker.getFieldBy()),
+    )
 
 print("========================================================")
 quads = accLattice.getNodesOfClass(Quad)
@@ -209,7 +213,13 @@ actionContainer.addAction(action_account, AccActionsContainer.BODY)
 actionContainer.addAction(action_account, AccActionsContainer.EXIT)
 
 print("============================================================================================")
-accLattice.trackBunch(bunch_tmp, paramsDict=paramsDict, actionContainer=actionContainer, index_start=start_ind, index_stop=stop_ind)
+accLattice.trackBunch(
+    bunch_tmp,
+    paramsDict=paramsDict,
+    actionContainer=actionContainer,
+    index_start=start_ind,
+    index_stop=stop_ind,
+)
 print("============================================================================================")
 
 bunch_teapot_final = bunch_tmp
@@ -356,9 +366,21 @@ twiss_analysis.analyzeBunch(bunch_tmp)
 x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1] * twiss_analysis.getTwiss(0)[3]) * 1000.0
 y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1] * twiss_analysis.getTwiss(1)[3]) * 1000.0
 z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1] * twiss_analysis.getTwiss(2)[3]) * 1000.0
-print("Start tracking pos = %8.5f " % d_start, " (x_rms,y_rms,z_rms) = ( %6.3f, %6.3f, %6.3f )" % (x_rms, y_rms, z_rms))
+print(
+    "Start tracking pos = %8.5f " % d_start,
+    " (x_rms,y_rms,z_rms) = ( %6.3f, %6.3f, %6.3f )" % (x_rms, y_rms, z_rms),
+)
 print("Number of particles in the bunch = ", bunch_tmp.getSize())
-print("debug d_start=", d_start, " d_stop=", d_stop, " space_step=", space_step, " n_space_parts=", n_space_parts)
+print(
+    "debug d_start=",
+    d_start,
+    " d_stop=",
+    d_stop,
+    " space_step=",
+    space_step,
+    " n_space_parts=",
+    n_space_parts,
+)
 print("debug initial number of steps =", tracker.stepsNumber())
 print("============================================================================================")
 for space_ind in range(n_space_parts):
@@ -375,7 +397,11 @@ for space_ind in range(n_space_parts):
     synch_part_pvector = bunch_synch_part.getSyncParticle().pVector()
     synch_part_rvector = bunch_synch_part.getSyncParticle().rVector()
     momentum = math.sqrt(synch_part_pvector[0] ** 2 + synch_part_pvector[1] ** 2 + synch_part_pvector[2] ** 2)
-    norm_final_v = [synch_part_pvector[0] / momentum, synch_part_pvector[1] / momentum, synch_part_pvector[2] / momentum]
+    norm_final_v = [
+        synch_part_pvector[0] / momentum,
+        synch_part_pvector[1] / momentum,
+        synch_part_pvector[2] / momentum,
+    ]
     d_parameter = (
         norm_final_v[0] * synch_part_rvector[0] + norm_final_v[1] * synch_part_rvector[1] + norm_final_v[2] * synch_part_rvector[2]
     )
@@ -390,7 +416,11 @@ for space_ind in range(n_space_parts):
     x_rms = math.sqrt(twiss_analysis.getTwiss(0)[1] * twiss_analysis.getTwiss(0)[3]) * 1000.0
     y_rms = math.sqrt(twiss_analysis.getTwiss(1)[1] * twiss_analysis.getTwiss(1)[3]) * 1000.0
     z_rms = math.sqrt(twiss_analysis.getTwiss(2)[1] * twiss_analysis.getTwiss(2)[3]) * 1000.0
-    print("i = %3d " % space_ind, " pos = %8.5f " % d_parameter, " (x_rms,y_rms,z_rms) = ( %6.3f, %6.3f, %6.3f )" % (x_rms, y_rms, z_rms))
+    print(
+        "i = %3d " % space_ind,
+        " pos = %8.5f " % d_parameter,
+        " (x_rms,y_rms,z_rms) = ( %6.3f, %6.3f, %6.3f )" % (x_rms, y_rms, z_rms),
+    )
 
 bunch_3d_final = bunch_tmp
 twiss_analysis.analyzeBunch(bunch_3d_final)

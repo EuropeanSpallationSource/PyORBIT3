@@ -14,7 +14,13 @@ import math
 import sys
 import time
 
-from orbit.utils.fitting.Solver_lib import Solver, Scorer, SolveStopperFactory, VariableProxy, TrialPoint
+from orbit.utils.fitting.Solver_lib import (
+    Solver,
+    Scorer,
+    SolveStopperFactory,
+    VariableProxy,
+    TrialPoint,
+)
 
 from orbit.utils.fitting.BisectionSearch1D import BisectionSearchAlgorithm
 from orbit.utils.fitting.GoldenSectionSearch1D import GoldenSectionSearchAlgorithm
@@ -120,7 +126,10 @@ def FitTest(scorer, searchAlgorithm, variableProxy_arr, maxIter=10):
     print("==============Fitting results for algorithm: ", search_alg_name)
     solver.getScoreboard().printScoreBoard()
     (pos_min_arr, value_min) = scorer.getAnswer()
-    print("===== best score ========== exact answer (pos. min, min value)=", (pos_min_arr, value_min))
+    print(
+        "===== best score ========== exact answer (pos. min, min value)=",
+        (pos_min_arr, value_min),
+    )
     bestScore = solver.getScoreboard().getBestScore()
     print("best score=", bestScore, " iteration=", solver.getScoreboard().getIteration())
     trialPoint = solver.getScoreboard().getBestTrialPoint()

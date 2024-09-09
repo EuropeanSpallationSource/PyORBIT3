@@ -23,7 +23,9 @@ import time
 from orbit.py_linac.linac_parsers import SNS_LinacLatticeFactory
 
 from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_to_AxisField_Nodes
-from orbit.py_linac.lattice_modifications import Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes
+from orbit.py_linac.lattice_modifications import (
+    Replace_BaseRF_Gap_and_Quads_to_Overlapping_Nodes,
+)
 from orbit.py_linac.lattice_modifications import Replace_Quads_to_OverlappingQuads_Nodes
 
 from orbit.py_linac.lattice import GetGlobalQuadGradient
@@ -33,7 +35,21 @@ from orbit.py_linac.lattice import GetGlobalRF_AxisField
 from orbit.py_linac.overlapping_fields import SNS_EngeFunctionFactory
 
 # names = ["MEBT","DTL1","DTL2","DTL3","DTL4","DTL5","DTL6","CCL1","CCL2","CCL3","CCL4","SCLMed","SCLHigh","HEBT1","HEBT2"]
-names = ["MEBT", "DTL1", "DTL2", "DTL3", "DTL4", "DTL5", "DTL6", "CCL1", "CCL2", "CCL3", "CCL4", "SCLMed", "SCLHigh"]
+names = [
+    "MEBT",
+    "DTL1",
+    "DTL2",
+    "DTL3",
+    "DTL4",
+    "DTL5",
+    "DTL6",
+    "CCL1",
+    "CCL2",
+    "CCL3",
+    "CCL4",
+    "SCLMed",
+    "SCLHigh",
+]
 
 # ---- the XML file name with the structure
 xml_file_name = "../sns_linac_xml/sns_linac.xml"

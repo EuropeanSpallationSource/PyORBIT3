@@ -236,7 +236,11 @@ class MATRIX_Lattice(AccLattice):
                 mt = matrixNode.getMatrix()
                 ind0 = 0 + dir_ind
                 ind1 = 1 + dir_ind
-                track_m.set(0, 0, mt.get(ind0, ind0) * mt.get(ind1, ind1) + mt.get(ind0, ind1) * mt.get(ind1, ind0))
+                track_m.set(
+                    0,
+                    0,
+                    mt.get(ind0, ind0) * mt.get(ind1, ind1) + mt.get(ind0, ind1) * mt.get(ind1, ind0),
+                )
                 track_m.set(0, 1, -mt.get(ind0, ind0) * mt.get(ind1, ind0))
                 track_m.set(0, 2, -mt.get(ind0, ind1) * mt.get(ind1, ind1))
                 track_m.set(1, 0, -2 * mt.get(ind0, ind0) * mt.get(ind0, ind1))
