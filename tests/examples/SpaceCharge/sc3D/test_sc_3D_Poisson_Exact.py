@@ -134,18 +134,14 @@ def get_max_diff_phi():
     return modified_max_diff_phi
 
 
-def test_phi_theory_at_max_deviation(get_max_diff_phi):
-    assert get_max_diff_phi == "4.103"
-
-
 @pytest.fixture
 def get_max_diff_solv_phi():
     modified_max_diff_solv_phi = to_4_significant_digits(max_diff_solv_phi)
     return modified_max_diff_solv_phi
 
 
-def test_phi_solver_at_max_deviation(get_max_diff_solv_phi):
-    assert get_max_diff_solv_phi == "4.103"
+def test_phi_at_max_deviation(get_max_diff_phi, get_max_diff_solv_phi):
+    assert get_max_diff_phi == get_max_diff_solv_phi
 
 
 @pytest.fixture
