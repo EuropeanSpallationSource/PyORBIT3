@@ -5,6 +5,7 @@ tracking. The number of transport matrices in the lattice is equal to the sum of
 all parts of TEAPOT elements. The RF cavities in the Matrix lattice are the
 TEAPOT RF Cavity class instances.
 """
+
 import os
 import math
 

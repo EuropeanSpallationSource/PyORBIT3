@@ -2,7 +2,6 @@
 Module. Includes classes for impedance accelerator nodes.
 """
 
-
 # import physical constants
 from orbit.utils import consts
 

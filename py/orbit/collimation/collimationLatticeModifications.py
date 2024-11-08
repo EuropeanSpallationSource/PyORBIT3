@@ -1,6 +1,7 @@
 """
 Module. Includes functions that will modify the accelerator lattice by inserting the one collimator node accelerator node.
 """
+
 # import the auxiliary classes
 from ..utils import orbitFinalize
 

@@ -350,8 +350,8 @@ class _teapotFactory:
             return [drft_1, elem, drft_2]
         # ==========Others elements such as markers,monitor,rcollimator
         if (
-            madElem.getType().lower() == "marker"
-            or  # madElem.getType().lower() == "monitor" or \
+            madElem.getType().lower() == "marker"  # madElem.getType().lower() == "monitor" or \
+            or
             # madElem.getType().lower() == "hmonitor" or \
             # madElem.getType().lower() == "vmonitor" or \
             madElem.getType().lower() == "rcolimator"

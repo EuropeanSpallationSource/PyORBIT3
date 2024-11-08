@@ -2,6 +2,7 @@
 Module. Includes functions that will modify the accelerator lattice
 by inserting an impedance node into a teapot accelerator node.
 """
+
 # import the auxiliary classes
 from orbit.utils import orbitFinalize
 

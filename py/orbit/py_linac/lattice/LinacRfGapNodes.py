@@ -363,7 +363,6 @@ class BaseRF_Gap(AbstractRF_Gap):
 
 
 class RF_AxisFieldsStore:
-
     """
     The dictionary with the axis field Functions
     with the input file names as keys.

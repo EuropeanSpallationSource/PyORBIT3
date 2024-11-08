@@ -1,6 +1,7 @@
 """
 Module. Includes functions that will modify the accelerator lattice by inserting the one fieldtracker node accelerator node.
 """
+
 # import the auxiliary classes
 from orbit.utils import orbitFinalize
 

@@ -7,6 +7,7 @@ The initialization will create one turn matrix, but the user can ignore it if
 the lattice is a linac lattice.
 The  This class cannot calculate chromaticities.
 """
+
 import os
 import math
 

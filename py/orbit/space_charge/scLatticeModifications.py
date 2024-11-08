@@ -1,6 +1,7 @@
 """
 Module. Includes a base function that will modify the accelerator lattice by inserting the SC accelerator nodes.
 """
+
 # import the auxiliary classes
 from orbit.utils import orbitFinalize
 
