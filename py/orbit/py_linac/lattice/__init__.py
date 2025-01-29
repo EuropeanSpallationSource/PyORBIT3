@@ -12,18 +12,9 @@ from orbit.py_linac.lattice.LinacAccLatticeLib import (
     Sequence,
 )
 
-from orbit.py_linac.lattice.LinacAccNodes import (
-    BaseLinacNode,
-    LinacNode,
-    LinacMagnetNode,
-)
-from orbit.py_linac.lattice.LinacAccNodes import (
-    MarkerLinacNode,
-    Drift,
-    Quad,
-    AbstractRF_Gap,
-    Bend,
-)
+from orbit.py_linac.lattice.LinacAccNodes import BaseLinacNode, LinacNode, LinacMagnetNode
+from orbit.py_linac.lattice.LinacAccNodes import MarkerLinacNode, Drift, Quad, AbstractRF_Gap, Bend
+from orbit.py_linac.lattice.LinacAccNodes import Solenoid
 from orbit.py_linac.lattice.LinacAccNodes import DCorrectorH, DCorrectorV
 from orbit.py_linac.lattice.LinacAccNodes import ThickKick
 
@@ -73,6 +64,7 @@ __all__.append("DCorrectorH")
 __all__.append("DCorrectorV")
 __all__.append("ThickKick")
 __all__.append("Bend")
+__all__.append("Solenoid")
 
 
 __all__.append("LinacApertureNode")
